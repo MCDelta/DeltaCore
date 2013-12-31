@@ -7,17 +7,15 @@ import net.minecraft.item.ItemSpade;
 
 public class ItemDeltaShovel extends ItemDeltaTool
 {
-     
-     public ItemDeltaShovel (EnumMCDMods m, ToolMaterial mat)
-     {
-          super(m, "shovel", mat, ItemSpade.blocksEffectiveAgainst, 1.0F);
-     }
-     
-     
-     
-     
-     public boolean canHarvestBlock (Block block)
-     {
-          return block == Block.snow ? true : block == Block.blockSnow;
-     }
+
+    public ItemDeltaShovel(EnumMCDMods m, ToolMaterial mat)
+    {
+        super(m, "shovel", mat, ItemSpade.blocksEffectiveAgainst, 1.0F);
+    }
+
+    @Override
+    public boolean canHarvestBlock(Block block)
+    {
+        return block == Block.snow ? true : block == Block.blockSnow;
+    }
 }

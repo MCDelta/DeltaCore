@@ -8,112 +8,105 @@ import mcdelta.core.config.Settings;
 
 public class Logger
 {
-     public static java.util.logging.Logger logger;
+    public static java.util.logging.Logger logger;
 
+    public static void log(Object... message)
+    {
+        log(Level.INFO, message);
+    }
 
+    public static void log(Level level, Object... message)
+    {
+        StringBuilder sb = new StringBuilder();
 
-     public static void log (Object... message)
-     {
-          log(Level.INFO, message);
-     }
+        if (level != Level.INFO)
+        {
+            sb.append("\n");
+            sb.append("\n");
+        }
 
+        if (level == Level.SEVERE)
+        {
+            sb.append("!!!!!");
+            sb.append("\n");
+        }
 
+        int index = -1;
 
-     public static void log (Level level, Object... message)
-     {
-          StringBuilder sb = new StringBuilder();
+        for (Object obj : message)
+        {
+            index++;
 
-          if (level != Level.INFO)
-          {
-               sb.append("\n");
-               sb.append("\n");
-          }
+            if (obj instanceof List)
+            {
+                sb.append(list((List<?>) obj));
+            }
 
-          if (level == Level.SEVERE)
-          {
-               sb.append("!!!!!");
-               sb.append("\n");
-          }
+            else if (obj instanceof Object[])
+            {
+                sb.append(Arrays.asList(obj));
+            }
 
-          int index = -1;
-          
-          for (Object obj : message)
-          {
-               index++;
-               
-               if (obj instanceof List)
-               {
-                    sb.append(list((List) obj));
-               }
+            else
+            {
+                if (index != 0)
+                {
+                    sb.append("  :  ");
+                }
 
-               else if (obj instanceof Object[])
-               {
-                    sb.append(Arrays.asList(obj));
-               }
+                try
+                {
+                    sb.append(obj);
+                }
 
-               else
-               {
-                    if (index != 0)
-                    {
-                         sb.append("  :  ");
-                    }
+                catch (NullPointerException e)
+                {
+                    sb.append("!!!!! This would have crashed all the things  " + e + " !!!!!");
+                }
+            }
+        }
 
-                    try
-                    {
-                         sb.append(obj);
-                    }
+        if (level == Level.SEVERE)
+        {
+            sb.append("\n");
+            sb.append("!!!!!");
+        }
 
-                    catch (java.lang.NullPointerException e)
-                    {
-                         sb.append("!!!!! This would have crashed all the things  " + e + " !!!!!");
-                    }
-               }
-          }
+        if (level != Level.INFO)
+        {
+            sb.append("\n");
+        }
 
-          if (level == Level.SEVERE)
-          {
-               sb.append("\n");
-               sb.append("!!!!!");
-          }
+        if (Settings.LOG_MASTER)
+        {
+            return;
+        } else if ((level == Level.CONFIG) && !Settings.LOG_CONFIG)
+        {
+            return;
+        } else if ((level == Level.INFO) && !Settings.LOG_INFO)
+        {
+            return;
+        } else if ((level == Level.SEVERE) && !Settings.LOG_SEVERE)
+        {
+            return;
+        } else if ((level == Level.WARNING) && !Settings.LOG_WARNING)
+        {
+            return;
+        }
 
-          if (level != Level.INFO)
-          {
-               sb.append("\n");
-          }
+        logger.log(Level.INFO, String.format(sb.toString()));
+    }
 
-          if (Settings.LOG_MASTER)
-          {
-               return;
-          }
-          else if (level == Level.CONFIG && !Settings.LOG_CONFIG)
-          {
-               return;
-          }
-          else if (level == Level.INFO && !Settings.LOG_INFO)
-          {
-               return;
-          }
-          else if (level == Level.SEVERE && !Settings.LOG_SEVERE)
-          {
-               return;
-          }
-          else if (level == Level.WARNING && !Settings.LOG_WARNING) { return; }
+    private static StringBuilder list(List<?> list)
+    {
+        StringBuilder sb = new StringBuilder();
 
-          logger.log(Level.INFO, String.format(sb.toString()));
-     }
+        for (Object obj : list)
+        {
+            sb.append("/n");
+            sb.append("- " + obj);
+        }
 
-
-
-     private static StringBuilder list (List list)
-     {
-          StringBuilder sb = new StringBuilder();
-
-          for (Object obj : list)
-          {
-               sb.append("/n");
-               sb.append("- " + obj);
-          }
-
-          return null;
-     }
+        return null;
+    }
 }

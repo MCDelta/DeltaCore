@@ -9,16 +9,15 @@ import net.minecraft.item.ItemStack;
 
 public class ItemDeltaAxe extends ItemDeltaTool
 {
-     public ItemDeltaAxe (EnumMCDMods m, ToolMaterial mat)
-     {
-          super(m, "axe", mat, ItemAxe.blocksEffectiveAgainst, 3.0F);
-     }
-     
-     
-     
-     
-     public float getStrVsBlock (ItemStack stack, Block block)
-     {
-          return block != null && (block.blockMaterial == Material.wood || block.blockMaterial == Material.plants || block.blockMaterial == Material.vine) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(stack, block);
-     }
+    public ItemDeltaAxe(EnumMCDMods m, ToolMaterial mat)
+    {
+        super(m, "axe", mat, ItemAxe.blocksEffectiveAgainst, 3.0F);
+    }
+
+    @Override
+    public float getStrVsBlock(ItemStack stack, Block block)
+    {
+        return (block != null) && ((block.blockMaterial == Material.wood) || (block.blockMaterial == Material.plants) || (block.blockMaterial == Material.vine)) ? efficiencyOnProperMaterial
+                : super.getStrVsBlock(stack, block);
+    }
 }
