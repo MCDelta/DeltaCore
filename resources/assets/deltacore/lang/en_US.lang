@@ -1,0 +1,12 @@
+# tools
+
+tool.sword=Sword
+
+
+# materials
+
+material.iron=Iron
+material.wood=Wooden
+material.stone=Stone
+material.diamond=Diamond
+material.gold=Golden
