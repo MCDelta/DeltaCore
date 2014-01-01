@@ -1,9 +1,6 @@
 package mcdelta.core.block;
 
-import java.util.logging.Level;
-
 import mcdelta.core.DeltaCore;
-import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import net.minecraft.block.Block;
@@ -70,10 +67,5 @@ public class BlockDelta extends Block
     public String getid()
     {
         return mod.id();
-    }
-
-    public static void log(Object... message)
-    {
-        Logger.log(Level.INFO, message);
     }
 }

@@ -10,7 +10,7 @@ public class Logger
 {
     public static java.util.logging.Logger logger;
 
-    public static void logBlank()
+    public static void blank()
     {
         log("\n");
     }
