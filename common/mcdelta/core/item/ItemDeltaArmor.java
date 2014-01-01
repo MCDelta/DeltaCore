@@ -7,7 +7,6 @@ import mcdelta.core.material.ToolMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -16,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.relauncher.Side;
@@ -34,19 +32,19 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
     public ModDelta mod;
     public String name;
 
-    public ItemDeltaArmor(ModDelta m, ToolMaterial mat, int i)
+    public ItemDeltaArmor(ModDelta mod, ToolMaterial mat, int type)
     {
-        super(DeltaCore.config.getItemID(m, getArmorType(i) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, mat.index() + 4, i);
+        super(DeltaCore.config.getItemID(mod, getArmorType(type) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, mat.index() + 4, type);
 
-        mod = m;
-        name = getArmorType(i) + "." + mat.getName().toLowerCase();
+        this.mod = mod;
+        name = getArmorType(type) + "." + mat.getName().toLowerCase();
         String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
         setCreativeTab(CreativeTabs.tabCombat);
 
         toolMaterial = mat;
-        damageReduceAmount = mat.getDamageReductionAmount(i);
-        setMaxDamage(mat.getDurability(i));
+        damageReduceAmount = mat.getDamageReductionAmount(type);
+        setMaxDamage(mat.getDurability(type));
 
         if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))
         {
@@ -124,21 +122,6 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
     {
         super.registerIcons(register);
         itemIcon = ItemDelta.doRegister("deltacore", "armor_" + armorType, register);
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
-        int i = EntityLiving.getArmorPosition(stack) - 1;
-        ItemStack itemstack1 = player.getCurrentArmor(i);
-
-        if (itemstack1 == null)
-        {
-            player.setCurrentItemOrArmor(i + 1, stack.copy()); // Forge: Vanilla bug fix associated with fixed setCurrentItemOrArmor indexs for players.
-            stack.stackSize = 0;
-        }
-
-        return stack;
     }
 
     static int[] getMaxDamageArray()
