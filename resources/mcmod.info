@@ -1,12 +1,14 @@
 [
-{
-  "modid": "deltacore",
-  "name": “MC Delta Core",
-  "description": "",
-  "credits": "Made By the MCDelta team",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "logoFile": "assets/tuxweapons/logo.png",
-  "authors": [ "TuxCraft" ]
-}
+  {
+    "modid": "deltacore",
+    "name": "MC Delta Core",
+    "description": "The mod needed for all MC Delta Mods",
+    "credits": "Made By the MCDelta team",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "logoFile": "assets/tuxweapons/logo.png",
+    "authors": [
+      "TuxCraft"
+    ]
+  }
 ]

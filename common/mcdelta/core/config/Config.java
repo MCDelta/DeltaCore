@@ -41,7 +41,7 @@ public class Config
 
     public Config(FMLPreInitializationEvent event)
     {
-        filePath = event.getSuggestedConfigurationFile().toPath().toString().replace("DeltaCore.cfg", "MCDelta/");
+        filePath = event.getModConfigurationDirectory().getAbsolutePath() + "/MCDelta/";
 
         addConfig(new String[]
         { core, items, blocks, enchants });
@@ -239,7 +239,7 @@ public class Config
         return sb.toString();
     }
 
-    public void addConfig(String[] arr)
+    public void addConfig(String... arr)
     {
         for (String s : arr)
         {
@@ -359,7 +359,7 @@ public class Config
         }
 
         int id = cfg.get(m.modid, s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(m.modid, "block IDs");
+        cfg.addCustomCategoryComment(m.modid, "enchantment IDs");
 
         cfg.save();
 

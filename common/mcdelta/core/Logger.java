@@ -12,20 +12,54 @@ public class Logger
 
     public static void log(Object... message)
     {
+        if (!Settings.LOG_MASTER || !Settings.LOG_INFO)
+        {
+            return;
+        }
         log(Level.INFO, message);
+    }
+
+    public static void config(Object... message)
+    {
+        if (!Settings.LOG_MASTER || !Settings.LOG_CONFIG)
+        {
+            return;
+        }
+        log(Level.CONFIG, message);
+    }
+
+    public static void severe(Object... message)
+    {
+        if (!Settings.LOG_MASTER || !Settings.LOG_SEVERE)
+        {
+            return;
+        }
+        log(Level.SEVERE, message);
+    }
+
+    public static void warning(Object... message)
+    {
+        if (!Settings.LOG_MASTER || !Settings.LOG_WARNING)
+        {
+            return;
+        }
+        log(Level.WARNING, message);
     }
 
     public static void log(Level level, Object... message)
     {
+        if (!Settings.LOG_MASTER)
+        {
+            return;
+        }
+
         StringBuilder sb = new StringBuilder();
 
         if (level != Level.INFO)
         {
             sb.append("\n");
             sb.append("\n");
-        }
-
-        if (level == Level.SEVERE)
+        } else if (level == Level.SEVERE)
         {
             sb.append("!!!!!");
             sb.append("\n");
@@ -40,29 +74,16 @@ public class Logger
             if (obj instanceof List)
             {
                 sb.append(list((List<?>) obj));
-            }
-
-            else if (obj instanceof Object[])
+            } else if (obj instanceof Object[])
             {
-                sb.append(Arrays.asList(obj));
-            }
-
-            else
+                sb.append(list(Arrays.asList(obj)));
+            } else
             {
                 if (index != 0)
                 {
                     sb.append("  :  ");
                 }
-
-                try
-                {
-                    sb.append(obj);
-                }
-
-                catch (NullPointerException e)
-                {
-                    sb.append("!!!!! This would have crashed all the things  " + e + " !!!!!");
-                }
+                sb.append(obj);
             }
         }
 
@@ -70,31 +91,12 @@ public class Logger
         {
             sb.append("\n");
             sb.append("!!!!!");
-        }
-
-        if (level != Level.INFO)
+        } else if (level != Level.INFO)
         {
             sb.append("\n");
         }
 
-        if (Settings.LOG_MASTER)
-        {
-            return;
-        } else if ((level == Level.CONFIG) && !Settings.LOG_CONFIG)
-        {
-            return;
-        } else if ((level == Level.INFO) && !Settings.LOG_INFO)
-        {
-            return;
-        } else if ((level == Level.SEVERE) && !Settings.LOG_SEVERE)
-        {
-            return;
-        } else if ((level == Level.WARNING) && !Settings.LOG_WARNING)
-        {
-            return;
-        }
-
-        logger.log(Level.INFO, String.format(sb.toString()));
+        logger.log(level, sb.toString());
     }
 
     private static StringBuilder list(List<?> list)
@@ -107,6 +109,6 @@ public class Logger
             sb.append("- " + obj);
         }
 
-        return null;
+        return sb;
     }
 }

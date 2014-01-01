@@ -21,7 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = DeltaCore.MOD_ID, name = "DeltaCore", useMetadata = true, version = "1.0a")
+@Mod(modid = DeltaCore.MOD_ID, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels =
 { DeltaCore.MOD_ID }, packetHandler = PacketHandler.class)
 public class DeltaCore
@@ -30,7 +30,7 @@ public class DeltaCore
     // - camo creeper
     // - timed potion to prevent potion effects
 
-    public static final String MOD_ID = "DeltaCore";
+    public static final String MOD_ID = "deltacore";
 
     @Instance(MOD_ID)
     public static DeltaCore instance;
