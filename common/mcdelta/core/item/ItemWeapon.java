@@ -109,8 +109,8 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
             itemOverlay = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_2", register);
         }
 
-        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_"
-                + toolName + ".png"));
+        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName
+                + ".png"));
 
         if (overrideExists)
         {

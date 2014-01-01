@@ -60,7 +60,7 @@ public class ParticleHammerSmash extends EntityFX
 
                 double xOffset = rand.nextInt(radiusClose * 2) - radiusClose;
                 double zOffset = rand.nextInt(radiusClose * 2) - radiusClose;
-                
+
                 worldObj.spawnParticle("cloud", posX + xOffset, posY, posZ + zOffset, 0, 0, 0);
             }
         }

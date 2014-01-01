@@ -59,7 +59,7 @@ public class ParticleCriticalHit extends EntityFX
             if (((d0 * d0) + (d1 * d1) + (d2 * d2)) <= 1.0D)
             {
                 double d3 = theEntity.posX + ((d0 * theEntity.width) / 4.0D);
-                double d4 = theEntity.boundingBox.minY + theEntity.height / 2.0F + ((d1 * theEntity.height) / 4.0D);
+                double d4 = theEntity.boundingBox.minY + (theEntity.height / 2.0F) + ((d1 * theEntity.height) / 4.0D);
                 double d5 = theEntity.posZ + ((d2 * theEntity.width) / 4.0D);
 
                 EntityFX fx = new EntityCritFX(worldObj, d3, d4, d5, d0, d1 + 0.2D, d2);
