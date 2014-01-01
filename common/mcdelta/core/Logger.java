@@ -10,6 +10,11 @@ public class Logger
 {
     public static java.util.logging.Logger logger;
 
+    public static void logBlank()
+    {
+        log("\n");
+    }
+    
     public static void log(Object... message)
     {
         if (!Settings.LOG_MASTER || !Settings.LOG_INFO)

@@ -1,12 +1,10 @@
 package mcdelta.core.item;
 
-import static mcdelta.core.assets.Assets.log;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
+import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -123,7 +121,7 @@ public class ItemDelta extends Item
         {
             return register.registerIcon(modid.toLowerCase() + ":" + s);
         }
-        log(Level.SEVERE, "missing icon! " + loc);
+        Logger.severe("missing icon! " + loc);
         return register.registerIcon(DeltaCore.MOD_ID + ":null");
     }
 

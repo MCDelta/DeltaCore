@@ -24,8 +24,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
 
 public class Assets
 {
@@ -59,18 +57,6 @@ public class Assets
     {
         Class<?> clazz = (Class<?>) EntityList.stringToClassMapping.get(name);
         return clazz;
-    }
-
-    // ========== Prints ==========
-
-    public static void log(Object... message)
-    {
-        Logger.log(message);
-    }
-
-    public static void log(Level level, Object... message)
-    {
-        Logger.log(level, message);
     }
 
     public static boolean resourceExists(ResourceLocation loc)
@@ -131,7 +117,7 @@ public class Assets
 
         else
         {
-            Logger.log(Level.SEVERE, "[ placeBlock() ]" + worldAccessError, pos);
+            Logger.severe("[ placeBlock() ]" + worldAccessError, pos);
         }
     }
 
@@ -143,7 +129,7 @@ public class Assets
 
             return world.setBlockToAir(pos.x, pos.y, pos.z);
         }
-        Logger.log(Level.SEVERE, "[ setToAir() ]" + worldAccessError, pos);
+        Logger.severe("[ setToAir() ]" + worldAccessError, pos);
         return false;
     }
 
@@ -212,7 +198,7 @@ public class Assets
 
             return Assets.setToAir(pos);
         }
-        Logger.log(Level.SEVERE, "[ breakBlock() ]" + worldAccessError, pos);
+        Logger.severe("[ breakBlock() ]" + worldAccessError, pos);
 
         return false;
     }
@@ -275,7 +261,7 @@ public class Assets
 
         else
         {
-            Logger.log(Level.SEVERE, "[ Assets.updateBlock() ]" + worldAccessError, pos);
+            Logger.severe("[ Assets.updateBlock() ]" + worldAccessError, pos);
         }
     }
 
@@ -310,7 +296,7 @@ public class Assets
     {
         byte[] data = packet.populate();
 
-        log("sending a packet", packet.getClass().getSimpleName(), data.length);
+        Logger.log("sending a packet", packet.getClass().getSimpleName(), data.length);
 
         Packet250CustomPayload packet250 = new Packet250CustomPayload();
         packet250.channel = DeltaCore.MOD_ID;
@@ -329,14 +315,9 @@ public class Assets
 
             return world.getBlockPowerInput(pos.x, pos.y, pos.z);
         }
-        Logger.log(Level.SEVERE, "[ Assets.getPowerInput() ]" + worldAccessError, pos);
+        Logger.severe("[ Assets.getPowerInput() ]" + worldAccessError, pos);
 
         return 0;
-    }
-
-    public static void logBlank()
-    {
-        log("\n");
     }
 
     public static boolean isPoweredDirectly(Position pos)
@@ -388,16 +369,6 @@ public class Assets
         }
 
         return list;
-    }
-
-    public static ModContainer getMod(String s)
-    {
-        return Loader.instance().getIndexedModList().get(s);
-    }
-
-    public static ModContainer deltaCore()
-    {
-        return getMod("DeltaCore");
     }
 
     public static Field getField(Class<?> clazz, String s) throws Exception
