@@ -22,13 +22,7 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
 
         Tessellator tessellator = Tessellator.instance;
 
-        int j;
-        float f1;
-        float f2;
-        float f3;
-
         renderer.setRenderBoundsFromBlock(block);
-        int k;
 
         block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
@@ -68,12 +62,10 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
     {
-        int l = renderer.blockAccess.getBlockMetadata(x, y, z);
-        boolean flag1 = false || ((l & 8) != 0);
-        int i1 = BlockPistonBase.getOrientation(l);
-        float f = 0.25F;
+        int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
+        int orientation = BlockPistonBase.getOrientation(meta);
 
-        switch (i1)
+        switch (orientation)
         {
             case 0:
                 renderer.uvRotateEast = 3;
@@ -81,8 +73,7 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
                 renderer.uvRotateSouth = 3;
                 renderer.uvRotateNorth = 3;
             case 1:
-            default:
-                break;
+
             case 2:
                 renderer.uvRotateSouth = 1;
                 renderer.uvRotateNorth = 2;
@@ -104,6 +95,8 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
                 renderer.uvRotateWest = 1;
                 renderer.uvRotateTop = 1;
                 renderer.uvRotateBottom = 2;
+            default:
+                break;
         }
 
         renderer.renderStandardBlock(block, x, y, z);
@@ -119,7 +112,6 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
     @Override
     public boolean shouldRender3DInInventory()
     {
-
         return true;
     }
 

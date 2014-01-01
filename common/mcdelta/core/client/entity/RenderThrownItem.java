@@ -1,10 +1,8 @@
 package mcdelta.core.client.entity;
 
 import mcdelta.core.assets.client.RenderAssets;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -39,7 +37,6 @@ public class RenderThrownItem extends Render
     public void doRender(Entity entity, double x, double y, double z, float par8, float par9)
     {
         Icon icon = item.getIconFromDamage(damage);
-        TextureManager engine = Minecraft.getMinecraft().getTextureManager();
 
         if (icon != null)
         {
@@ -51,7 +48,7 @@ public class RenderThrownItem extends Render
             GL11.glRotatef(180.0F - renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(-renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
-            RenderAssets.renderItemInWorld(new ItemStack(item), engine, icon);
+            RenderAssets.renderItemInWorld(new ItemStack(item), icon);
 
             GL11.glPopMatrix();
         }
@@ -63,7 +60,7 @@ public class RenderThrownItem extends Render
         return TextureMap.locationItemsTexture;
     }
 
-    private void func_77026_a(Tessellator tessalator, Icon xIcon)
+    private void useless(Tessellator tessalator, Icon xIcon)
     {
         float f = xIcon.getMinU();
         float f1 = xIcon.getMaxU();

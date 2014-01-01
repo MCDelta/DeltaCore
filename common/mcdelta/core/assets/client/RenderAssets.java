@@ -2,8 +2,8 @@ package mcdelta.core.assets.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import mcdelta.core.DeltaCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -30,12 +30,9 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderAssets
 {
-    private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    private static final ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
-    private static final ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
-
-    public static ResourceLocation glint = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-    private static Random rand = new Random();
+    public static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+    public static final ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
+    public static final ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
 
     public static List<Item> flipInInventory = new ArrayList<Item>();
 
@@ -84,7 +81,7 @@ public class RenderAssets
         {
             Icon icon = icons[i];
 
-            rand.setSeed(187L);
+            DeltaCore.rand.setSeed(187L);
 
             int color = colors[i];
             float r = ((color >> 16) & 255) / 255.0F;
@@ -95,21 +92,21 @@ public class RenderAssets
         }
     }
 
-    public static void renderItemInWorld(ItemStack stack, TextureManager texturemanager, Icon icon)
+    public static void renderItemInWorld(ItemStack stack, Icon icon)
     {
-        renderItemInWorld(stack, texturemanager, 1, new Icon[]
+        renderItemInWorld(stack, 1, new Icon[]
         { icon }, new int[]
         { 0xffffff }, new boolean[]
         { false });
     }
 
-    public static void renderItemInWorld(ItemStack stack, TextureManager texturemanager, int passes, Icon[] icons, int[] colors, boolean[] shiny)
+    public static void renderItemInWorld(ItemStack stack, int passes, Icon[] icons, int[] colors, boolean[] shiny)
     {
         for (int i = 0; i < passes; i++)
         {
             Icon icon = icons[i];
 
-            rand.setSeed(187L);
+            DeltaCore.rand.setSeed(187L);
 
             int color = colors[i];
             float r = ((color >> 16) & 255) / 255.0F;
@@ -160,7 +157,7 @@ public class RenderAssets
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                texturemanager.bindTexture(glint);
+                texturemanager.bindTexture(RES_ITEM_GLINT);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;
@@ -253,7 +250,7 @@ public class RenderAssets
         GL11.glDepthFunc(GL11.GL_GREATER);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDepthMask(false);
-        manager.bindTexture(glint);
+        manager.bindTexture(RES_ITEM_GLINT);
         zLevel -= 50.0F;
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_DST_COLOR);
@@ -335,8 +332,8 @@ public class RenderAssets
             {
                 if (k > 0)
                 {
-                    float x = (((rand.nextFloat() * 2.0F) - 1.0F) * 0.3F) / 0.5F;
-                    float y = (((rand.nextFloat() * 2.0F) - 1.0F) * 0.3F) / 0.5F;
+                    float x = (((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F) / 0.5F;
+                    float y = (((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F) / 0.5F;
                     GL11.glTranslatef(x, y, f12 + f11);
                 } else
                 {
@@ -358,7 +355,7 @@ public class RenderAssets
                 {
                     GL11.glDepthFunc(GL11.GL_EQUAL);
                     GL11.glDisable(GL11.GL_LIGHTING);
-                    texturemanager.bindTexture(glint);
+                    texturemanager.bindTexture(RES_ITEM_GLINT);
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                     float f13 = 0.76F;
@@ -397,9 +394,9 @@ public class RenderAssets
 
                 if (l > 0)
                 {
-                    f11 = ((rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
-                    float f16 = ((rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
-                    float f17 = ((rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
+                    f11 = ((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
+                    float f16 = ((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
+                    float f17 = ((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
                     GL11.glTranslatef(f11, f16, f17);
                 }
 
@@ -509,7 +506,7 @@ public class RenderAssets
             {
                 GL11.glDepthFunc(GL11.GL_EQUAL);
                 GL11.glDisable(GL11.GL_LIGHTING);
-                texturemanager.bindTexture(glint);
+                texturemanager.bindTexture(RES_ITEM_GLINT);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                 float f7 = 0.76F;

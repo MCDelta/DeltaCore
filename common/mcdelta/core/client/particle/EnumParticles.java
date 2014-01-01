@@ -48,7 +48,7 @@ public enum EnumParticles
             switch (this)
             {
                 case HAMMER_SMASH:
-                    fx = new ParticleHammerSmash(world, x, y, z, (Integer) obj[0], (Integer) obj[1]);
+                    fx = new ParticleHammerSmash(world, x, y, z, (Integer) obj[0]);
                     break;
 
                 case CRITICAL_HIT:

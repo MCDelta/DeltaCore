@@ -8,9 +8,8 @@ public class ParticleHammerSmash extends EntityFX
     private int currentLife;
     private int maximumLife;
     private final int radius;
-    private final int blockID;
 
-    public ParticleHammerSmash(World world, double x, double y, double z, int r, int id)
+    public ParticleHammerSmash(World world, double x, double y, double z, int r)
     {
         super(world, x, y, z);
 
@@ -21,8 +20,6 @@ public class ParticleHammerSmash extends EntityFX
         posZ = z;
 
         radius = r;
-
-        blockID = id;
     }
 
     @Override

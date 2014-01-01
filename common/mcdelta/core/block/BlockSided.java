@@ -65,33 +65,33 @@ public class BlockSided extends BlockDelta
     {
         if (!world.isRemote)
         {
-            int l = world.getBlockId(x, y, z - 1);
-            int i1 = world.getBlockId(x, y, z + 1);
-            int j1 = world.getBlockId(x - 1, y, z);
-            int k1 = world.getBlockId(x + 1, y, z);
-            byte b0 = 3;
+            int zMin = world.getBlockId(x, y, z - 1);
+            int zPlus = world.getBlockId(x, y, z + 1);
+            int xMin = world.getBlockId(x - 1, y, z);
+            int xPlus = world.getBlockId(x + 1, y, z);
+            byte meta = 3;
 
-            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            if (Block.opaqueCubeLookup[zMin] && !Block.opaqueCubeLookup[zPlus])
             {
-                b0 = 3;
+                meta = 3;
             }
 
-            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            if (Block.opaqueCubeLookup[zPlus] && !Block.opaqueCubeLookup[zMin])
             {
-                b0 = 2;
+                meta = 2;
             }
 
-            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            if (Block.opaqueCubeLookup[xMin] && !Block.opaqueCubeLookup[xPlus])
             {
-                b0 = 5;
+                meta = 5;
             }
 
-            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            if (Block.opaqueCubeLookup[xPlus] && !Block.opaqueCubeLookup[xMin])
             {
-                b0 = 4;
+                meta = 4;
             }
 
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+            world.setBlockMetadataWithNotify(x, y, z, meta, 2);
         }
     }
 
@@ -134,11 +134,11 @@ public class BlockSided extends BlockDelta
 
     public static IPosition getIPositionFromBlockSource(IBlockSource blockSource)
     {
-        EnumFacing enumfacing = getFacing(blockSource.getBlockMetadata());
-        double d0 = blockSource.getX() + (0.7D * enumfacing.getFrontOffsetX());
-        double d1 = blockSource.getY() + (0.7D * enumfacing.getFrontOffsetY());
-        double d2 = blockSource.getZ() + (0.7D * enumfacing.getFrontOffsetZ());
-        return new PositionImpl(d0, d1, d2);
+        EnumFacing facing = getFacing(blockSource.getBlockMetadata());
+        double x = blockSource.getX() + (0.7D * facing.getFrontOffsetX());
+        double y = blockSource.getY() + (0.7D * facing.getFrontOffsetY());
+        double z = blockSource.getZ() + (0.7D * facing.getFrontOffsetZ());
+        return new PositionImpl(x, y, z);
     }
 
     public static EnumFacing getFacing(int par0)
