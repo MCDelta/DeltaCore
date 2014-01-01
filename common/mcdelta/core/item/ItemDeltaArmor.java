@@ -1,25 +1,28 @@
 package mcdelta.core.item;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ToolMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
+public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialArmor
 {
     private static final int[] maxDamageArray = new int[]
     { 11, 16, 15, 13 };
@@ -28,16 +31,16 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
     private int renderIndex;
     private final int damageReduceAmount;
 
-    public EnumMCDMods mod;
+    public ModDelta mod;
     public String name;
 
-    public ItemDeltaArmor(EnumMCDMods m, ToolMaterial mat, int i)
+    public ItemDeltaArmor(ModDelta m, ToolMaterial mat, int i)
     {
         super(DeltaCore.config.getItemID(m, getArmorType(i) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, mat.index() + 4, i);
 
         mod = m;
         name = getArmorType(i) + "." + mat.getName().toLowerCase();
-        String unlocalized = mod.modid.toLowerCase() + ":" + name;
+        String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
         setCreativeTab(CreativeTabs.tabCombat);
 
@@ -141,5 +144,28 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
     static int[] getMaxDamageArray()
     {
         return maxDamageArray;
+    }
+
+    // ARMOR PROPS
+
+    @Override
+    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot)
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
+    {
+        // TODO Auto-generated method stub
+
     }
 }

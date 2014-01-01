@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -267,13 +267,13 @@ public class Config
 
     private int id = 9000;
 
-    public int getItemID(EnumMCDMods mod, String s)
+    public int getItemID(ModDelta mod, String s)
     {
         Configuration cfg = getConfig(items);
 
         cfg.load();
 
-        Iterator<?> iter = cfg.getCategory(mod.modid).getValues().entrySet().iterator();
+        Iterator<?> iter = cfg.getCategory(mod.id()).getValues().entrySet().iterator();
         List<Integer> occupied = new ArrayList<Integer>();
 
         while (iter.hasNext())
@@ -295,8 +295,8 @@ public class Config
             }
         }
 
-        int id = cfg.get(mod.modid, s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(mod.modid, "ingame item IDs");
+        int id = cfg.get(mod.id(), s + " ID", possibleID).getInt();
+        cfg.addCustomCategoryComment(mod.id(), "ingame item IDs");
 
         cfg.save();
 
@@ -305,13 +305,13 @@ public class Config
         return id - 256;
     }
 
-    public int getBlockID(EnumMCDMods mod, String s)
+    public int getBlockID(ModDelta mod, String s)
     {
         Configuration cfg = getConfig(blocks);
 
         cfg.load();
 
-        Iterator<?> iter = cfg.getCategory(mod.modid).getValues().entrySet().iterator();
+        Iterator<?> iter = cfg.getCategory(mod.id()).getValues().entrySet().iterator();
         List<Integer> occupied = new ArrayList<Integer>();
 
         while (iter.hasNext())
@@ -331,8 +331,8 @@ public class Config
             }
         }
 
-        int id = cfg.get(mod.modid, s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(mod.modid, "block IDs");
+        int id = cfg.get(mod.id(), s + " ID", possibleID).getInt();
+        cfg.addCustomCategoryComment(mod.id(), "block IDs");
 
         cfg.save();
 
@@ -341,7 +341,7 @@ public class Config
         return id;
     }
 
-    public int getEnchantmentID(EnumMCDMods m, String s)
+    public int getEnchantmentID(ModDelta m, String s)
     {
         Configuration cfg = getConfig(enchants);
 
@@ -358,8 +358,8 @@ public class Config
             }
         }
 
-        int id = cfg.get(m.modid, s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(m.modid, "enchantment IDs");
+        int id = cfg.get(m.id(), s + " ID", possibleID).getInt();
+        cfg.addCustomCategoryComment(m.id(), "enchantment IDs");
 
         cfg.save();
 

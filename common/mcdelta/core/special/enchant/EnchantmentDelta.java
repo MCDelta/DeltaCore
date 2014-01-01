@@ -3,7 +3,6 @@ package mcdelta.core.special.enchant;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
 import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
 import net.minecraft.enchantment.Enchantment;
@@ -12,14 +11,14 @@ import net.minecraft.util.StatCollector;
 
 public class EnchantmentDelta extends Enchantment
 {
-    private final EnumMCDMods mod;
+    private final ModDelta mod;
 
     public EnchantmentDelta(String s, int rarity, EnumEnchantmentType enchType)
     {
-        this(EnumMCDMods.DELTA_CORE, s, rarity, enchType);
+        this(DeltaCore.instance, s, rarity, enchType);
     }
 
-    public EnchantmentDelta(EnumMCDMods m, String s, int rarity, EnumEnchantmentType enchType)
+    public EnchantmentDelta(ModDelta m, String s, int rarity, EnumEnchantmentType enchType)
     {
         super(DeltaCore.config.getEnchantmentID(m, s), rarity, enchType);
         mod = m;
@@ -39,19 +38,11 @@ public class EnchantmentDelta extends Enchantment
 
     public String getModid()
     {
-        return mod.modid;
+        return mod.id();
     }
 
     public static void log(Object... message)
     {
         Logger.log(Level.INFO, message);
-    }
-
-    public static void loadEnchants()
-    {
-        for (ModDelta mod : ModDelta.mods)
-        {
-            mod.doThings(ModDelta.Stage.LOAD_ENCHANTS);
-        }
     }
 }

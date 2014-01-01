@@ -3,7 +3,6 @@ package mcdelta.core.block;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
 import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
@@ -18,21 +17,21 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockDelta extends Block
 {
-    private final EnumMCDMods mod;
+    private final ModDelta mod;
     public String name;
 
     public BlockDelta(String s, Material mat)
     {
-        this(EnumMCDMods.DELTA_CORE, s, mat);
+        this(DeltaCore.instance, s, mat);
     }
 
-    public BlockDelta(EnumMCDMods m, String s, Material mat)
+    public BlockDelta(ModDelta m, String s, Material mat)
     {
         super(DeltaCore.config.getBlockID(m, s), mat);
 
         mod = m;
         name = s;
-        String unlocalized = mod.modid.toLowerCase() + ":" + s;
+        String unlocalized = mod.id().toLowerCase() + ":" + s;
         setUnlocalizedName(unlocalized);
         setCreativeTab(CreativeTabs.tabAllSearch);
 
@@ -54,11 +53,11 @@ public class BlockDelta extends Block
 
     protected Icon doRegister(String s, IconRegister register)
     {
-        ResourceLocation loc = new ResourceLocation(mod.modid.toLowerCase(), "textures/blocks/" + s + ".png");
+        ResourceLocation loc = new ResourceLocation(mod.id().toLowerCase(), "textures/blocks/" + s + ".png");
 
         if (Assets.resourceExists(loc))
         {
-            return register.registerIcon(mod.modid + ":" + s);
+            return register.registerIcon(mod.id() + ":" + s);
         }
         return register.registerIcon(DeltaCore.MOD_ID + ":null");
     }
@@ -68,21 +67,13 @@ public class BlockDelta extends Block
         this.setBlockBounds(shape[0], shape[1], shape[2], shape[3], shape[4], shape[5]);
     }
 
-    public String getModid()
+    public String getid()
     {
-        return mod.modid;
+        return mod.id();
     }
 
     public static void log(Object... message)
     {
         Logger.log(Level.INFO, message);
-    }
-
-    public static void loadBlocks()
-    {
-        for (ModDelta mod : ModDelta.mods)
-        {
-            mod.doThings(ModDelta.Stage.LOAD_BLOCKS);
-        }
     }
 }

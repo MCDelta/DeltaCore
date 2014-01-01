@@ -1,6 +1,6 @@
 package mcdelta.core.item;
 
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ToolMaterial;
@@ -39,7 +39,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
 
     private boolean overrideExists = false;
 
-    public ItemDeltaTool(EnumMCDMods m, String s, ToolMaterial mat, Block[] arr, float damage)
+    public ItemDeltaTool(ModDelta m, String s, ToolMaterial mat, Block[] arr, float damage)
     {
         super(m, mat.getName() + "." + s);
         toolMaterial = mat;
@@ -60,7 +60,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         itemIcon = doRegister("deltacore", toolName + "_1", register);
         itemOverlay = doRegister("deltacore", toolName + "_2", register);
 
-        overrideExists = Assets.resourceExists(new ResourceLocation(mod.modid.toLowerCase(), "textures/items/override/" + toolMaterial.getName().toLowerCase() + "_" + toolName
+        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterial.getName().toLowerCase() + "_" + toolName
                 + ".png"));
 
         if (overrideExists)

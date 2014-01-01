@@ -3,13 +3,9 @@ package mcdelta.core;
 import java.util.Random;
 import java.util.logging.Level;
 
-import mcdelta.core.block.BlockDelta;
 import mcdelta.core.config.Config;
-import mcdelta.core.item.ItemDelta;
-import mcdelta.core.material.ToolMaterial;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
-import mcdelta.core.special.enchant.EnchantmentDelta;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
@@ -24,7 +20,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 @Mod(modid = DeltaCore.MOD_ID, useMetadata = true)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels =
 { DeltaCore.MOD_ID }, packetHandler = PacketHandler.class)
-public class DeltaCore
+public class DeltaCore extends ModDelta
 {
     // TODO (possible ideas)
     // - camo creeper
@@ -50,16 +46,11 @@ public class DeltaCore
         Logger.logger = event.getModLog();
         localizationWarnings.append("The following are missing localized names: \n");
         config = new Config(event);
-        ToolMaterial.init();
     }
 
     @EventHandler
     public void load(FMLInitializationEvent event)
     {
-        ItemDelta.loadItems();
-        BlockDelta.loadBlocks();
-        EnchantmentDelta.loadEnchants();
-
         Recipes.addCraftingRecipes();
 
         MinecraftForge.setBlockHarvestLevel(Block.oreNetherQuartz, "pickaxe", 2);
@@ -75,5 +66,4 @@ public class DeltaCore
 
         proxy.registerRenderers();
     }
-
 }

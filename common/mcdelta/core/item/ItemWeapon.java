@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ToolMaterial;
@@ -46,13 +46,13 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
 
     private boolean overrideExists = false;
 
-    public EnumMCDMods mod;
+    public ModDelta mod;
     public String name;
     private final float weaponDamage;
     private final String toolName;
     public ToolMaterial toolMaterialDelta;
 
-    public ItemWeapon(String s, EnumMCDMods m, ToolMaterial mat, float f)
+    public ItemWeapon(String s, ModDelta m, ToolMaterial mat, float f)
     {
         super(DeltaCore.config.getItemID(m, mat.getName() + "." + s), mat.toolMaterial);
 
@@ -75,7 +75,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         // ItemDelta code
         mod = m;
         name = mat.getName() + "." + toolName;
-        String unlocalized = mod.modid.toLowerCase() + ":" + name;
+        String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
 
         String weapon = "tool." + toolName;
@@ -105,16 +105,16 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
 
         else
         {
-            itemIcon = ItemDelta.doRegister(mod.modid.toLowerCase(), toolName + "_1", register);
-            itemOverlay = ItemDelta.doRegister(mod.modid.toLowerCase(), toolName + "_2", register);
+            itemIcon = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_1", register);
+            itemOverlay = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_2", register);
         }
 
-        overrideExists = Assets.resourceExists(new ResourceLocation(mod.modid.toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_"
+        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_"
                 + toolName + ".png"));
 
         if (overrideExists)
         {
-            overrideIcon = ItemDelta.doRegister(mod.modid.toLowerCase(), "override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName, register);
+            overrideIcon = ItemDelta.doRegister(mod.id().toLowerCase(), "override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName, register);
         }
     }
 

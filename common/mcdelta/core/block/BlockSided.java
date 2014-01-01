@@ -1,6 +1,6 @@
 package mcdelta.core.block;
 
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
@@ -32,7 +32,7 @@ public class BlockSided extends BlockDelta
         super(s, mat);
     }
 
-    public BlockSided(EnumMCDMods m, String s, Material mat)
+    public BlockSided(ModDelta m, String s, Material mat)
     {
         super(m, s, mat);
     }

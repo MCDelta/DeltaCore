@@ -1,7 +1,7 @@
 package mcdelta.core.item;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,11 +16,11 @@ import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 public class ItemDeltaBow extends ItemBow
 {
-    public EnumMCDMods mod;
+    public ModDelta mod;
     public String name;
     public Item[] ammo;
 
-    public ItemDeltaBow(EnumMCDMods m, String s, Item[] arr)
+    public ItemDeltaBow(ModDelta m, String s, Item[] arr)
     {
         super(DeltaCore.config.getItemID(m, s));
 
@@ -29,7 +29,7 @@ public class ItemDeltaBow extends ItemBow
         // ItemDelta code
         mod = m;
         name = s;
-        String unlocalized = mod.modid.toLowerCase() + ":" + name;
+        String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
 
         if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.EnumMCDMods;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -64,21 +63,21 @@ public class ItemDelta extends Item
         }
     }
 
-    public EnumMCDMods mod;
+    public ModDelta mod;
     public String name;
     private boolean checkUnlocalized = true;
 
     public ItemDelta(String s)
     {
-        this(EnumMCDMods.DELTA_CORE, s);
+        this(DeltaCore.instance, s);
     }
 
-    public ItemDelta(EnumMCDMods m, String s)
+    public ItemDelta(ModDelta m, String s)
     {
         this(m, s, true);
     }
 
-    public ItemDelta(EnumMCDMods m, String s, boolean b)
+    public ItemDelta(ModDelta m, String s, boolean b)
     {
         super(DeltaCore.config.getItemID(m, s));
         maxStackSize = 64;
@@ -89,7 +88,7 @@ public class ItemDelta extends Item
         // ItemDelta code
         mod = m;
         name = s;
-        String unlocalized = mod.modid.toLowerCase() + ":" + name;
+        String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
 
         if (checkUnlocalized && !StatCollector.func_94522_b("item." + unlocalized + ".name"))
@@ -113,7 +112,7 @@ public class ItemDelta extends Item
 
     protected Icon doRegister(String s, IconRegister register)
     {
-        return doRegister(mod.modid, s, register);
+        return doRegister(mod.id(), s, register);
     }
 
     public static Icon doRegister(String modid, String s, IconRegister register)
@@ -128,16 +127,8 @@ public class ItemDelta extends Item
         return register.registerIcon(DeltaCore.MOD_ID + ":null");
     }
 
-    public String getModid()
+    public String getid()
     {
-        return mod.modid;
-    }
-
-    public static void loadItems()
-    {
-        for (ModDelta mod : ModDelta.mods)
-        {
-            mod.doThings(ModDelta.Stage.LOAD_ITEMS);
-        }
+        return mod.id();
     }
 }

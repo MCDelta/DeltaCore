@@ -1,19 +1,28 @@
 package mcdelta.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModContainer;
 
-public interface ModDelta
+public class ModDelta
 {
-    public static List<ModDelta> mods = new ArrayList<ModDelta>();
-
-    public static enum Stage
+    public ModContainer mod()
     {
-        LOAD_ITEMS,
-        LOAD_BLOCKS,
-        LOAD_ENCHANTS,
-        LOAD_CONFIG;
+        return Loader.instance().getIndexedModList().get(id());
     }
 
-    public void doThings(Stage stage);
+    public String id()
+    {
+        return this.getClass().getAnnotation(Mod.class).modid();
+    }
+
+    public String name()
+    {
+        return mod().getName();
+    }
+
+    public String version()
+    {
+        return mod().getVersion();
+    }
 }

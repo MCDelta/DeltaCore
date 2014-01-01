@@ -1,6 +1,6 @@
 package mcdelta.core.item;
 
-import mcdelta.core.EnumMCDMods;
+import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ToolMaterial;
@@ -31,7 +31,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
 
     private boolean overrideExists = false;
 
-    public ItemDeltaHoe(EnumMCDMods m, ToolMaterial mat)
+    public ItemDeltaHoe(ModDelta m, ToolMaterial mat)
     {
         super(m, mat.getName() + ".hoe");
         toolMaterial = mat;
@@ -48,7 +48,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         itemIcon = doRegister("deltacore", "hoe" + "_1", register);
         itemOverlay = doRegister("deltacore", "hoe" + "_2", register);
 
-        overrideExists = Assets.resourceExists(new ResourceLocation(mod.modid.toLowerCase(), "textures/items/override/" + toolMaterial.getName().toLowerCase() + "_hoe.png"));
+        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterial.getName().toLowerCase() + "_hoe.png"));
 
         if (overrideExists)
         {
