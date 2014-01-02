@@ -22,17 +22,17 @@ public class BlockDelta extends Block
         this(DeltaCore.instance, s, mat);
     }
 
-    public BlockDelta(ModDelta m, String s, Material mat)
+    public BlockDelta(ModDelta mod, String name, Material mat)
     {
-        super(m.config().getBlockID(s), mat);
+        super(mod.config().getBlockID(name), mat);
 
-        mod = m;
-        name = s;
-        String unlocalized = mod.id().toLowerCase() + ":" + s;
+        this.mod = mod;
+        this.name = name;
+        String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
         setCreativeTab(CreativeTabs.tabAllSearch);
 
-        GameRegistry.registerBlock(this, s);
+        GameRegistry.registerBlock(this, name);
 
         if (!StatCollector.func_94522_b("tile." + unlocalized + ".name"))
         {

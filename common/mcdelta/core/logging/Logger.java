@@ -66,7 +66,6 @@ public class Logger
         {
             return;
         }
-
         StringBuilder sb = new StringBuilder();
 
         if (level != Level.INFO)
@@ -78,7 +77,6 @@ public class Logger
             sb.append("!!!!!");
             sb.append("\n");
         }
-
         int index = -1;
 
         for (Object obj : message)
@@ -100,7 +98,6 @@ public class Logger
                 sb.append(obj);
             }
         }
-
         if (level == Level.SEVERE)
         {
             sb.append("\n");
@@ -109,7 +106,6 @@ public class Logger
         {
             sb.append("\n");
         }
-
         logger.log(level, sb.toString());
     }
 
@@ -122,7 +118,6 @@ public class Logger
             sb.append("/n");
             sb.append("- " + obj);
         }
-
         return sb;
     }
 }

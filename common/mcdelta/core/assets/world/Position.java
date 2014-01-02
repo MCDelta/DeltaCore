@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class Position
 {
-    public IBlockAccess blockAccess;
+    public IBlockAccess world;
     public int x;
     public int y;
     public int z;
@@ -23,28 +23,28 @@ public class Position
         this(world, x, y, z, 0);
     }
 
-    public Position(IBlockAccess world, int i, int ii, int iii, int iiii)
+    public Position(IBlockAccess world, int x, int y, int z, int dimID)
     {
-        blockAccess = world;
-        x = i;
-        y = ii;
-        z = iii;
-        dimensionID = iiii;
+        this.world = world;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        dimensionID = dimID;
     }
 
     public int getMeta()
     {
-        return blockAccess.getBlockMetadata(x, y, z);
+        return world.getBlockMetadata(x, y, z);
     }
 
     public Position move(EnumFacing facing)
     {
-        return new Position(blockAccess, x + facing.getFrontOffsetX(), y + facing.getFrontOffsetY(), z + facing.getFrontOffsetZ(), dimensionID);
+        return new Position(world, x + facing.getFrontOffsetX(), y + facing.getFrontOffsetY(), z + facing.getFrontOffsetZ(), dimensionID);
     }
 
     public Position move(int i, int j, int k)
     {
-        return new Position(blockAccess, x + i, y + j, z + k, dimensionID);
+        return new Position(world, x + i, y + j, z + k, dimensionID);
     }
 
     public BlockData getBlockData()
@@ -53,18 +53,17 @@ public class Position
         {
             return null;
         }
-
         return new BlockData(getBlock(), getMeta(), getTile());
     }
 
     public Block getBlock()
     {
-        return Block.blocksList[blockAccess.getBlockId(x, y, z)];
+        return Block.blocksList[world.getBlockId(x, y, z)];
     }
 
     public TileEntity getTile()
     {
-        return blockAccess.getBlockTileEntity(x, y, z);
+        return world.getBlockTileEntity(x, y, z);
     }
 
     @Override
@@ -75,14 +74,14 @@ public class Position
 
     public Position copy()
     {
-        return new Position(blockAccess, x, y, z, dimensionID);
+        return new Position(world, x, y, z, dimensionID);
     }
 
     public boolean isNormalCube()
     {
-        if (blockAccess instanceof World)
+        if (world instanceof World)
         {
-            World world = (World) blockAccess;
+            World world = (World) this.world;
 
             return getBlock().isBlockNormalCube(world, x, y, z);
         }

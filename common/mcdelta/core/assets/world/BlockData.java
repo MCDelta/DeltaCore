@@ -9,21 +9,21 @@ public class BlockData
     public int meta;
     public TileEntity tile;
 
-    public BlockData(Block b)
+    public BlockData(Block block)
     {
-        this(b, 0, null);
+        this(block, 0, null);
     }
 
-    public BlockData(Block b, int i)
+    public BlockData(Block block, int meta)
     {
-        this(b, i, null);
+        this(block, meta, null);
     }
 
-    public BlockData(Block b, int i, TileEntity tileEntity)
+    public BlockData(Block block, int meta, TileEntity tile)
     {
-        block = b;
-        meta = i;
-        tile = tileEntity;
+        this.block = block;
+        this.meta = meta;
+        this.tile = tile;
     }
 
     @Override
@@ -32,13 +32,58 @@ public class BlockData
         return "BlockData [ block:" + block.getUnlocalizedName() + ", metadata:" + meta + ", tile:" + tile + " ]";
     }
 
-    public boolean equals(BlockData data)
+    @Override
+    public int hashCode()
     {
-        if ((data.block == block) && (data.meta == meta))
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result) + ((block == null) ? 0 : block.hashCode());
+        result = (prime * result) + meta;
+        result = (prime * result) + ((tile == null) ? 0 : tile.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
         {
             return true;
         }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (!(obj instanceof BlockData))
+        {
+            return false;
+        }
+        BlockData other = (BlockData) obj;
 
-        return false;
+        if (block == null)
+        {
+            if (other.block != null)
+            {
+                return false;
+            }
+        } else if (!block.equals(other.block))
+        {
+            return false;
+        }
+        if (meta != other.meta)
+        {
+            return false;
+        }
+        if (tile == null)
+        {
+            if (other.tile != null)
+            {
+                return false;
+            }
+        } else if (!tile.equals(other.tile))
+        {
+            return false;
+        }
+        return true;
     }
 }

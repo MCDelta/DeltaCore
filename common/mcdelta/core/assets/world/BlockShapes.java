@@ -35,7 +35,6 @@ public class BlockShapes
                     return shape(yMinP, f1, f2, yMaxP, f3, f4);
             }
         }
-
         if (i == 1)
         {
             float f1 = 0.625F;
@@ -59,7 +58,6 @@ public class BlockShapes
                     return shape(yMinP, f1, f2, yMaxP, f3, f4);
             }
         }
-
         if (i == 2)
         {
             float f1 = 0.125F;
@@ -83,7 +81,6 @@ public class BlockShapes
                     return shape(yMinP, f1, f2, yMaxP, f3, f4);
             }
         }
-
         if (i == 3)
         {
             float f1 = 0.625F;
@@ -107,7 +104,6 @@ public class BlockShapes
                     return shape(yMinP, f1, f2, yMaxP, f3, f4);
             }
         }
-
         return defaultShape();
     }
 
@@ -131,7 +127,6 @@ public class BlockShapes
             case EAST:
                 return shape(f2, 0, 0, 1, 1, 1);
         }
-
         return defaultShape();
     }
 
@@ -155,7 +150,6 @@ public class BlockShapes
             case EAST:
                 return shape(f2, 0, 0, 1, 1, 1);
         }
-
         return defaultShape();
     }
 
@@ -194,7 +188,6 @@ public class BlockShapes
                 f4 -= f;
                 return shape(f3, 0, 0, f4, 1, 1);
         }
-
         return defaultShape();
     }
 
@@ -227,7 +220,6 @@ public class BlockShapes
                 f2 += f;
                 return shape(f1, f3, f3, f2, f4, f4);
         }
-
         return defaultShape();
     }
 
@@ -241,5 +233,4 @@ public class BlockShapes
         return new float[]
         { f1, f2, f3, f4, f5, f6 };
     }
-
 }

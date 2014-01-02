@@ -20,15 +20,15 @@ public class ItemDeltaBow extends ItemBow
     public String name;
     public Item[] ammo;
 
-    public ItemDeltaBow(ModDelta m, String s, Item[] arr)
+    public ItemDeltaBow(ModDelta mod, String name, Item[] ammo)
     {
-        super(m.config().getItemID(s));
+        super(mod.config().getItemID(name));
 
-        ammo = arr;
+        this.ammo = ammo;
 
         // ItemDelta code
-        mod = m;
-        name = s;
+        this.mod = mod;
+        this.name = name;
         String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
 
@@ -36,7 +36,6 @@ public class ItemDeltaBow extends ItemBow
         {
             DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
         }
-
         if (this instanceof IExtraPasses)
         {
             ClientProxy.extraPasses.add(this);
@@ -46,17 +45,16 @@ public class ItemDeltaBow extends ItemBow
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        boolean flag = player.capabilities.isCreativeMode;
+        boolean hasAmmo = player.capabilities.isCreativeMode;
 
         for (Item item : ammo)
         {
             if (player.inventory.hasItem(item.itemID))
             {
-                flag = true;
+                hasAmmo = true;
             }
         }
-
-        if (flag)
+        if (hasAmmo)
         {
             ArrowNockEvent event = new ArrowNockEvent(player, stack);
             MinecraftForge.EVENT_BUS.post(event);
@@ -64,10 +62,8 @@ public class ItemDeltaBow extends ItemBow
             {
                 return event.result;
             }
-
             player.setItemInUse(stack, getMaxItemUseDuration(stack));
         }
-
         return stack;
     }
 

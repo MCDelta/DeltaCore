@@ -31,9 +31,9 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
 
     private boolean overrideExists = false;
 
-    public ItemDeltaHoe(ModDelta m, ToolMaterial mat)
+    public ItemDeltaHoe(ModDelta mod, ToolMaterial mat)
     {
-        super(m, mat.getName() + ".hoe");
+        super(mod, mat.getName() + ".hoe");
         toolMaterial = mat;
         maxStackSize = 1;
         setMaxDamage(mat.getMaxUses());
@@ -63,7 +63,6 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         {
             return 1;
         }
-
         return 2;
     }
 
@@ -74,12 +73,10 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         {
             return overrideIcon;
         }
-
         if (pass == 2)
         {
             return itemOverlay;
         }
-
         return itemIcon;
     }
 
@@ -90,12 +87,10 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         {
             return 0xffffff;
         }
-
         if (pass == 2)
         {
             return ToolMaterial.WOOD.getColor();
         }
-
         return toolMaterial.getColor();
     }
 
@@ -106,7 +101,6 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         {
             return true;
         }
-
         return false;
     }
 
@@ -122,13 +116,11 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
         {
             return false;
         }
-
         if (event.getResult() == Result.ALLOW)
         {
             stack.damageItem(1, player);
             return true;
         }
-
         int i1 = world.getBlockId(x, y, z);
         boolean air = world.isAirBlock(x, y + 1, z);
 

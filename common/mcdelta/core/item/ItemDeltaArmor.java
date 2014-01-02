@@ -50,13 +50,12 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
         {
             DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
         }
-
         ClientProxy.extraPasses.add(this);
     }
 
-    private static String getArmorType(int i)
+    private static String getArmorType(int type)
     {
-        switch (i)
+        switch (type)
         {
             default:
                 return "helmet";
@@ -112,7 +111,6 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
         {
             return OreDictionary.itemMatches(OreDictionary.getOres(toolMaterial.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
         }
-
         return super.getIsRepairable(repair, gem);
     }
 
@@ -149,6 +147,5 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
     public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
     {
         // TODO Auto-generated method stub
-
     }
 }

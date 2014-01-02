@@ -48,7 +48,6 @@ public class Assets
                 return element;
             }
         }
-
         return null;
     }
 
@@ -93,7 +92,6 @@ public class Assets
         {
             returnVal += element;
         }
-
         return (returnVal / arr.length);
     }
 
@@ -109,9 +107,9 @@ public class Assets
 
     public static void placeBlock(Position pos, BlockData data)
     {
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             world.setBlock(pos.x, pos.y, pos.z, data.block.blockID, data.meta, 2);
             world.notifyBlocksOfNeighborChange(pos.x, pos.y, pos.z, data.block.blockID);
@@ -120,9 +118,7 @@ public class Assets
             {
                 world.setBlockTileEntity(pos.x, pos.y, pos.z, data.tile);
             }
-        }
-
-        else
+        } else
         {
             Logger.severe("[ placeBlock() ]" + worldAccessError, pos);
         }
@@ -130,9 +126,9 @@ public class Assets
 
     public static boolean setToAir(Position pos)
     {
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             return world.setBlockToAir(pos.x, pos.y, pos.z);
         }
@@ -145,9 +141,9 @@ public class Assets
         return getFacing(pos.getMeta());
     }
 
-    public static EnumFacing getFacing(int i)
+    public static EnumFacing getFacing(int face)
     {
-        switch (i)
+        switch (face)
         {
             case 0:
                 return EnumFacing.DOWN;
@@ -189,14 +185,14 @@ public class Assets
 
     public static boolean isAirBlock(Position pos)
     {
-        return pos.blockAccess.isAirBlock(pos.x, pos.y, pos.z);
+        return pos.world.isAirBlock(pos.x, pos.y, pos.z);
     }
 
     public static boolean breakBlock(Position pos, boolean b)
     {
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             if (b)
             {
@@ -225,7 +221,6 @@ public class Assets
 
             entity.motionX = speed * direction;
         }
-
         if (!yAlign && (targetY != 0))
         {
             double distance = Math.abs(entity.prevPosY - targetY);
@@ -235,7 +230,6 @@ public class Assets
 
             entity.motionY = speed * direction;
         }
-
         if (!zAlign && (targetZ != 0))
         {
             double distance = Math.abs(entity.prevPosZ - targetZ);
@@ -253,20 +247,17 @@ public class Assets
         {
             return true;
         }
-
         return false;
     }
 
     public static void updateBlock(Position pos)
     {
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             world.markBlockForUpdate(pos.x, pos.y, pos.z);
-        }
-
-        else
+        } else
         {
             Logger.severe("[ Assets.updateBlock() ]" + worldAccessError, pos);
         }
@@ -283,7 +274,6 @@ public class Assets
                 positions.add(pos.move(face));
             }
         }
-
         return positions;
     }
 
@@ -295,7 +285,6 @@ public class Assets
         {
             positions.add(pos.move(face));
         }
-
         return positions;
     }
 
@@ -316,9 +305,9 @@ public class Assets
 
     public static int getPowerInput(Position pos)
     {
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             return world.getBlockPowerInput(pos.x, pos.y, pos.z);
         }
@@ -338,10 +327,9 @@ public class Assets
         {
             return true;
         }
-
-        if (pos.blockAccess instanceof World)
+        if (pos.world instanceof World)
         {
-            World world = (World) pos.blockAccess;
+            World world = (World) pos.world;
 
             return world.isBlockIndirectlyGettingPowered(pos.x, pos.y, pos.z);
         }
@@ -374,7 +362,6 @@ public class Assets
                 list.add(Assets.getPowerInput(pos.move(face)));
             }
         }
-
         return list;
     }
 
@@ -394,9 +381,7 @@ public class Assets
             {
                 chars[i] = Character.toUpperCase(chars[i]);
                 found = true;
-            }
-
-            else if (Character.isWhitespace(chars[i]) || (chars[i] == '.') || (chars[i] == '\''))
+            } else if (Character.isWhitespace(chars[i]) || (chars[i] == '.') || (chars[i] == '\''))
             {
                 found = false;
             }

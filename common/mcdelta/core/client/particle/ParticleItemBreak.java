@@ -9,19 +9,18 @@ import net.minecraft.world.World;
 
 public class ParticleItemBreak extends EntityFX
 {
-
     private final Entity target;
     private final ItemStack stack;
     private int currentLife;
     private final int maximumLife;
     private final int particlesPerTick;
 
-    public ParticleItemBreak(Entity entity, ItemStack item, int i, int ii)
+    public ParticleItemBreak(Entity entity, ItemStack item, int maxLife, int ppt)
     {
-        this(entity.worldObj, entity, entity.posX, entity.posY, entity.posZ, item, i, ii);
+        this(entity.worldObj, entity, entity.posX, entity.posY, entity.posZ, item, maxLife, ppt);
     }
 
-    protected ParticleItemBreak(World world, Entity entity, double x, double y, double z, ItemStack item, int i, int ii)
+    protected ParticleItemBreak(World world, Entity entity, double x, double y, double z, ItemStack item, int maxLife, int ppt)
     {
         super(world, x, y, z);
 
@@ -33,8 +32,8 @@ public class ParticleItemBreak extends EntityFX
 
         stack = item;
 
-        maximumLife = i;
-        particlesPerTick = ii;
+        maximumLife = maxLife;
+        particlesPerTick = ppt;
 
         target = entity;
     }
@@ -56,7 +55,6 @@ public class ParticleItemBreak extends EntityFX
 
             Minecraft.getMinecraft().effectRenderer.addEffect(fx);
         }
-
         ++currentLife;
 
         if (currentLife >= maximumLife)

@@ -14,7 +14,7 @@ public abstract class IConfig
     public void init(ConfigWrapper config)
     {
         config.load();
-        
+
         initCommon(config);
 
         if (FMLCommonHandler.instance().getSide().isServer())

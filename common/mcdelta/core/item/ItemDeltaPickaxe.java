@@ -9,9 +9,9 @@ import net.minecraft.item.ItemPickaxe;
 public class ItemDeltaPickaxe extends ItemDeltaTool
 {
 
-    public ItemDeltaPickaxe(ModDelta m, ToolMaterial mat)
+    public ItemDeltaPickaxe(ModDelta mod, ToolMaterial mat)
     {
-        super(m, "pickaxe", mat, ItemPickaxe.blocksEffectiveAgainst, 2.0F);
+        super(mod, "pickaxe", mat, ItemPickaxe.blocksEffectiveAgainst, 2.0F);
     }
 
     @Override

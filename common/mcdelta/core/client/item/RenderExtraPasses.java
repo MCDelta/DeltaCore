@@ -40,36 +40,30 @@ public class RenderExtraPasses implements IItemRenderer
         {
             icons[i] = ((IExtraPasses) stack.getItem()).getIconFromPass(stack, i + 1);
         }
-
         for (int i = 0; i < passes; i++)
         {
             colors[i] = ((IExtraPasses) stack.getItem()).getColorFromPass(stack, i + 1);
         }
-
         for (int i = 0; i < passes; i++)
         {
             shiny[i] = ((IExtraPasses) stack.getItem()).getShinyFromPass(stack, i + 1);
         }
-
         TextureManager engine = Minecraft.getMinecraft().getTextureManager();
 
         if (type == ItemRenderType.INVENTORY)
         {
             RenderAssets.renderItemInventory(stack, engine, passes, icons, colors, shiny, zLevel);
         }
-
         if ((type == ItemRenderType.EQUIPPED) || (type == ItemRenderType.EQUIPPED_FIRST_PERSON))
         {
             RenderAssets.renderEquippedItem(stack, engine, passes, icons, colors, shiny);
         }
-
         if (type == ItemRenderType.ENTITY)
         {
             EntityItem entityItem = (EntityItem) data[1];
 
             RenderAssets.renderEntityItem(entityItem, stack, passes, icons, colors, shiny);
         }
-
         GL11.glPopMatrix();
     }
 }

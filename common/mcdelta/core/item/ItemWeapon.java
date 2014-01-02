@@ -52,11 +52,11 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
     private final String toolName;
     public ToolMaterial toolMaterialDelta;
 
-    public ItemWeapon(String s, ModDelta m, ToolMaterial mat, float f)
+    public ItemWeapon(String toolName, ModDelta mod, ToolMaterial mat, float f)
     {
-        super(m.config().getItemID(mat.getName() + "." + s), mat.toolMaterial);
+        super(mod.config().getItemID(mat.getName() + "." + toolName), mat.toolMaterial);
 
-        toolName = s;
+        this.toolName = toolName;
         toolMaterialDelta = mat;
         maxStackSize = 1;
         setMaxDamage(mat.getMaxUses());
@@ -73,7 +73,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         weaponDamage = f;
 
         // ItemDelta code
-        mod = m;
+        this.mod = mod;
         name = mat.getName() + "." + toolName;
         String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
@@ -85,12 +85,10 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             DeltaCore.localizationWarnings.append("- " + weapon + " \n");
         }
-
         if (!StatCollector.func_94522_b(material))
         {
             DeltaCore.localizationWarnings.append("- " + material + " \n");
         }
-
         ClientProxy.extraPasses.add(this);
     }
 
@@ -101,14 +99,11 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             itemIcon = ItemDelta.doRegister("deltacore", toolName + "_1", register);
             itemOverlay = ItemDelta.doRegister("deltacore", toolName + "_2", register);
-        }
-
-        else
+        } else
         {
             itemIcon = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_1", register);
             itemOverlay = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_2", register);
         }
-
         overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName
                 + ".png"));
 
@@ -125,7 +120,6 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             return 1;
         }
-
         return 2;
     }
 
@@ -136,12 +130,10 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             return overrideIcon;
         }
-
         if (pass == 2)
         {
             return itemOverlay;
         }
-
         return itemIcon;
     }
 
@@ -152,12 +144,10 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             return 0xffffff;
         }
-
         if (pass == 2)
         {
             return ToolMaterial.WOOD.getColor();
         }
-
         return toolMaterialDelta.getColor();
     }
 
@@ -168,7 +158,6 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             return true;
         }
-
         return false;
     }
 
@@ -202,7 +191,6 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             stack.damageItem(2, living);
         }
-
         return true;
     }
 
@@ -230,10 +218,8 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
             {
                 return event.result;
             }
-
             player.setItemInUse(stack, getMaxItemUseDuration(stack));
         }
-
         return stack;
     }
 
@@ -256,7 +242,6 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
         {
             return OreDictionary.itemMatches(OreDictionary.getOres(toolMaterialDelta.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
         }
-
         return super.getIsRepairable(repair, gem);
     }
 

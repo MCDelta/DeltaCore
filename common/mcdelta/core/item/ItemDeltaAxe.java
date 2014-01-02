@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 
 public class ItemDeltaAxe extends ItemDeltaTool
 {
-    public ItemDeltaAxe(ModDelta m, ToolMaterial mat)
+    public ItemDeltaAxe(ModDelta mod, ToolMaterial mat)
     {
-        super(m, "axe", mat, ItemAxe.blocksEffectiveAgainst, 3.0F);
+        super(mod, "axe", mat, ItemAxe.blocksEffectiveAgainst, 3.0F);
     }
 
     @Override

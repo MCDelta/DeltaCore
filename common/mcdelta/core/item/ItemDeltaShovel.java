@@ -8,9 +8,9 @@ import net.minecraft.item.ItemSpade;
 public class ItemDeltaShovel extends ItemDeltaTool
 {
 
-    public ItemDeltaShovel(ModDelta m, ToolMaterial mat)
+    public ItemDeltaShovel(ModDelta mod, ToolMaterial mat)
     {
-        super(m, "shovel", mat, ItemSpade.blocksEffectiveAgainst, 1.0F);
+        super(mod, "shovel", mat, ItemSpade.blocksEffectiveAgainst, 1.0F);
     }
 
     @Override

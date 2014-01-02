@@ -52,7 +52,6 @@ public class ItemDelta extends Item
                 ItemDeltaHoe hoe = new ItemDeltaHoe(mat.getMod(), mat);
                 hoes.put(mat, hoe);
             }
-
             if (mat.armorInfo != null)
             {
                 ItemDeltaArmor helmet = new ItemDeltaArmor(mat.getMod(), mat, 0);
@@ -65,27 +64,27 @@ public class ItemDelta extends Item
     public String name;
     private boolean checkUnlocalized = true;
 
-    public ItemDelta(String s)
+    public ItemDelta(String name)
     {
-        this(DeltaCore.instance, s);
+        this(DeltaCore.instance, name);
     }
 
-    public ItemDelta(ModDelta m, String s)
+    public ItemDelta(ModDelta mod, String name)
     {
-        this(m, s, true);
+        this(mod, name, true);
     }
 
-    public ItemDelta(ModDelta m, String s, boolean b)
+    public ItemDelta(ModDelta mod, String name, boolean checkLoc)
     {
-        super(m.config().getItemID(s));
+        super(mod.config().getItemID(name));
         maxStackSize = 64;
         setCreativeTab(CreativeTabs.tabAllSearch);
 
-        checkUnlocalized = b;
+        checkUnlocalized = checkLoc;
 
         // ItemDelta code
-        mod = m;
-        name = s;
+        this.mod = mod;
+        this.name = name;
         String unlocalized = mod.id().toLowerCase() + ":" + name;
         setUnlocalizedName(unlocalized);
 
@@ -93,7 +92,6 @@ public class ItemDelta extends Item
         {
             DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
         }
-
         if (this instanceof IExtraPasses)
         {
             ClientProxy.extraPasses.add(this);

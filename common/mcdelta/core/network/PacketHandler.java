@@ -38,7 +38,6 @@ public class PacketHandler implements IPacketHandler
         {
             e.printStackTrace(System.err);
         }
-
         packet.readPopulate(dis);
 
         return packet;

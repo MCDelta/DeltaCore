@@ -32,7 +32,6 @@ public enum EnumParticles
             {
                 return;
             }
-
             double distanceX = mc.renderViewEntity.posX - x;
             double distanceY = mc.renderViewEntity.posY - y;
             double distanceZ = mc.renderViewEntity.posZ - z;
@@ -42,7 +41,6 @@ public enum EnumParticles
             {
                 return;
             }
-
             EntityFX fx = null;
 
             switch (this)
@@ -50,9 +48,7 @@ public enum EnumParticles
                 case HAMMER_SMASH:
                     fx = new ParticleHammerSmash(world, x, y, z, (Integer) obj[0]);
                     break;
-
                 case CRITICAL_HIT:
-
                     if (obj.length == 2)
                     {
                         fx = new ParticleCriticalHit((Entity) obj[0], (Integer) obj[1]);
@@ -61,20 +57,15 @@ public enum EnumParticles
 
                     fx = new ParticleCriticalHit((Entity) obj[0], 0xAB3D3D, 1, 20, false);
                     break;
-
                 case CRITICAL_HIT_NORMAL:
-
                     fx = new ParticleCriticalHit((Entity) obj[0], 0xe5e5e5, 1, 20, false);
                     break;
-
                 case ITEM_BREAK:
                     fx = new ParticleItemBreak((Entity) obj[0], (ItemStack) obj[1], 2, 6);
                     break;
-
                 default:
                     break;
             }
-
             if (fx != null)
             {
                 Minecraft.getMinecraft().effectRenderer.addEffect(fx);
@@ -96,21 +87,18 @@ public enum EnumParticles
                     spawnParticle(world, x, y, z, entities.get(0), 0xAB3D3D, 1, 20, false);
                 }
                 break;
-
             case CRITICAL_HIT_NORMAL:
                 if (!entities.isEmpty())
                 {
                     spawnParticle(world, x, y, z, entities.get(0), 0xffffff, 1, 20, false);
                 }
                 break;
-
             case ITEM_BREAK:
                 if (!entities.isEmpty())
                 {
                     spawnParticle(world, x, y, z, entities.get(0), player.getHeldItem(), 2, 6);
                 }
                 break;
-
             default:
                 break;
         }

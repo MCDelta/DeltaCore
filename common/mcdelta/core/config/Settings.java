@@ -22,7 +22,7 @@ public class Settings
 
     public static String LOG_WARNING_KEY = "log warning";
     public static boolean LOG_WARNING;
-    
+
     public static String LOG_DEBUG_KEY = "log debug";
     public static boolean LOG_DEBUG;
 

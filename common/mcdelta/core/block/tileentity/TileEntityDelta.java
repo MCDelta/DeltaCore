@@ -17,9 +17,9 @@ public class TileEntityDelta extends TileEntity
     @Override
     public Packet getDescriptionPacket()
     {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        writeToNBT(nbtTag);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, nbtTag);
+        NBTTagCompound nbt = new NBTTagCompound();
+        writeToNBT(nbt);
+        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, nbt);
     }
 
     @Override

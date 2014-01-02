@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 
 public class ParticleCriticalHit extends EntityFX
 {
-
     private int currentLife;
     private final Entity theEntity;
     private final int maximumLife;
@@ -20,12 +19,13 @@ public class ParticleCriticalHit extends EntityFX
         this(target.worldObj, target, target.posX, target.posY, target.posZ, ((color >> 16) & 255) / 255.0F, ((color >> 8) & 255) / 255.0F, (color & 255) / 255.0F, 3, 16, false);
     }
 
-    public ParticleCriticalHit(Entity target, int color, int i, int ii, boolean b)
+    public ParticleCriticalHit(Entity target, int color, int maxLife, int ppt, boolean magic)
     {
-        this(target.worldObj, target, target.posX, target.posY, target.posZ, ((color >> 16) & 255) / 255.0F, ((color >> 8) & 255) / 255.0F, (color & 255) / 255.0F, i, ii, b);
+        this(target.worldObj, target, target.posX, target.posY, target.posZ, ((color >> 16) & 255) / 255.0F, ((color >> 8) & 255) / 255.0F, (color & 255) / 255.0F, maxLife, ppt,
+                magic);
     }
 
-    public ParticleCriticalHit(World world, Entity target, double x, double y, double z, float r, float g, float b, int i, int ii, boolean bool)
+    public ParticleCriticalHit(World world, Entity target, double x, double y, double z, float r, float g, float b, int maxLife, int ppt, boolean magic)
     {
         super(world, x, y, z);
 
@@ -39,12 +39,12 @@ public class ParticleCriticalHit extends EntityFX
         particleGreen = g;
         particleBlue = b;
 
-        maximumLife = i;
-        particlePerTick = ii;
+        maximumLife = maxLife;
+        particlePerTick = ppt;
 
         theEntity = target;
 
-        isMagic = bool;
+        isMagic = magic;
     }
 
     @Override
@@ -69,11 +69,9 @@ public class ParticleCriticalHit extends EntityFX
                 {
                     fx.nextTextureIndexX();
                 }
-
                 Minecraft.getMinecraft().effectRenderer.addEffect(fx);
             }
         }
-
         ++currentLife;
 
         if (currentLife >= maximumLife)

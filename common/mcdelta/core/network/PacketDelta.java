@@ -16,10 +16,10 @@ public class PacketDelta
 {
     private final int type;
 
-    public PacketDelta(int i)
+    public PacketDelta(int type)
     {
-        type = i;
-        PacketHandler.packets[i] = this.getClass();
+        this.type = type;
+        PacketHandler.packets[type] = this.getClass();
     }
 
     public byte[] populate()
@@ -35,7 +35,6 @@ public class PacketDelta
         {
             e.printStackTrace(System.err);
         }
-
         return bos.toByteArray();
     }
 

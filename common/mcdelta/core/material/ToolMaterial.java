@@ -97,11 +97,8 @@ public class ToolMaterial
         {
             toolMaterial = EnumHelper.addToolMaterial(getName(), getHarvestLevel(), getMaxUses(), getEfficiencyOnProperMaterial(), getDamageVsEntity(), getEnchantability());
         }
-
         if (armorMaterial == null)
-        {
-
-        }
+        {}
     }
 
     public String getName()

@@ -115,7 +115,6 @@ public class RenderAssets
 
             renderDroppedItem(null, stack, icon, 0, 0, r, g, b, 0, shiny[i]);
         }
-
     }
 
     public static void renderEquippedItem(ItemStack stack, TextureManager texturemanager, Icon icon)
@@ -137,7 +136,6 @@ public class RenderAssets
                 GL11.glPopMatrix();
                 return;
             }
-
             texturemanager.bindTexture(texturemanager.getResourceLocation(stack.getItemSpriteNumber()));
             Tessellator tessellator = Tessellator.instance;
             float f = icon.getMinU();
@@ -183,7 +181,6 @@ public class RenderAssets
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glDepthFunc(GL11.GL_LEQUAL);
             }
-
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         }
     }
@@ -222,14 +219,12 @@ public class RenderAssets
             {
                 renderIcon(0, 0, icons[i], 16, 16, zLevel);
             }
-
             GL11.glEnable(GL11.GL_LIGHTING);
 
             if (((shiny != null) && shiny[i]) || stack.isItemEnchanted())
             {
                 renderEffect(engine, 0, 0, zLevel);
             }
-
             GL11.glEnable(GL11.GL_CULL_FACE);
         }
     }
@@ -271,12 +266,10 @@ public class RenderAssets
             {
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             }
-
             if (j1 == 1)
             {
                 GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             }
-
             float f = 0.00390625F;
             float f1 = 0.00390625F;
             float f2 = ((Minecraft.getSystemTime() % (3000 + (j1 * 1873))) / (3000.0F + (j1 * 1873))) * 256.0F;
@@ -288,7 +281,6 @@ public class RenderAssets
             {
                 f4 = -1.0F;
             }
-
             tessellator.startDrawingQuads();
             tessellator.addVertexWithUV(par2 + 0, par3 + par5, zLevel, (f2 + (par5 * f4)) * f, (f3 + par5) * f1);
             tessellator.addVertexWithUV(par2 + par4, par3 + par5, zLevel, (f2 + par4 + (par5 * f4)) * f, (f3 + par5) * f1);
@@ -308,7 +300,6 @@ public class RenderAssets
             ResourceLocation resourcelocation = texturemanager.getResourceLocation(entityItem.getEntityItem().getItemSpriteNumber());
             icon = ((TextureMap) texturemanager.getTexture(resourcelocation)).getAtlasSprite("missingno");
         }
-
         float f4 = icon.getMinU();
         float f5 = icon.getMaxU();
         float f6 = icon.getMinV();
@@ -339,7 +330,6 @@ public class RenderAssets
                 {
                     GL11.glTranslatef(0f, 0f, f12 + f11);
                 }
-
                 if (stack.getItemSpriteNumber() == 0)
                 {
                     texturemanager.bindTexture(TextureMap.locationBlocksTexture);
@@ -347,7 +337,6 @@ public class RenderAssets
                 {
                     texturemanager.bindTexture(TextureMap.locationItemsTexture);
                 }
-
                 GL11.glColor4f(par5, par6, par7, 1.0F);
                 ItemRenderer.renderItemIn2D(tessellator, f5, f6, f4, f7, icon.getIconWidth(), icon.getIconHeight(), f12);
 
@@ -382,11 +371,8 @@ public class RenderAssets
                     GL11.glDepthFunc(GL11.GL_LEQUAL);
                 }
             }
-
             GL11.glPopMatrix();
-        }
-
-        else
+        } else
         {
             for (int l = 0; l < par3; ++l)
             {
@@ -399,7 +385,6 @@ public class RenderAssets
                     float f17 = ((DeltaCore.rand.nextFloat() * 2.0F) - 1.0F) * 0.3F;
                     GL11.glTranslatef(f11, f16, f17);
                 }
-
                 GL11.glRotatef(180.0F - RenderManager.instance.playerViewY, 0.0F, 1.0F, 0.0F);
 
                 GL11.glColor4f(par5, par6, par7, 1.0F);
@@ -465,7 +450,6 @@ public class RenderAssets
         {
             block = Block.blocksList[stack.itemID];
         }
-
         IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, type);
         if (customRenderer != null)
         {
@@ -484,7 +468,6 @@ public class RenderAssets
                 GL11.glPopMatrix();
                 return;
             }
-
             texturemanager.bindTexture(texturemanager.getResourceLocation(stack.getItemSpriteNumber()));
             Tessellator tessellator = Tessellator.instance;
             float f = icon.getMinU();

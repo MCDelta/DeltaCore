@@ -27,14 +27,14 @@ public class BlockSided extends BlockDelta
     @SideOnly(Side.CLIENT)
     protected Icon sideIcon;
 
-    public BlockSided(String s, Material mat)
+    public BlockSided(String name, Material mat)
     {
-        super(s, mat);
+        super(name, mat);
     }
 
-    public BlockSided(ModDelta m, String s, Material mat)
+    public BlockSided(ModDelta mod, String name, Material mat)
     {
-        super(m, s, mat);
+        super(mod, name, mat);
     }
 
     @Override

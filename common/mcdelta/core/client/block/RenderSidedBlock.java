@@ -98,7 +98,6 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
             default:
                 break;
         }
-
         renderer.renderStandardBlock(block, x, y, z);
         renderer.uvRotateEast = 0;
         renderer.uvRotateWest = 0;

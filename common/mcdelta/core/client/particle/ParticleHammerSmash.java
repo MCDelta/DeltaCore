@@ -9,7 +9,7 @@ public class ParticleHammerSmash extends EntityFX
     private int maximumLife;
     private final int radius;
 
-    public ParticleHammerSmash(World world, double x, double y, double z, int r)
+    public ParticleHammerSmash(World world, double x, double y, double z, int radi)
     {
         super(world, x, y, z);
 
@@ -19,7 +19,7 @@ public class ParticleHammerSmash extends EntityFX
         posY = y;
         posZ = z;
 
-        radius = r;
+        radius = radi;
     }
 
     @Override
@@ -42,7 +42,6 @@ public class ParticleHammerSmash extends EntityFX
             {
                 flag = false;
             }
-
             if (flag)
             {
                 worldObj.spawnParticle("tilecrack_" + id + "_0", posX + xOffset, posY + yOffset, posZ + zOffset, motionX, motionY, motionZ);
@@ -61,7 +60,6 @@ public class ParticleHammerSmash extends EntityFX
                 worldObj.spawnParticle("cloud", posX + xOffset, posY, posZ + zOffset, 0, 0, 0);
             }
         }
-
         ++currentLife;
 
         if (currentLife >= maximumLife)

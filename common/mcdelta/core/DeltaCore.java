@@ -61,7 +61,6 @@ public class DeltaCore extends ModDelta
         {
             Logger.debug(localizationWarnings);
         }
-
         proxy.registerRenderers();
     }
 }

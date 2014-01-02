@@ -19,9 +19,9 @@ public class ConfigWrapper
 
     private Configuration config;
 
-    private int blockIdStart;
-    private int itemIdStart;
-    private int enchantIdStart;
+    private final int blockIdStart;
+    private final int itemIdStart;
+    private final int enchantIdStart;
 
     public ConfigWrapper()
     {

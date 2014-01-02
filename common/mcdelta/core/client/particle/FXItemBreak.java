@@ -72,13 +72,11 @@ public class FXItemBreak extends EntityFX
             {
                 icons[i] = ((IExtraPasses) stack.getItem()).getIconFromPass(stack, i + 1);
             }
-
             for (int i = 0; i < passes; i++)
             {
                 colors[i] = ((IExtraPasses) stack.getItem()).getColorFromPass(stack, i + 1);
             }
         }
-
         for (int i = 0; i < passes; i++)
         {
             if (icons[i] != null)
@@ -88,7 +86,6 @@ public class FXItemBreak extends EntityFX
                 f8 = icons[i].getInterpolatedV((particleTextureJitterY / 4.0F) * 16.0F);
                 f9 = icons[i].getInterpolatedV(((particleTextureJitterY + 1.0F) / 4.0F) * 16.0F);
             }
-
             float f11 = (float) ((prevPosX + ((posX - prevPosX) * pt)) - interpPosX);
             float f12 = (float) ((prevPosY + ((posY - prevPosY) * pt)) - interpPosY);
             float f13 = (float) ((prevPosZ + ((posZ - prevPosZ) * pt)) - interpPosZ);

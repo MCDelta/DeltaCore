@@ -4,7 +4,6 @@ import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ToolMaterial;
-import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,19 +38,17 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
 
     private boolean overrideExists = false;
 
-    public ItemDeltaTool(ModDelta m, String s, ToolMaterial mat, Block[] arr, float damage)
+    public ItemDeltaTool(ModDelta mod, String name, ToolMaterial mat, Block[] effective, float damage)
     {
-        super(m, mat.getName() + "." + s);
+        super(mod, mat.getName() + "." + name);
         toolMaterial = mat;
-        toolName = s;
-        blocksEffectiveAgainst = arr;
+        toolName = name;
+        blocksEffectiveAgainst = effective;
         maxStackSize = 1;
         setMaxDamage(mat.getMaxUses());
         efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
         damageVsEntity = damage + mat.getDamageVsEntity();
         setCreativeTab(CreativeTabs.tabTools);
-
-        ClientProxy.extraPasses.add(this);
     }
 
     @Override
@@ -76,7 +73,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return 1;
         }
-
         return 2;
     }
 
@@ -87,12 +83,10 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return overrideIcon;
         }
-
         if (pass == 2)
         {
             return itemOverlay;
         }
-
         return itemIcon;
     }
 
@@ -103,12 +97,10 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return 0xffffff;
         }
-
         if (pass == 2)
         {
             return ToolMaterial.WOOD.getColor();
         }
-
         return toolMaterial.getColor();
     }
 
@@ -119,7 +111,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return true;
         }
-
         return false;
     }
 
@@ -133,7 +124,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
                 return efficiencyOnProperMaterial;
             }
         }
-
         return 1.0F;
     }
 
@@ -151,7 +141,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             stack.damageItem(1, living);
         }
-
         return true;
     }
 
@@ -180,7 +169,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return OreDictionary.itemMatches(OreDictionary.getOres(toolMaterial.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
         }
-
         return super.getIsRepairable(repair, gem);
     }
 
@@ -199,7 +187,6 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
         {
             return efficiencyOnProperMaterial;
         }
-
         return getStrVsBlock(stack, block);
     }
 }
