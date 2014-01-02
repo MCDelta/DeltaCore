@@ -34,7 +34,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
 
     public ItemDeltaArmor(ModDelta mod, ToolMaterial mat, int type)
     {
-        super(DeltaCore.config.getItemID(mod, getArmorType(type) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, mat.index() + 4, type);
+        super(mod.config().getItemID(getArmorType(type) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, mat.index() + 4, type);
 
         this.mod = mod;
         name = getArmorType(type) + "." + mat.getName().toLowerCase();

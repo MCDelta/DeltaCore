@@ -1,238 +1,257 @@
 package mcdelta.core.config;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 
-import mcdelta.core.DeltaCore;
-import mcdelta.core.ModDelta;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
+/**
+ * This is effectively a wrapper for Forge Configurations. It allows for easier manipulation of Config files.
+ */
 public class Config
 {
-    private final Map<String, Configuration> stringToCfg = new HashMap<String, Configuration>();
-    private final Map<Configuration, String> cfgToString = new HashMap<Configuration, String>();
-    public String filePath;
+    public static final String CATEGORY_ENCHANT = "enchantment";
 
-    private final String core = "core";
-    private final String items = "items";
-    private final String blocks = "blocks";
-    private final String enchants = "enchants";
+    private Configuration config;
 
-    public Config(FMLPreInitializationEvent event)
+    private int blockIdStart;
+    private int itemIdStart;
+    private int enchantIdStart;
+
+    public Config()
     {
-        filePath = event.getModConfigurationDirectory().getAbsolutePath() + "/MCDelta/";
-
-        addConfig(new String[]
-        { core, items, blocks, enchants });
-
-        initCore(getConfig(core));
-        initItems(getConfig(items));
-        initBlocks(getConfig(blocks));
-        initEnchantments(getConfig(enchants));
+        blockIdStart = 1000;
+        itemIdStart = 5000;
+        enchantIdStart = 52;
     }
 
-    private void initEnchantments(Configuration cfg)
+    public Config(int blockStart, int itemStart, int enchantStart)
     {
-        cfg.load();
-
-        try
-        {
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        cfg.save();
+        blockIdStart = blockStart;
+        itemIdStart = itemStart;
+        enchantIdStart = enchantStart;
     }
 
-    private void initBlocks(Configuration cfg)
+    public void setConfiguration(Configuration config)
     {
-        cfg.load();
-
-        try
-        {
-            // DO SOMETHING
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        cfg.save();
+        this.config = config;
     }
 
-    private void initItems(Configuration cfg)
+    public Configuration getConfiguration()
     {
-        cfg.load();
-
-        try
-        {
-            // DO SOMETHING
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        cfg.save();
+        return config;
     }
 
-    private void initCore(Configuration cfg)
+    public int getBlockID(String name)
     {
-        cfg.load();
-
-        try
+        load();
+        if (!config.hasKey(Configuration.CATEGORY_BLOCK, name))
         {
-            Class<Settings> c = Settings.class;
-
-            //getBoolean(c, cfg, Assets.getField(c, "LOG_MASTER"), Settings.CATEGORY_LOG);
-            //getBoolean(c, cfg, Assets.getField(c, "LOG_INFO"), Settings.CATEGORY_LOG);
-            //getBoolean(c, cfg, Assets.getField(c, "LOG_CONFIG"), Settings.CATEGORY_LOG);
-            //getBoolean(c, cfg, Assets.getField(c, "LOG_WARNING"), Settings.CATEGORY_LOG);
-            //getBoolean(c, cfg, Assets.getField(c, "LOG_SEVERE"), Settings.CATEGORY_LOG);
-
-            //getInteger(c, cfg, Assets.getField(c, "RANDOM_SEED"), Settings.CATEGORY_MISC);
-            DeltaCore.rand.setSeed(Settings.RANDOM_SEED);
-
-            //cfg.addCustomCategoryComment(Settings.CATEGORY_LOG, buildFancyComment(Settings.COMMENT_LOG, Configuration.NEW_LINE, 20));
-            //cfg.addCustomCategoryComment(Settings.CATEGORY_MISC, buildFancyComment(Settings.COMMENT_MISC, Configuration.NEW_LINE, 20));
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        cfg.save();
-    }
-
-    public void addConfig(String... arr)
-    {
-        for (String s : arr)
-        {
-            addConfig(s);
-        }
-    }
-
-    public void addConfig(String s)
-    {
-        Configuration config = new Configuration(new File(filePath + s + ".cfg"), true);
-
-        stringToCfg.put(s, config);
-        cfgToString.put(config, s);
-    }
-
-    public String getConfigName(Configuration c)
-    {
-        return cfgToString.get(c);
-    }
-
-    public Configuration getConfig(String s)
-    {
-        return stringToCfg.get(s);
-    }
-
-    private int id = 9000;
-
-    public int getItemID(ModDelta mod, String s)
-    {
-        Configuration cfg = getConfig(items);
-
-        cfg.load();
-
-        Iterator<?> iter = cfg.getCategory(mod.id()).getValues().entrySet().iterator();
-        List<Integer> occupied = new ArrayList<Integer>();
-
-        while (iter.hasNext())
-        {
-            Entry<String, Property> entry = (Entry<String, Property>) iter.next();
-            occupied.add(entry.getValue().getInt());
-        }
-
-        int possibleID = 0;
-
-        while (true)
-        {
-            id++;
-
-            if ((Item.itemsList[id] == null) && !occupied.contains(id))
+            for (int id = blockIdStart; id < Block.blocksList.length; ++id)
             {
-                possibleID = id;
-                break;
+                if (Block.blocksList[id] == null)
+                {
+                    config.getBlock(name, id);
+                    break;
+                }
             }
+            save();
         }
-
-        int id = cfg.get(mod.id(), s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(mod.id(), "ingame item IDs");
-
-        cfg.save();
-
-        return id - 256;
+        return config.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(name).getInt();
     }
 
-    public int getBlockID(ModDelta mod, String s)
+    public int getItemID(String name)
     {
-        Configuration cfg = getConfig(blocks);
-
-        cfg.load();
-
-        Iterator<?> iter = cfg.getCategory(mod.id()).getValues().entrySet().iterator();
-        List<Integer> occupied = new ArrayList<Integer>();
-
-        while (iter.hasNext())
+        load();
+        if (!config.hasKey(Configuration.CATEGORY_ITEM, name))
         {
-            Entry<String, Property> entry = (Entry<String, Property>) iter.next();
-            occupied.add(entry.getValue().getInt());
-        }
-
-        int possibleID = 0;
-
-        for (int i = 1; i < Block.blocksList.length; i++)
-        {
-            if ((Block.blocksList[i] == null) && !occupied.contains(id))
+            for (int id = itemIdStart; id < Item.itemsList.length; ++id)
             {
-                possibleID = i;
-                break;
+                if (Item.itemsList[id] == null)
+                {
+                    config.getItem(name, id);
+                    break;
+                }
             }
+            save();
         }
-
-        int id = cfg.get(mod.id(), s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(mod.id(), "block IDs");
-
-        cfg.save();
-
-        return id;
+        return config.getCategory(Configuration.CATEGORY_ITEM).getValues().get(name).getInt();
     }
 
-    public int getEnchantmentID(ModDelta m, String s)
+    public int getEnchantmentID(String name)
     {
-        Configuration cfg = getConfig(enchants);
-
-        cfg.load();
-
-        int possibleID = 0;
-
-        for (int i = 1; i < Enchantment.enchantmentsList.length; i++)
+        load();
+        if (!config.hasKey(CATEGORY_ENCHANT, name))
         {
-            if (Enchantment.enchantmentsList[i] == null)
+            for (int id = enchantIdStart; id < Enchantment.enchantmentsList.length; ++id)
             {
-                possibleID = i;
-                break;
+                if (Enchantment.enchantmentsList[id] == null)
+                {
+                    config.get(CATEGORY_ENCHANT, name, id);
+                    break;
+                }
             }
+            save();
         }
+        return config.getCategory(CATEGORY_ENCHANT).getValues().get(name).getInt();
+    }
 
-        int id = cfg.get(m.id(), s + " ID", possibleID).getInt();
-        cfg.addCustomCategoryComment(m.id(), "enchantment IDs");
+    public int get(String category, String key, int defaultValue)
+    {
+        return config.get(category, key, defaultValue).getInt();
+    }
 
-        cfg.save();
+    public boolean get(String category, String key, boolean defaultValue)
+    {
+        return config.get(category, key, defaultValue).getBoolean(defaultValue);
+    }
 
-        return id;
+    public String get(String category, String key, String defaultValue)
+    {
+        return config.get(category, key, defaultValue).getString();
+    }
+
+    public Property getProperty(String category, String key, int defaultValue)
+    {
+        return config.get(category, key, defaultValue);
+    }
+
+    public Property getProperty(String category, String key, boolean defaultValue)
+    {
+        return config.get(category, key, defaultValue);
+    }
+
+    public Property getProperty(String category, String key, String defaultValue)
+    {
+        return config.get(category, key, defaultValue);
+    }
+
+    public ConfigCategory getCategory(String category)
+    {
+        return config.getCategory(category);
+    }
+
+    public Map<?, ?> getCategoryMap(String category)
+    {
+        return config.getCategory(category).getValues();
+    }
+
+    public Set<String> getCategoryKeys(String category)
+    {
+        return config.getCategory(category).getValues().keySet();
+    }
+
+    public boolean hasCategory(String category)
+    {
+        return config.hasCategory(category);
+    }
+
+    public boolean hasKey(String category, String key)
+    {
+        return config.hasKey(category, key);
+    }
+
+    public void save()
+    {
+        if (config.hasChanged())
+        {
+            config.save();
+        }
+    }
+
+    public void load()
+    {
+        config.load();
+    }
+
+    public boolean renameProperty(String category, String key, String newCategory, String newKey, boolean forceValue)
+    {
+        if (config.hasKey(category, key))
+        {
+            Property prop = config.getCategory(category).get(key);
+
+            if (prop.isIntValue())
+            {
+                int value = config.getCategory(category).getValues().get(key).getInt();
+                removeProperty(category, key);
+
+                if (forceValue)
+                {
+                    removeProperty(newCategory, newKey);
+                }
+                config.get(newCategory, newKey, value);
+            } else if (prop.isBooleanValue())
+            {
+                boolean value = config.getCategory(category).getValues().get(key).getBoolean(false);
+                removeProperty(category, key);
+
+                if (forceValue)
+                {
+                    removeProperty(newCategory, newKey);
+                }
+                config.get(newCategory, newKey, value);
+            } else if (prop.isDoubleValue())
+            {
+                double value = config.getCategory(category).getValues().get(key).getDouble(0.0);
+                removeProperty(category, key);
+
+                if (forceValue)
+                {
+                    removeProperty(newCategory, newKey);
+                }
+                config.get(newCategory, newKey, value);
+            } else
+            {
+                String value = config.getCategory(category).getValues().get(key).getString();
+                removeProperty(category, key);
+
+                if (forceValue)
+                {
+                    removeProperty(newCategory, newKey);
+                }
+                config.get(newCategory, newKey, value);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeProperty(String category, String key)
+    {
+        if (!config.hasKey(category, key))
+        {
+            return false;
+        }
+        config.getCategory(category).remove(key);
+        return true;
+    }
+
+    public boolean renameCategory(String category, String newCategory)
+    {
+        if (!config.hasCategory(category))
+        {
+            return false;
+        }
+        for (Property prop : config.getCategory(category).values())
+        {
+            renameProperty(category, prop.getName(), newCategory, prop.getName(), true);
+        }
+        removeCategory(category);
+        return true;
+    }
+
+    public boolean removeCategory(String category)
+    {
+        if (!config.hasCategory(category))
+        {
+            return false;
+        }
+        config.removeCategory(config.getCategory(category));
+        return true;
     }
 }

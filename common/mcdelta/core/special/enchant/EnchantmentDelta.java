@@ -20,7 +20,7 @@ public class EnchantmentDelta extends Enchantment
 
     public EnchantmentDelta(ModDelta m, String s, int rarity, EnumEnchantmentType enchType)
     {
-        super(DeltaCore.config.getEnchantmentID(m, s), rarity, enchType);
+        super(m.config().getEnchantmentID(s), rarity, enchType);
         mod = m;
         name = s;
 

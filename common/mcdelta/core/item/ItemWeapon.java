@@ -54,7 +54,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
 
     public ItemWeapon(String s, ModDelta m, ToolMaterial mat, float f)
     {
-        super(DeltaCore.config.getItemID(m, mat.getName() + "." + s), mat.toolMaterial);
+        super(m.config().getItemID(mat.getName() + "." + s), mat.toolMaterial);
 
         toolName = s;
         toolMaterialDelta = mat;

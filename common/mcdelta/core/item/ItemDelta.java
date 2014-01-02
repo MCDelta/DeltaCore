@@ -77,7 +77,7 @@ public class ItemDelta extends Item
 
     public ItemDelta(ModDelta m, String s, boolean b)
     {
-        super(DeltaCore.config.getItemID(m, s));
+        super(m.config().getItemID(s));
         maxStackSize = 64;
         setCreativeTab(CreativeTabs.tabAllSearch);
 

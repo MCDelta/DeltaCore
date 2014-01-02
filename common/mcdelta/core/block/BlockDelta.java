@@ -24,7 +24,7 @@ public class BlockDelta extends Block
 
     public BlockDelta(ModDelta m, String s, Material mat)
     {
-        super(DeltaCore.config.getBlockID(m, s), mat);
+        super(m.config().getBlockID(s), mat);
 
         mod = m;
         name = s;

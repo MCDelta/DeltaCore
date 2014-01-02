@@ -22,7 +22,7 @@ public class ItemDeltaBow extends ItemBow
 
     public ItemDeltaBow(ModDelta m, String s, Item[] arr)
     {
-        super(DeltaCore.config.getItemID(m, s));
+        super(m.config().getItemID(s));
 
         ammo = arr;
 
