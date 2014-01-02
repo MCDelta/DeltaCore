@@ -2,6 +2,8 @@ package mcdelta.core;
 
 import java.util.Random;
 
+import mcdelta.core.config.CoreConfig;
+import mcdelta.core.logging.Logger;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
 import net.minecraft.block.Block;
@@ -41,7 +43,7 @@ public class DeltaCore extends ModDelta
     {
         Logger.logger = event.getModLog();
         localizationWarnings.append("The following are missing localized names: \n");
-        initConfig(event);
+        init(event, new CoreConfig());
     }
 
     @EventHandler
@@ -57,7 +59,7 @@ public class DeltaCore extends ModDelta
     {
         if (localizationWarnings.length() > 45)
         {
-            Logger.warning(localizationWarnings);
+            Logger.debug(localizationWarnings);
         }
 
         proxy.registerRenderers();

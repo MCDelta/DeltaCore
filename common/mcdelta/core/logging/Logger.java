@@ -1,4 +1,4 @@
-package mcdelta.core;
+package mcdelta.core.logging;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,19 +14,28 @@ public class Logger
     {
         log("\n");
     }
-    
+
     public static void log(Object... message)
     {
-        if (!Settings.LOG_MASTER || !Settings.LOG_INFO)
+        if (Settings.LOG_MASTER || !Settings.LOG_INFO)
         {
             return;
         }
         log(Level.INFO, message);
     }
 
+    public static void debug(Object... message)
+    {
+        if (Settings.LOG_MASTER || !Settings.LOG_DEBUG)
+        {
+            return;
+        }
+        log(Debug.DEBUG, message);
+    }
+
     public static void config(Object... message)
     {
-        if (!Settings.LOG_MASTER || !Settings.LOG_CONFIG)
+        if (Settings.LOG_MASTER || !Settings.LOG_CONFIG)
         {
             return;
         }
@@ -35,7 +44,7 @@ public class Logger
 
     public static void severe(Object... message)
     {
-        if (!Settings.LOG_MASTER || !Settings.LOG_SEVERE)
+        if (Settings.LOG_MASTER || !Settings.LOG_SEVERE)
         {
             return;
         }
@@ -44,7 +53,7 @@ public class Logger
 
     public static void warning(Object... message)
     {
-        if (!Settings.LOG_MASTER || !Settings.LOG_WARNING)
+        if (Settings.LOG_MASTER || !Settings.LOG_WARNING)
         {
             return;
         }
@@ -53,7 +62,7 @@ public class Logger
 
     public static void log(Level level, Object... message)
     {
-        if (!Settings.LOG_MASTER)
+        if (Settings.LOG_MASTER)
         {
             return;
         }

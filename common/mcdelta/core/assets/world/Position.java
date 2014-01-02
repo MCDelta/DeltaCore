@@ -2,8 +2,8 @@ package mcdelta.core.assets.world;
 
 import java.util.logging.Level;
 
-import mcdelta.core.Logger;
 import mcdelta.core.assets.Assets;
+import mcdelta.core.logging.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

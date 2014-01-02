@@ -13,7 +13,7 @@ import net.minecraftforge.common.Property;
 /**
  * This is effectively a wrapper for Forge Configurations. It allows for easier manipulation of Config files.
  */
-public class Config
+public class ConfigWrapper
 {
     public static final String CATEGORY_ENCHANT = "enchantment";
 
@@ -23,14 +23,14 @@ public class Config
     private int itemIdStart;
     private int enchantIdStart;
 
-    public Config()
+    public ConfigWrapper()
     {
         blockIdStart = 1000;
         itemIdStart = 5000;
         enchantIdStart = 52;
     }
 
-    public Config(int blockStart, int itemStart, int enchantStart)
+    public ConfigWrapper(int blockStart, int itemStart, int enchantStart)
     {
         blockIdStart = blockStart;
         itemIdStart = itemStart;

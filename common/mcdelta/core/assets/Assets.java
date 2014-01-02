@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.Logger;
 import mcdelta.core.assets.client.RenderAssets;
 import mcdelta.core.assets.world.BlockData;
 import mcdelta.core.assets.world.BlockShapes;
 import mcdelta.core.assets.world.Position;
+import mcdelta.core.logging.Logger;
 import mcdelta.core.network.PacketDelta;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

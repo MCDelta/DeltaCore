@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
+import mcdelta.core.logging.Logger;
 import mcdelta.core.material.ToolMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;

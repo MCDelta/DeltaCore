@@ -2,7 +2,8 @@ package mcdelta.core;
 
 import java.io.File;
 
-import mcdelta.core.config.Config;
+import mcdelta.core.config.ConfigWrapper;
+import mcdelta.core.config.IConfig;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -11,7 +12,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ModDelta
 {
-    protected Config config;
+    protected ConfigWrapper config;
 
     public ModContainer mod()
     {
@@ -33,7 +34,7 @@ public class ModDelta
         return mod().getVersion();
     }
 
-    public Config config()
+    public ConfigWrapper config()
     {
         return config;
     }
@@ -46,9 +47,23 @@ public class ModDelta
         File configFile = new File(configFolder.getAbsolutePath() + "/" + name() + ".cfg");
 
         // Create the config handler
-        config = new Config();
+        config = new ConfigWrapper();
 
         // Set the Configuration inside the Handler
         config.setConfiguration(new Configuration(configFile, true));
+    }
+
+    protected void init(final FMLPreInitializationEvent evt)
+    {
+        this.init(evt, null);
+    }
+
+    protected void init(final FMLPreInitializationEvent evt, final IConfig config)
+    {
+        initConfig(evt);
+        if (config != null)
+        {
+            config.init(this.config);
+        }
     }
 }

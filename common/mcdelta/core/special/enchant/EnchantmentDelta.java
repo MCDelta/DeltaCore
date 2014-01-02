@@ -3,8 +3,8 @@ package mcdelta.core.special.enchant;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.Logger;
 import mcdelta.core.ModDelta;
+import mcdelta.core.logging.Logger;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.util.StatCollector;
