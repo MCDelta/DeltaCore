@@ -61,8 +61,6 @@ public class Assets
 
     public static boolean resourceExists(ResourceLocation loc)
     {
-        Minecraft.getMinecraft().getResourceManager().getResource(loc);
-
         return Minecraft.getMinecraft().getResourceManager().getResource(loc) != null;
     }
 
