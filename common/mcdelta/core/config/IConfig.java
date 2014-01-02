@@ -13,6 +13,8 @@ public abstract class IConfig
     /** Initializes the configuration file */
     public void init(ConfigWrapper config)
     {
+        config.load();
+        
         initCommon(config);
 
         if (FMLCommonHandler.instance().getSide().isServer())
@@ -22,6 +24,7 @@ public abstract class IConfig
         {
             initClient(config);
         }
+        config.save();
     }
 
     protected abstract void initCommon(ConfigWrapper config);
