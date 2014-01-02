@@ -14,6 +14,6 @@ public class CoreConfig extends IConfig
         Settings.LOG_DEBUG = config.get(Settings.CATEGORY_LOG, Settings.LOG_DEBUG_KEY, false);
 
         config.getConfiguration().addCustomCategoryComment(Settings.CATEGORY_MISC, Settings.COMMENT_MISC);
-        Settings.RANDOM_SEED = config.get(Settings.CATEGORY_LOG, Settings.RANDOM_SEED_KEY, 123456789);
+        Settings.RANDOM_SEED = config.get(Settings.CATEGORY_MISC, Settings.RANDOM_SEED_KEY, 123456789);
     }
 }
