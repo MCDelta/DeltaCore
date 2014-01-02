@@ -14,6 +14,7 @@ import mcdelta.core.assets.world.Position;
 import mcdelta.core.network.PacketDelta;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.Resource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,7 +62,15 @@ public class Assets
 
     public static boolean resourceExists(ResourceLocation loc)
     {
-        return Minecraft.getMinecraft().getResourceManager().getResource(loc) != null;
+        try
+        {
+            Resource tmp = Minecraft.getMinecraft().getResourceManager().getResource(loc);
+            tmp.getClass();
+        } catch (Exception e)
+        {
+            return false;
+        }
+        return true;
     }
 
     public static float[] hexToRGB(int i)
