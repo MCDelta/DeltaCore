@@ -43,7 +43,15 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      public ItemDeltaTool (final ModDelta mod, final String name, final ToolMaterial mat, final Block[] effective, final float damage)
      {
-          super(mod, mat.getName() + "." + name);
+          this(mod, name, mat, effective, damage, true);
+     }
+     
+     
+     
+     
+     public ItemDeltaTool (final ModDelta mod, final String name, final ToolMaterial mat, final Block[] effective, final float damage, boolean b)
+     {
+          super(mod, mat.getName() + "." + name, b);
           this.toolMaterial = mat;
           this.toolName = name;
           this.blocksEffectiveAgainst = effective;
