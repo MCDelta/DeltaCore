@@ -1,4 +1,4 @@
-package mcdelta.core.special.enchant;
+package mcdelta.core.enchant;
 
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
