@@ -87,6 +87,7 @@ public class Logger
           {
                return;
           }
+          
           final StringBuilder sb = new StringBuilder();
           
           if (level != Level.INFO)
@@ -94,11 +95,13 @@ public class Logger
                sb.append("\n");
                sb.append("\n");
           }
-          else if (level == Level.SEVERE)
+          
+          if (level == Level.SEVERE)
           {
                sb.append("!!!!!");
                sb.append("\n");
           }
+          
           int index = -1;
           
           for (final Object obj : message)
@@ -109,10 +112,12 @@ public class Logger
                {
                     sb.append(list((List<?>) obj));
                }
+               
                else if (obj instanceof Object[])
                {
                     sb.append(list(Arrays.asList(obj)));
                }
+               
                else
                {
                     if (index != 0)
@@ -122,15 +127,18 @@ public class Logger
                     sb.append(obj);
                }
           }
+          
           if (level == Level.SEVERE)
           {
                sb.append("\n");
                sb.append("!!!!!");
           }
-          else if (level != Level.INFO)
+          
+          if (level != Level.INFO)
           {
                sb.append("\n");
           }
+          
           logger.log(level, sb.toString());
      }
      
