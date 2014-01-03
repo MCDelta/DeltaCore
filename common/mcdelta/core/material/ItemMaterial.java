@@ -1,6 +1,5 @@
 package mcdelta.core.material;
 
-import mcdelta.core.ModDelta;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraftforge.common.EnumHelper;
@@ -19,17 +18,14 @@ public class ItemMaterial
      public EnumToolMaterial  toolMaterial;
      public EnumArmorMaterial armorMaterial;
      
-     protected ModDelta       owner;
      
      
      
-     
-     public ItemMaterial (final ModDelta owner, final Object[] delta, final Object[] tool, final Object[] armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public ItemMaterial (final Object[] delta, final Object[] tool, final Object[] armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           this.deltaInfo = delta;
           this.toolInfo = tool;
           this.armorInfo = armor;
-          this.owner = owner;
           
           if (toolMat == null)
           {
@@ -47,14 +43,6 @@ public class ItemMaterial
           {
                this.armorMaterial = armorMat;
           }
-     }
-     
-     
-     
-     
-     public ModDelta owner ()
-     {
-          return this.owner;
      }
      
      

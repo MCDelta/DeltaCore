@@ -37,22 +37,22 @@ public class DeltaContent implements IContent
      {
           if (mat.needsTools())
           {
-               final ItemDeltaShovel shovel = new ItemDeltaShovel(mat.owner(), mat);
+               final ItemDeltaShovel shovel = new ItemDeltaShovel(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(shovel, "shovel", mat.getHarvestLevel());
                shovels.put(mat, shovel);
                
-               final ItemDeltaPickaxe pick = new ItemDeltaPickaxe(mat.owner(), mat);
+               final ItemDeltaPickaxe pick = new ItemDeltaPickaxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(pick, "pickaxe", mat.getHarvestLevel());
                pickaxes.put(mat, pick);
                
-               final ItemDeltaAxe axe = new ItemDeltaAxe(mat.owner(), mat);
+               final ItemDeltaAxe axe = new ItemDeltaAxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(axe, "axe", mat.getHarvestLevel());
                axes.put(mat, axe);
                
-               final ItemWeapon sword = new ItemWeapon("sword", mat.owner(), mat, 4.0F);
+               final ItemWeapon sword = new ItemWeapon("sword", DeltaCore.instance, mat, 4.0F);
                swords.put(mat, sword);
                
-               final ItemDeltaHoe hoe = new ItemDeltaHoe(mat.owner(), mat);
+               final ItemDeltaHoe hoe = new ItemDeltaHoe(DeltaCore.instance, mat);
                hoes.put(mat, hoe);
           }
           if (mat.armorInfo != null)
