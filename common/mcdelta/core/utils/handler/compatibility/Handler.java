@@ -58,7 +58,7 @@ final class Handler
                try
                {
                     // Initialize the compatibility features
-                    tmp.init(this);
+                    tmp.init();
                }
                catch (final Exception e)
                {
