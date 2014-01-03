@@ -36,5 +36,4 @@ public class EssentialAlloysSupport implements LimitedModSupport
           { 33, new int[]
           { 3, 8, 6, 3 }, 10 });
      }
-     
 }
