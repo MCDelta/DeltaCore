@@ -7,8 +7,8 @@ import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
-import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.material.ItemMaterial;
+import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -36,241 +36,297 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemWeapon extends ItemSword implements IExtraPasses
 {
-    private final List<Block> harvest = new ArrayList<Block>();
-    private final List<Material> effective = new ArrayList<Material>();
-
-    @SideOnly(Side.CLIENT)
-    protected Icon itemOverlay;
-
-    @SideOnly(Side.CLIENT)
-    protected Icon overrideIcon;
-
-    private boolean overrideExists = false;
-
-    public ModDelta mod;
-    public String name;
-    private final float weaponDamage;
-    private final String toolName;
-    public ItemMaterial toolMaterialDelta;
-
-    public ItemWeapon(final String toolName, final ModDelta mod, final ItemMaterial mat, final float f)
-    {
-        super(mod.config().getItemID(mat.getName() + "." + toolName), mat.toolMaterial);
-
-        this.toolName = toolName;
-        toolMaterialDelta = mat;
-        maxStackSize = 1;
-        setMaxDamage(mat.getMaxUses());
-        setCreativeTab(CreativeTabs.tabCombat);
-
-        harvest.add(Block.web);
-
-        effective.add(Material.plants);
-        effective.add(Material.vine);
-        effective.add(Material.coral);
-        effective.add(Material.leaves);
-        effective.add(Material.pumpkin);
-
-        weaponDamage = f;
-
-        // ItemDelta code
-        this.mod = mod;
-        name = mat.getName() + "." + toolName;
-        final String unlocalized = mod.id().toLowerCase() + ":" + name;
-        setUnlocalizedName(unlocalized);
-
-        final String weapon = "tool." + toolName;
-        final String material = "material." + mat.getName();
-
-        if (!StatCollector.func_94522_b(weapon))
-        {
-            DeltaCore.localizationWarnings.append("- " + weapon + " \n");
-        }
-        if (!StatCollector.func_94522_b(material))
-        {
-            DeltaCore.localizationWarnings.append("- " + material + " \n");
-        }
-        ClientProxy.extraPasses.add(this);
-    }
-
-    @Override
-    public void registerIcons(final IconRegister register)
-    {
-        if (toolName == "sword")
-        {
-            itemIcon = ItemDelta.doRegister("deltacore", toolName + "_1", register);
-            itemOverlay = ItemDelta.doRegister("deltacore", toolName + "_2", register);
-        } else
-        {
-            itemIcon = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_1", register);
-            itemOverlay = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_2", register);
-        }
-        overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName
-                + ".png"));
-
-        if (overrideExists)
-        {
-            overrideIcon = ItemDelta.doRegister(mod.id().toLowerCase(), "override/" + toolMaterialDelta.getName().toLowerCase() + "_" + toolName, register);
-        }
-    }
-
-    @Override
-    public int getPasses(final ItemStack stack)
-    {
-        if (overrideExists)
-        {
-            return 1;
-        }
-        return 2;
-    }
-
-    @Override
-    public Icon getIconFromPass(final ItemStack stack, final int pass)
-    {
-        if (overrideExists)
-        {
-            return overrideIcon;
-        }
-        if (pass == 2)
-        {
-            return itemOverlay;
-        }
-        return itemIcon;
-    }
-
-    @Override
-    public int getColorFromPass(final ItemStack stack, final int pass)
-    {
-        if (overrideExists)
-        {
-            return 0xffffff;
-        }
-        if (pass == 2)
-        {
-            return MaterialRegistry.WOOD.getColor();
-        }
-        return toolMaterialDelta.getColor();
-    }
-
-    @Override
-    public boolean getShinyFromPass(final ItemStack stack, final int pass)
-    {
-        if ((pass == 1) && toolMaterialDelta.isShinyDefault())
-        {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public float func_82803_g()
-    {
-        return toolMaterialDelta.getDamageVsEntity();
-    }
-
-    @Override
-    public float getStrVsBlock(final ItemStack stack, final Block block)
-    {
-        if (harvest.contains(block))
-        {
-            return 15.0F;
-        }
-        return effective.contains(block.blockMaterial) ? 1.5F : 1.0F;
-    }
-
-    @Override
-    public boolean hitEntity(final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
-    {
-        stack.damageItem(1, attacker);
-        return true;
-    }
-
-    @Override
-    public boolean onBlockDestroyed(final ItemStack stack, final World world, final int blockID, final int x, final int y, final int z, final EntityLivingBase living)
-    {
-        if (Block.blocksList[blockID].getBlockHardness(world, x, y, z) != 0.0D)
-        {
-            stack.damageItem(2, living);
-        }
-        return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D()
-    {
-        return true;
-    }
-
-    @Override
-    public int getMaxItemUseDuration(final ItemStack stack)
-    {
-        return 72000;
-    }
-
-    @Override
-    public ItemStack onItemRightClick(final ItemStack stack, final World world, final EntityPlayer player)
-    {
-        if (getItemUseAction(stack) != null)
-        {
-            final ArrowNockEvent event = new ArrowNockEvent(player, stack);
-            MinecraftForge.EVENT_BUS.post(event);
-            if (event.isCanceled())
-            {
-                return event.result;
-            }
-            player.setItemInUse(stack, getMaxItemUseDuration(stack));
-        }
-        return stack;
-    }
-
-    @Override
-    public boolean canHarvestBlock(final Block block)
-    {
-        return harvest.contains(block);
-    }
-
-    @Override
-    public int getItemEnchantability()
-    {
-        return toolMaterialDelta.getEnchantability();
-    }
-
-    @Override
-    public boolean getIsRepairable(final ItemStack repair, final ItemStack gem)
-    {
-        if ((OreDictionary.getOres(toolMaterialDelta.getOreDictionaryName()) != null) && !OreDictionary.getOres(toolMaterialDelta.getOreDictionaryName()).isEmpty())
-        {
-            return OreDictionary.itemMatches(OreDictionary.getOres(toolMaterialDelta.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
-        }
-        return super.getIsRepairable(repair, gem);
-    }
-
-    @Override
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers()
-    {
-        final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
-        multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) weaponDamage
-                + toolMaterialDelta.getDamageVsEntity(), 0));
-
-        return multimap;
-    }
-
-    @Override
-    public String getItemDisplayName(final ItemStack stack)
-    {
-        final ItemMaterial mat = toolMaterialDelta;
-
-        final String weapon = StatCollector.translateToLocal("tool." + toolName);
-        final String material = StatCollector.translateToLocal("material." + mat.getName());
-
-        return material + " " + weapon;
-    }
-
-    @Override
-    public EnumAction getItemUseAction(final ItemStack stack)
-    {
-        return null;
-    }
+     private final List<Block>    harvest        = new ArrayList<Block>();
+     private final List<Material> effective      = new ArrayList<Material>();
+     
+     @SideOnly (Side.CLIENT)
+     protected Icon               itemOverlay;
+     
+     @SideOnly (Side.CLIENT)
+     protected Icon               overrideIcon;
+     
+     private boolean              overrideExists = false;
+     
+     public ModDelta              mod;
+     public String                name;
+     private final float          weaponDamage;
+     private final String         toolName;
+     public ItemMaterial          toolMaterialDelta;
+     
+     
+     
+     
+     public ItemWeapon (final String toolName, final ModDelta mod, final ItemMaterial mat, final float f)
+     {
+          super(mod.config().getItemID(mat.getName() + "." + toolName), mat.toolMaterial);
+          
+          this.toolName = toolName;
+          this.toolMaterialDelta = mat;
+          this.maxStackSize = 1;
+          this.setMaxDamage(mat.getMaxUses());
+          this.setCreativeTab(CreativeTabs.tabCombat);
+          
+          this.harvest.add(Block.web);
+          
+          this.effective.add(Material.plants);
+          this.effective.add(Material.vine);
+          this.effective.add(Material.coral);
+          this.effective.add(Material.leaves);
+          this.effective.add(Material.pumpkin);
+          
+          this.weaponDamage = f;
+          
+          // ItemDelta code
+          this.mod = mod;
+          this.name = mat.getName() + "." + toolName;
+          final String unlocalized = mod.id().toLowerCase() + ":" + this.name;
+          this.setUnlocalizedName(unlocalized);
+          
+          final String weapon = "tool." + toolName;
+          final String material = "material." + mat.getName();
+          
+          if (!StatCollector.func_94522_b(weapon))
+          {
+               DeltaCore.localizationWarnings.append("- " + weapon + " \n");
+          }
+          if (!StatCollector.func_94522_b(material))
+          {
+               DeltaCore.localizationWarnings.append("- " + material + " \n");
+          }
+          ClientProxy.extraPasses.add(this);
+     }
+     
+     
+     
+     
+     @Override
+     public void registerIcons (final IconRegister register)
+     {
+          if (this.toolName == "sword")
+          {
+               this.itemIcon = ItemDelta.doRegister("deltacore", this.toolName + "_1", register);
+               this.itemOverlay = ItemDelta.doRegister("deltacore", this.toolName + "_2", register);
+          }
+          else
+          {
+               this.itemIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_1", register);
+               this.itemOverlay = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_2", register);
+          }
+          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.toolMaterialDelta.getName().toLowerCase() + "_" + this.toolName + ".png"));
+          
+          if (this.overrideExists)
+          {
+               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.toolMaterialDelta.getName().toLowerCase() + "_" + this.toolName, register);
+          }
+     }
+     
+     
+     
+     
+     @Override
+     public int getPasses (final ItemStack stack)
+     {
+          if (this.overrideExists)
+          {
+               return 1;
+          }
+          return 2;
+     }
+     
+     
+     
+     
+     @Override
+     public Icon getIconFromPass (final ItemStack stack, final int pass)
+     {
+          if (this.overrideExists)
+          {
+               return this.overrideIcon;
+          }
+          if (pass == 2)
+          {
+               return this.itemOverlay;
+          }
+          return this.itemIcon;
+     }
+     
+     
+     
+     
+     @Override
+     public int getColorFromPass (final ItemStack stack, final int pass)
+     {
+          if (this.overrideExists)
+          {
+               return 0xffffff;
+          }
+          if (pass == 2)
+          {
+               return MaterialRegistry.WOOD.getColor();
+          }
+          return this.toolMaterialDelta.getColor();
+     }
+     
+     
+     
+     
+     @Override
+     public boolean getShinyFromPass (final ItemStack stack, final int pass)
+     {
+          if (pass == 1 && this.toolMaterialDelta.isShinyDefault())
+          {
+               return true;
+          }
+          return false;
+     }
+     
+     
+     
+     
+     @Override
+     public float func_82803_g ()
+     {
+          return this.toolMaterialDelta.getDamageVsEntity();
+     }
+     
+     
+     
+     
+     @Override
+     public float getStrVsBlock (final ItemStack stack, final Block block)
+     {
+          if (this.harvest.contains(block))
+          {
+               return 15.0F;
+          }
+          return this.effective.contains(block.blockMaterial) ? 1.5F : 1.0F;
+     }
+     
+     
+     
+     
+     @Override
+     public boolean hitEntity (final ItemStack stack, final EntityLivingBase target, final EntityLivingBase attacker)
+     {
+          stack.damageItem(1, attacker);
+          return true;
+     }
+     
+     
+     
+     
+     @Override
+     public boolean onBlockDestroyed (final ItemStack stack, final World world, final int blockID, final int x, final int y, final int z, final EntityLivingBase living)
+     {
+          if (Block.blocksList[blockID].getBlockHardness(world, x, y, z) != 0.0D)
+          {
+               stack.damageItem(2, living);
+          }
+          return true;
+     }
+     
+     
+     
+     
+     @Override
+     @SideOnly (Side.CLIENT)
+     public boolean isFull3D ()
+     {
+          return true;
+     }
+     
+     
+     
+     
+     @Override
+     public int getMaxItemUseDuration (final ItemStack stack)
+     {
+          return 72000;
+     }
+     
+     
+     
+     
+     @Override
+     public ItemStack onItemRightClick (final ItemStack stack, final World world, final EntityPlayer player)
+     {
+          if (this.getItemUseAction(stack) != null)
+          {
+               final ArrowNockEvent event = new ArrowNockEvent(player, stack);
+               MinecraftForge.EVENT_BUS.post(event);
+               if (event.isCanceled())
+               {
+                    return event.result;
+               }
+               player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+          }
+          return stack;
+     }
+     
+     
+     
+     
+     @Override
+     public boolean canHarvestBlock (final Block block)
+     {
+          return this.harvest.contains(block);
+     }
+     
+     
+     
+     
+     @Override
+     public int getItemEnchantability ()
+     {
+          return this.toolMaterialDelta.getEnchantability();
+     }
+     
+     
+     
+     
+     @Override
+     public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
+     {
+          if (OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()) != null && !OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()).isEmpty())
+          {
+               return OreDictionary.itemMatches(OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+          }
+          return super.getIsRepairable(repair, gem);
+     }
+     
+     
+     
+     
+     @Override
+     public Multimap<String, AttributeModifier> getItemAttributeModifiers ()
+     {
+          final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
+          multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
+          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.weaponDamage + this.toolMaterialDelta.getDamageVsEntity(), 0));
+          
+          return multimap;
+     }
+     
+     
+     
+     
+     @Override
+     public String getItemDisplayName (final ItemStack stack)
+     {
+          final ItemMaterial mat = this.toolMaterialDelta;
+          
+          final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
+          final String material = StatCollector.translateToLocal("material." + mat.getName());
+          
+          return material + " " + weapon;
+     }
+     
+     
+     
+     
+     @Override
+     public EnumAction getItemUseAction (final ItemStack stack)
+     {
+          return null;
+     }
 }
