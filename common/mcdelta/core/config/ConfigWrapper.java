@@ -25,6 +25,7 @@ public class ConfigWrapper
      private final int          blockIdStart;
      private final int          itemIdStart;
      private final int          enchantIdStart;
+     private int                potionIdStart;
      
      
      
@@ -34,6 +35,7 @@ public class ConfigWrapper
           this.blockIdStart = 1000;
           this.itemIdStart = 5000;
           this.enchantIdStart = 52;
+          this.potionIdStart = 0;
      }
      
      
@@ -133,7 +135,7 @@ public class ConfigWrapper
           this.load();
           if (!this.config.hasKey(CATEGORY_POTION, name))
           {
-               for (int id = this.enchantIdStart; id < Potion.potionTypes.length; ++id)
+               for (int id = this.potionIdStart; id < Potion.potionTypes.length; ++id)
                {
                     if (Potion.potionTypes[id] == null)
                     {
