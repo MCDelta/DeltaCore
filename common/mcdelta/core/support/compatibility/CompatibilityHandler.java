@@ -13,40 +13,32 @@ import java.util.List;
  */
 public final class CompatibilityHandler
 {
-     /**
-      * List of all {@link ICompatibility}s that this "Registry" needs to handle
-      */
-     private static final List<Handler> modsHandling = new ArrayList<Handler>();
-     
-     
-     
-     
-     /**
-      * @param name
-      *             The name of the mod that you are adding compatibility for.
-      *             EX: Buildcraft
-      * @param handler
-      *             The location of you Handler class. EX:
-      *             "ccm.nucleum.omnium.utils.handler.compatibility.MystcraftHandler"
-      */
-     public static void addModHandler (final String name, final String handler)
-     {
-          modsHandling.add(new Handler(name, handler));
-     }
-     
-     
-     
-     
-     /**
-      * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
-      * <p>
-      * Except DeltaCore.java
-      */
-     public static void init ()
-     {
-          for (final Handler handler : modsHandling)
-          {
-               handler.init();
-          }
-     }
+    /**
+     * List of all {@link ICompatibility}s that this "Registry" needs to handle
+     */
+    private static final List<Handler> modsHandling = new ArrayList<Handler>();
+
+    /**
+     * @param name
+     *            The name of the mod that you are adding compatibility for. EX: Buildcraft
+     * @param handler
+     *            The location of you Handler class. EX: "ccm.nucleum.omnium.utils.handler.compatibility.MystcraftHandler"
+     */
+    public static void addModHandler(final String name, final String handler)
+    {
+        modsHandling.add(new Handler(name, handler));
+    }
+
+    /**
+     * THIS METHOD SHOULD NEVER BE CALLED BY ANY CLASS.
+     * <p>
+     * Except DeltaCore.java
+     */
+    public static void init()
+    {
+        for (final Handler handler : modsHandling)
+        {
+            handler.init();
+        }
+    }
 }
