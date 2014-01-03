@@ -15,7 +15,7 @@ public class EssentialAlloysSupport implements LimitedModSupport
      @Override
      public String modid ()
      {
-          return "essentialalaloys";
+          return "essentialalloys";
      }
      
      
