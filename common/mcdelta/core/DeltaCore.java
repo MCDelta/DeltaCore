@@ -8,7 +8,10 @@ import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
 import mcdelta.core.support.CompatibilityHandler;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,6 +48,10 @@ public class DeltaCore extends ModDelta
      @EventHandler
      public void preInit (final FMLPreInitializationEvent event)
      {
+          OreDictionary.registerOre("ingotIron", new ItemStack(Item.ingotIron));
+          OreDictionary.registerOre("ingotGold", new ItemStack(Item.ingotGold));
+          OreDictionary.registerOre("gemDiamond", new ItemStack(Item.diamond));
+          
           Logger.logger = event.getModLog();
           localizationWarnings.append("The following are missing localized names: \n");
           this.init(event, new CoreConfig());
