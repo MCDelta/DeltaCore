@@ -42,7 +42,7 @@ final class Handler
                }
                catch (final ClassNotFoundException e)
                {
-                    Logger.severe(e, String.format("MC Delta has failed to find a compatibility class with %s, please inform the CCM Team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to find a compatibility class with %s, please inform the MCDelta team", this.name));
                     return;
                }
                try
@@ -52,17 +52,17 @@ final class Handler
                }
                catch (final Exception e)
                {
-                    Logger.severe(e, String.format("MC Delta has failed to create a new instance of a compatibility with %s, please inform the CCM Team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to create a new instance of a compatibility with %s, please inform the MCDelta Team", this.name));
                     return;
                }
                try
                {
                     // Initialize the compatibility features
-                    tmp.init();
+                    tmp.init(this);
                }
                catch (final Exception e)
                {
-                    Logger.severe(e, String.format("MC Delta has failed to load a compatibility with %s, please inform the CCM Team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to load a compatibility with %s, please inform the MCDelta team", this.name));
                     return;
                }
           }

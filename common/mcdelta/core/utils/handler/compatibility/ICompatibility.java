@@ -11,5 +11,5 @@ package mcdelta.core.utils.handler.compatibility;
 public interface ICompatibility
 {
      /** What to do if the Mod is found to be loaded */
-     public void init ();
+     public void init (Handler handler);
 }
