@@ -6,7 +6,7 @@ import mcdelta.core.config.CoreConfig;
 import mcdelta.core.logging.Logger;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
-import mcdelta.core.utils.handler.compatibility.CompatibilityHandler;
+import mcdelta.core.support.CompatibilityHandler;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;

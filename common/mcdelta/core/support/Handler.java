@@ -1,4 +1,4 @@
-package mcdelta.core.utils.handler.compatibility;
+package mcdelta.core.support;
 
 import mcdelta.core.logging.Logger;
 import cpw.mods.fml.common.Loader;

@@ -1,7 +1,7 @@
 /**
  * MC Delta, DeltaCore
  */
-package mcdelta.core.utils.handler.compatibility;
+package mcdelta.core.support;
 
 import java.util.ArrayList;
 import java.util.List;
