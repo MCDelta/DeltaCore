@@ -37,10 +37,10 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      
      public ItemDeltaHoe (final ModDelta mod, final ItemMaterial mat)
      {
-          super(mod, mat.getName() + ".hoe");
+          super(mod, mat.name() + ".hoe");
           this.itemMaterial = mat;
           this.maxStackSize = 1;
-          this.setMaxDamage(mat.getMaxUses());
+          this.setMaxDamage(mat.maxUses());
           this.setCreativeTab(CreativeTabs.tabTools);
           
           ClientProxy.extraPasses.add(this);
@@ -55,11 +55,11 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
           this.itemIcon = doRegister("deltacore", "hoe" + "_1", register);
           this.itemOverlay = doRegister("deltacore", "hoe" + "_2", register);
           
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.getName().toLowerCase() + "_hoe.png"));
+          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_hoe.png"));
           
           if (this.overrideExists)
           {
-               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.getName().toLowerCase() + "_hoe", register);
+               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.name().toLowerCase() + "_hoe", register);
           }
      }
      
@@ -105,9 +105,9 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
           }
           if (pass == 2)
           {
-               return MaterialRegistry.WOOD.getColor();
+               return MaterialRegistry.WOOD.color();
           }
-          return this.itemMaterial.getColor();
+          return this.itemMaterial.color();
      }
      
      
@@ -116,7 +116,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.itemMaterial.isShinyDefault())
+          if (pass == 1 && this.itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -177,6 +177,6 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      
      public String getMaterialName ()
      {
-          return this.itemMaterial.getName();
+          return this.itemMaterial.name();
      }
 }

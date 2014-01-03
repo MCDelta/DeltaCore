@@ -58,12 +58,12 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      
      public ItemWeapon (final String toolName, final ModDelta mod, final ItemMaterial mat, final float f)
      {
-          super(mod.config().getItemID(mat.getName() + "." + toolName), mat.toolMaterial);
+          super(mod.config().getItemID(mat.name() + "." + toolName), mat.getToolMaterial());
           
           this.toolName = toolName;
           this.toolMaterialDelta = mat;
           this.maxStackSize = 1;
-          this.setMaxDamage(mat.getMaxUses());
+          this.setMaxDamage(mat.maxUses());
           this.setCreativeTab(CreativeTabs.tabCombat);
           
           this.harvest.add(Block.web);
@@ -78,12 +78,12 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           
           // ItemDelta code
           this.mod = mod;
-          this.name = mat.getName() + "." + toolName;
+          this.name = mat.name() + "." + toolName;
           final String unlocalized = mod.id().toLowerCase() + ":" + this.name;
           this.setUnlocalizedName(unlocalized);
           
           final String weapon = "tool." + toolName;
-          final String material = "material." + mat.getName();
+          final String material = "material." + mat.name();
           
           if (!StatCollector.func_94522_b(weapon))
           {
@@ -112,11 +112,11 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
                this.itemIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_1", register);
                this.itemOverlay = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_2", register);
           }
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.toolMaterialDelta.getName().toLowerCase() + "_" + this.toolName + ".png"));
+          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.toolMaterialDelta.name().toLowerCase() + "_" + this.toolName + ".png"));
           
           if (this.overrideExists)
           {
-               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.toolMaterialDelta.getName().toLowerCase() + "_" + this.toolName, register);
+               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.toolMaterialDelta.name().toLowerCase() + "_" + this.toolName, register);
           }
      }
      
@@ -162,9 +162,9 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           }
           if (pass == 2)
           {
-               return MaterialRegistry.WOOD.getColor();
+               return MaterialRegistry.WOOD.color();
           }
-          return this.toolMaterialDelta.getColor();
+          return this.toolMaterialDelta.color();
      }
      
      
@@ -173,7 +173,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.toolMaterialDelta.isShinyDefault())
+          if (pass == 1 && this.toolMaterialDelta.defaultShiny())
           {
                return true;
           }
@@ -278,7 +278,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public int getItemEnchantability ()
      {
-          return this.toolMaterialDelta.getEnchantability();
+          return this.toolMaterialDelta.enchantability();
      }
      
      
@@ -287,9 +287,9 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()) != null && !OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()).isEmpty())
+          if (OreDictionary.getOres(this.toolMaterialDelta.oreName()) != null && !OreDictionary.getOres(this.toolMaterialDelta.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.toolMaterialDelta.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(this.toolMaterialDelta.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -316,7 +316,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           final ItemMaterial mat = this.toolMaterialDelta;
           
           final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
-          final String material = StatCollector.translateToLocal("material." + mat.getName());
+          final String material = StatCollector.translateToLocal("material." + mat.name());
           
           return material + " " + weapon;
      }

@@ -12,10 +12,10 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-public class ModDelta
+public abstract class ModDelta
 {
-     public static List<ModDelta> deltaMods = new ArrayList<ModDelta>();
-     protected ConfigWrapper      config;
+     public static final List<ModDelta> deltaMods = new ArrayList<ModDelta>();
+     protected ConfigWrapper            config;
      
      
      
@@ -61,14 +61,9 @@ public class ModDelta
      
      
      /**
-      * Classes that extend ModDelta need to override this!
-      * 
       * @return IContent
       */
-     public IContent content ()
-     {
-          return null;
-     }
+     public abstract IContent content ();
      
      
      
@@ -93,6 +88,26 @@ public class ModDelta
      protected void init (final FMLPreInitializationEvent evt)
      {
           this.init(evt, null);
+     }
+     
+     
+     
+     
+     /**
+      * THIS SHOULD ONLY BE CALLED BY DELTA CORE
+      */
+     protected static void loadDeltaMods ()
+     {
+          for (final ModContainer mod : Loader.instance().getIndexedModList().values())
+          {
+               if (mod.getMod() != null)
+               {
+                    if (mod.getMod() instanceof ModDelta)
+                    {
+                         deltaMods.add((ModDelta) mod.getMod());
+                    }
+               }
+          }
      }
      
      

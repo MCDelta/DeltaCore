@@ -59,6 +59,9 @@ public class DeltaCore extends ModDelta
      {
           Logger.logger = event.getModLog();
           localizationWarnings.append("The following are missing localized names: \n");
+          
+          loadDeltaMods();
+          
           this.init(event, new CoreConfig());
           
           OreDictionary.registerOre("ingotIron", new ItemStack(Item.ingotIron));
@@ -102,8 +105,7 @@ public class DeltaCore extends ModDelta
      
      /**
       * A simple if statement to check if a mod is loaded. Should NOT be used
-      * for instance to instance communication. Use the CompatibilityHandler for
-      * that.
+      * when a API is required. Use the CompatibilityHandler for that.
       */
      private void doLimitedModSupport (final LimitedModSupport modSupport)
      {

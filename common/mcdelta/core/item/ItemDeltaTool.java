@@ -52,12 +52,12 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      public ItemDeltaTool (final ModDelta mod, final String name, final ItemMaterial mat, final Block[] effective, final float damage, final boolean b)
      {
-          super(mod, mat.getName() + "." + name, b);
+          super(mod, mat.name() + "." + name, b);
           this.itemMaterial = mat;
           this.toolName = name;
           this.blocksEffectiveAgainst = effective;
           this.maxStackSize = 1;
-          this.setMaxDamage(mat.getMaxUses());
+          this.setMaxDamage(mat.maxUses());
           this.efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
           this.damageVsEntity = damage + mat.getDamageVsEntity();
           this.setCreativeTab(CreativeTabs.tabTools);
@@ -72,11 +72,11 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
           this.itemIcon = doRegister("deltacore", this.toolName + "_1", register);
           this.itemOverlay = doRegister("deltacore", this.toolName + "_2", register);
           
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.getName().toLowerCase() + "_" + this.toolName + ".png"));
+          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName + ".png"));
           
           if (this.overrideExists)
           {
-               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.getName().toLowerCase() + "_" + this.toolName, register);
+               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName, register);
           }
      }
      
@@ -122,9 +122,9 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
           }
           if (pass == 2)
           {
-               return MaterialRegistry.WOOD.getColor();
+               return MaterialRegistry.WOOD.color();
           }
-          return this.itemMaterial.getColor();
+          return this.itemMaterial.color();
      }
      
      
@@ -133,7 +133,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.itemMaterial.isShinyDefault())
+          if (pass == 1 && this.itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -195,7 +195,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public int getItemEnchantability ()
      {
-          return this.itemMaterial.getEnchantability();
+          return this.itemMaterial.enchantability();
      }
      
      
@@ -212,9 +212,9 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()) != null && !OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()).isEmpty())
+          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }

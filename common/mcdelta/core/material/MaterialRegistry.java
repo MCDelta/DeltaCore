@@ -22,8 +22,7 @@ public final class MaterialRegistry
      
      public static ItemMaterial add (final String name, final int color, final String oreName, final EnumToolMaterial tool, final int uses, final EnumArmorMaterial armor)
      {
-          return add(new Object[]
-          { name, color, oreName, false, true, false }, tool, uses, armor);
+          return add(new DeltaInfo(name, color, oreName, false, true, true, false), tool, uses, armor);
      }
      
      
@@ -31,8 +30,7 @@ public final class MaterialRegistry
      
      public static ItemMaterial add (final String name, final int color, final String oreName, final EnumToolMaterial tool)
      {
-          return add(new Object[]
-          { name, color, oreName, false, true, false }, tool);
+          return add(new DeltaInfo(name, color, oreName, false, true, false, false), tool);
      }
      
      
@@ -40,8 +38,7 @@ public final class MaterialRegistry
      
      public static ItemMaterial add (final String name, final int color, final String oreName, final boolean needTool, final boolean needWeapon, final EnumToolMaterial tool, final int uses, final EnumArmorMaterial armor)
      {
-          return add(new Object[]
-          { name, color, oreName, needTool, needWeapon, false }, tool, uses, armor);
+          return add(new DeltaInfo(name, color, oreName, needTool, needWeapon, true, false), tool, uses, armor);
      }
      
      
@@ -49,34 +46,30 @@ public final class MaterialRegistry
      
      public static ItemMaterial add (final String name, final int color, final String oreName, final boolean needTool, final boolean needWeapon, final EnumToolMaterial tool)
      {
-          return add(new Object[]
-          { name, color, oreName, needTool, needWeapon, false }, tool);
+          return add(new DeltaInfo(name, color, oreName, needTool, needWeapon, false, false), tool);
      }
      
      
      
      
-     public static ItemMaterial add (final Object[] delta, final EnumToolMaterial tool, final int uses, final EnumArmorMaterial armor)
+     public static ItemMaterial add (final DeltaInfo delta, final EnumToolMaterial tool, final int uses, final EnumArmorMaterial armor)
      {
-          return add(delta, new Object[]
-          { tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability() }, new Object[]
-          { uses, new int[]
-          { armor.getDamageReductionAmount(0), armor.getDamageReductionAmount(1), armor.getDamageReductionAmount(2), armor.getDamageReductionAmount(3) }, armor.getEnchantability() }, null, null);
+          return add(delta, new ToolInfo(tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability()), new ArmorInfo(uses, new int[]
+          { armor.getDamageReductionAmount(0), armor.getDamageReductionAmount(1), armor.getDamageReductionAmount(2), armor.getDamageReductionAmount(3) }, armor.getEnchantability()), null, null);
      }
      
      
      
      
-     public static ItemMaterial add (final Object[] delta, final EnumToolMaterial tool)
+     public static ItemMaterial add (final DeltaInfo delta, final EnumToolMaterial tool)
      {
-          return add(delta, new Object[]
-          { tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability() }, null, null, null);
+          return add(delta, new ToolInfo(tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability()), null, null, null);
      }
      
      
      
      
-     public static ItemMaterial add (final Object[] delta, final Object[] tool, final Object[] armor)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor)
      {
           return add(delta, tool, armor, null, null);
      }
@@ -84,7 +77,7 @@ public final class MaterialRegistry
      
      
      
-     public static ItemMaterial add (final Object[] delta, final Object[] tool, final Object[] armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, toolMat, armorMat);
           mats.add(tmp);
@@ -103,7 +96,7 @@ public final class MaterialRegistry
      
      public static List<ItemMaterial> materials ()
      {
-          return mats;
+          return new ArrayList<ItemMaterial>(mats);
      }
      
      

@@ -7,25 +7,18 @@ import mcdelta.core.material.ItemMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialArmor
+public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
 {
-     private static final int[] maxDamageArray = new int[]
-                                               { 11, 16, 15, 13 };
      private final ItemMaterial itemMaterial;
-     private int                armorType;
      public ModDelta            mod;
      public String              name;
      
@@ -34,17 +27,15 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
      
      public ItemDeltaArmor (final ModDelta mod, final ItemMaterial mat, final int type)
      {
-          super(mod.config().getItemID(getArmorType(type) + "." + mat.getName().toLowerCase()), EnumArmorMaterial.CHAIN, 1, type);
+          super(mod.config().getItemID(getArmorType(type) + "." + mat.name().toLowerCase()), mat.getArmorMaterial(), 1, type);
           
           this.mod = mod;
-          this.name = getArmorType(type) + "." + mat.getName().toLowerCase();
+          this.name = getArmorType(type) + "." + mat.name().toLowerCase();
           final String unlocalized = mod.id().toLowerCase() + ":" + this.name;
           this.setUnlocalizedName(unlocalized);
           this.setCreativeTab(CreativeTabs.tabCombat);
           
           this.itemMaterial = mat;
-          mat.getDamageReductionAmount(type);
-          this.setMaxDamage(mat.getDurability(type));
           
           if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))
           {
@@ -95,7 +86,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
-          return this.itemMaterial.getColor();
+          return this.itemMaterial.color();
      }
      
      
@@ -104,25 +95,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          return this.itemMaterial.isShinyDefault();
-     }
-     
-     
-     
-     
-     @Override
-     public int getItemEnchantability ()
-     {
-          return this.itemMaterial.getArmorEnchantability();
-     }
-     
-     
-     
-     
-     @Override
-     public EnumArmorMaterial getArmorMaterial ()
-     {
-          return EnumArmorMaterial.CHAIN;
+          return this.itemMaterial.defaultShiny();
      }
      
      
@@ -131,9 +104,9 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()) != null && !OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()).isEmpty())
+          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.getOreDictionaryName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -152,39 +125,22 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
      
      
      
-     static int[] getMaxDamageArray ()
-     {
-          return maxDamageArray;
-     }
-     
-     
-     
-     
-     // ARMOR PROPS
-     
      @Override
-     public ArmorProperties getProperties (final EntityLivingBase player, final ItemStack armor, final DamageSource source, final double damage, final int slot)
+     public String getArmorTexture (final ItemStack stack, final Entity entity, final int slot, final String type)
      {
-          // TODO Auto-generated method stub
-          return null;
-     }
-     
-     
-     
-     
-     @Override
-     public int getArmorDisplay (final EntityPlayer player, final ItemStack armor, final int slot)
-     {
-          // TODO Auto-generated method stub
-          return 0;
-     }
-     
-     
-     
-     
-     @Override
-     public void damageArmor (final EntityLivingBase entity, final ItemStack stack, final DamageSource source, final int damage, final int slot)
-     {
-          // TODO Auto-generated method stub
+          /*
+           * StringBuilder builder = new StringBuilder();
+           * 
+           * builder.append(Archive.MOD_ID + ":textures/models/armor/");
+           * builder.append(ArmorTypes.getType(stack).getTextureName());
+           * builder.append("_layer_"); switch (getPiece(stack).getType()) {
+           * case 2: builder.append(2); break; default: builder.append(1);
+           * break; } if (ArmorTypes.getType(stack).hasOverlay() && (type !=
+           * null) && type.equalsIgnoreCase("overlay")) {
+           * builder.append("_overlay"); } builder.append(".png");
+           * 
+           * return builder.toString();
+           */
+          return "";
      }
 }

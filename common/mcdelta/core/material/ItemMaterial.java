@@ -4,24 +4,19 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraftforge.common.EnumHelper;
 
-public class ItemMaterial
+public final class ItemMaterial
 {
-     // Format: { name, color, ore, needsTools, needsWeapons, defaultShiny }
-     public Object[]          deltaInfo;
+     private final DeltaInfo         deltaInfo;
+     private final ToolInfo          toolInfo;
+     private final ArmorInfo         armorInfo;
      
-     // Format: { harvest, uses, efficiency, damage, enchant }
-     public Object[]          toolInfo;
-     
-     // Format: { maxDamageFactor, damageReductionAmountArray, enchantability }
-     public Object[]          armorInfo;
-     
-     public EnumToolMaterial  toolMaterial;
-     public EnumArmorMaterial armorMaterial;
+     private final EnumToolMaterial  toolMaterial;
+     private final EnumArmorMaterial armorMaterial;
      
      
      
      
-     public ItemMaterial (final Object[] delta, final Object[] tool, final Object[] armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public ItemMaterial (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           this.deltaInfo = delta;
           this.toolInfo = tool;
@@ -29,7 +24,14 @@ public class ItemMaterial
           
           if (toolMat == null)
           {
-               this.toolMaterial = EnumHelper.addToolMaterial(this.getName(), this.getHarvestLevel(), this.getMaxUses(), this.getEfficiencyOnProperMaterial(), this.getDamageVsEntity(), this.getEnchantability());
+               if (tool != null)
+               {
+                    this.toolMaterial = EnumHelper.addToolMaterial(this.name(), this.toolInfo.harvestLvL(), this.toolInfo.maxUses(), this.toolInfo.efficiency(), this.toolInfo.damageVsEntity(), this.toolInfo.enchantability());
+               }
+               else
+               {
+                    this.toolMaterial = EnumHelper.addToolMaterial(this.name(), 0, 0, 0, 0, 0);
+               }
           }
           else
           {
@@ -37,7 +39,14 @@ public class ItemMaterial
           }
           if (armorMat == null)
           {
-               // DO SOMETHING
+               if (this.armorInfo != null)
+               {
+                    this.armorMaterial = EnumHelper.addArmorMaterial(this.name(), this.armorInfo.maxUses(), this.armorInfo.shieldBarArray(), this.armorInfo.enchantability());
+               }
+               else
+               {
+                    this.armorMaterial = EnumHelper.addArmorMaterial(this.name(), 0, null, 0);
+               }
           }
           else
           {
@@ -48,25 +57,25 @@ public class ItemMaterial
      
      
      
-     public String getName ()
+     public String name ()
      {
-          return (String) this.deltaInfo[0];
+          return this.deltaInfo.name();
      }
      
      
      
      
-     public int getColor ()
+     public int color ()
      {
-          return (Integer) this.deltaInfo[1];
+          return this.deltaInfo.color();
      }
      
      
      
      
-     public String getOreDictionaryName ()
+     public String oreName ()
      {
-          return (String) this.deltaInfo[2];
+          return this.deltaInfo.oreName();
      }
      
      
@@ -74,7 +83,7 @@ public class ItemMaterial
      
      public boolean needsTools ()
      {
-          return (Boolean) this.deltaInfo[3];
+          return this.deltaInfo.needsTools();
      }
      
      
@@ -82,15 +91,23 @@ public class ItemMaterial
      
      public boolean needsWeapons ()
      {
-          return (Boolean) this.deltaInfo[4];
+          return this.deltaInfo.needsWeapons();
      }
      
      
      
      
-     public boolean isShinyDefault ()
+     public boolean needsArmor ()
      {
-          return (Boolean) this.deltaInfo[5];
+          return this.deltaInfo.needsArmor();
+     }
+     
+     
+     
+     
+     public boolean defaultShiny ()
+     {
+          return this.deltaInfo.defaultShiny();
      }
      
      
@@ -98,63 +115,23 @@ public class ItemMaterial
      
      public int getHarvestLevel ()
      {
-          return (Integer) this.toolInfo[0];
+          return this.toolInfo.harvestLvL();
      }
      
      
      
      
-     public int getMaxUses ()
+     public int maxUses ()
      {
-          return (Integer) this.toolInfo[1];
+          return this.toolInfo.maxUses();
      }
      
      
      
      
-     public float getEfficiencyOnProperMaterial ()
+     public EnumToolMaterial getToolMaterial ()
      {
-          return (Float) this.toolInfo[2];
-     }
-     
-     
-     
-     
-     public float getDamageVsEntity ()
-     {
-          return (Float) this.toolInfo[3];
-     }
-     
-     
-     
-     
-     public int getEnchantability ()
-     {
-          return (Integer) this.toolInfo[4];
-     }
-     
-     
-     
-     
-     public int getDurability (final int i)
-     {
-          return ((int[]) this.armorInfo[1])[i] * (Integer) this.armorInfo[0];
-     }
-     
-     
-     
-     
-     public int getDamageReductionAmount (final int i)
-     {
-          return ((int[]) this.armorInfo[1])[i];
-     }
-     
-     
-     
-     
-     public int getArmorEnchantability ()
-     {
-          return (Integer) this.armorInfo[2];
+          return this.toolMaterial;
      }
      
      
@@ -163,5 +140,29 @@ public class ItemMaterial
      public EnumArmorMaterial getArmorMaterial ()
      {
           return this.armorMaterial;
+     }
+     
+     
+     
+     
+     public float getDamageVsEntity ()
+     {
+          return this.toolInfo.damageVsEntity();
+     }
+     
+     
+     
+     
+     public float getEfficiencyOnProperMaterial ()
+     {
+          return this.toolInfo.efficiency();
+     }
+     
+     
+     
+     
+     public int enchantability ()
+     {
+          return this.toolInfo.enchantability();
      }
 }

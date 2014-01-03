@@ -25,6 +25,9 @@ public class DeltaContent implements IContent
      public static Map<ItemMaterial, ItemDeltaHoe>     hoes     = new HashMap<ItemMaterial, ItemDeltaHoe>();
      
      public static Map<ItemMaterial, ItemDeltaArmor>   helmets  = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   chests   = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   pants    = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   boots    = new HashMap<ItemMaterial, ItemDeltaArmor>();
      
      
      
@@ -60,10 +63,19 @@ public class DeltaContent implements IContent
                final ItemDeltaHoe hoe = new ItemDeltaHoe(DeltaCore.instance, mat);
                hoes.put(mat, hoe);
           }
-          if (mat.armorInfo != null)
+          if (mat.needsArmor())
           {
-               //final ItemDeltaArmor helmet = new ItemDeltaArmor(mat.owner(), mat, 0);
-               //helmets.put(mat, helmet);
+               final ItemDeltaArmor helmet = new ItemDeltaArmor(DeltaCore.instance, mat, 0);
+               helmets.put(mat, helmet);
+               
+               final ItemDeltaArmor chest = new ItemDeltaArmor(DeltaCore.instance, mat, 1);
+               chests.put(mat, chest);
+               
+               final ItemDeltaArmor pant = new ItemDeltaArmor(DeltaCore.instance, mat, 2);
+               pants.put(mat, pant);
+               
+               final ItemDeltaArmor boot = new ItemDeltaArmor(DeltaCore.instance, mat, 3);
+               boots.put(mat, boot);
           }
      }
      
@@ -75,7 +87,7 @@ public class DeltaContent implements IContent
      {
           for (final ItemMaterial mat : MaterialRegistry.materials())
           {
-               final String material = mat.getOreDictionaryName();
+               final String material = mat.oreName();
                
                if (mat.needsTools())
                {
