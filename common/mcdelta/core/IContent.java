@@ -10,4 +10,9 @@ public interface IContent
      
      
      void addMaterialBasedContent (ItemMaterial mat);
+     
+     
+     
+     
+     void addRecipes ();
 }
