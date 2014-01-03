@@ -1,7 +1,7 @@
 [
   {
     "modid": "deltacore",
-    "name": "MC Delta Core",
+    "name": "DeltaCore",
     "description": "The mod needed for all MC Delta Mods",
     "credits": "Made By the MCDelta team",
     "version": "${version}",
