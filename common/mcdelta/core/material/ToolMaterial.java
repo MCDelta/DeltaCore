@@ -3,15 +3,13 @@ package mcdelta.core.material;
 import java.util.ArrayList;
 import java.util.List;
 
-import mcdelta.core.DeltaCore;
-import mcdelta.core.ModDelta;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraftforge.common.EnumHelper;
 
 public class ToolMaterial
 {
-     public static List<ToolMaterial> mats = new ArrayList<ToolMaterial>();
+     public static List<ToolMaterial> mats    = new ArrayList<ToolMaterial>();
      
      public static ToolMaterial       IRON    = new ToolMaterial("iron", 0xffffff, "ingotIron", EnumToolMaterial.IRON);
      public static ToolMaterial       WOOD    = new ToolMaterial("wood", 0x866526, "plankWood", EnumToolMaterial.WOOD);
@@ -19,7 +17,7 @@ public class ToolMaterial
      public static ToolMaterial       DIAMOND = new ToolMaterial("diamond", 0x33ebcb, "gemDiamond", EnumToolMaterial.EMERALD);
      public static ToolMaterial       GOLD    = new ToolMaterial("gold", 0xeaee57, "ingotGold", EnumToolMaterial.GOLD);
      
-     // Format: { name, color, ore, needsTools, needsWeapons, mod, defaultShiny }
+     // Format: { name, color, ore, needsTools, needsWeapons, defaultShiny }
      public Object[]                  deltaInfo;
      
      // Format: { harvest, uses, efficiency, damage, enchant }
@@ -37,7 +35,7 @@ public class ToolMaterial
      public ToolMaterial (final String s, final int i, final String s2, final EnumToolMaterial mat, final int i2, final EnumArmorMaterial mat2)
      {
           this(new Object[]
-          { s, i, s2, false, true, DeltaCore.instance, false }, mat, i2, mat2);
+          { s, i, s2, false, true, false }, mat, i2, mat2);
      }
      
      
@@ -46,7 +44,7 @@ public class ToolMaterial
      public ToolMaterial (final String s, final int i, final String s2, final EnumToolMaterial mat)
      {
           this(new Object[]
-          { s, i, s2, false, true, DeltaCore.instance, false }, mat);
+          { s, i, s2, false, true, false }, mat);
      }
      
      
@@ -155,17 +153,9 @@ public class ToolMaterial
      
      
      
-     public ModDelta getMod ()
-     {
-          return (ModDelta) this.deltaInfo[5];
-     }
-     
-     
-     
-     
      public boolean isShinyDefault ()
      {
-          return (Boolean) this.deltaInfo[6];
+          return (Boolean) this.deltaInfo[5];
      }
      
      

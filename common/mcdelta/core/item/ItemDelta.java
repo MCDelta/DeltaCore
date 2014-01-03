@@ -1,14 +1,10 @@
 package mcdelta.core.item;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.logging.Logger;
-import mcdelta.core.material.ToolMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,54 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ItemDelta extends Item
 {
-     public static Map<ToolMaterial, ItemWeapon>       swords   = new HashMap<ToolMaterial, ItemWeapon>();
-     public static Map<ToolMaterial, ItemDeltaPickaxe> pickaxes = new HashMap<ToolMaterial, ItemDeltaPickaxe>();
-     public static Map<ToolMaterial, ItemDeltaShovel>  shovels  = new HashMap<ToolMaterial, ItemDeltaShovel>();
-     public static Map<ToolMaterial, ItemDeltaAxe>     axes     = new HashMap<ToolMaterial, ItemDeltaAxe>();
-     public static Map<ToolMaterial, ItemDeltaHoe>     hoes     = new HashMap<ToolMaterial, ItemDeltaHoe>();
-     
-     public static Map<ToolMaterial, ItemDeltaArmor>   helmets  = new HashMap<ToolMaterial, ItemDeltaArmor>();
-     
-     
-     
-     
-     public static void loadItems ()
-     {
-          for (final ToolMaterial mat : ToolMaterial.mats)
-          {
-               if (mat.needsTools())
-               {
-                    final ItemDeltaShovel shovel = new ItemDeltaShovel(mat.getMod(), mat);
-                    MinecraftForge.setToolClass(shovel, "shovel", mat.getHarvestLevel());
-                    shovels.put(mat, shovel);
-                    
-                    final ItemDeltaPickaxe pick = new ItemDeltaPickaxe(mat.getMod(), mat);
-                    MinecraftForge.setToolClass(pick, "pickaxe", mat.getHarvestLevel());
-                    pickaxes.put(mat, pick);
-                    
-                    final ItemDeltaAxe axe = new ItemDeltaAxe(mat.getMod(), mat);
-                    MinecraftForge.setToolClass(axe, "axe", mat.getHarvestLevel());
-                    axes.put(mat, axe);
-                    
-                    final ItemWeapon sword = new ItemWeapon("sword", mat.getMod(), mat, 4.0F);
-                    swords.put(mat, sword);
-                    
-                    final ItemDeltaHoe hoe = new ItemDeltaHoe(mat.getMod(), mat);
-                    hoes.put(mat, hoe);
-               }
-               if (mat.armorInfo != null)
-               {
-                    final ItemDeltaArmor helmet = new ItemDeltaArmor(mat.getMod(), mat, 0);
-                    helmets.put(mat, helmet);
-               }
-          }
-     }
-     
-     
      public ModDelta mod;
      public String   name;
      private boolean checkUnlocalized = true;
