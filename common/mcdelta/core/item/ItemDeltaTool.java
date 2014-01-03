@@ -214,7 +214,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      
      @Override
-     public Multimap getItemAttributeModifiers ()
+     public Multimap<String, AttributeModifier> getItemAttributeModifiers ()
      {
           final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
           multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));

@@ -26,8 +26,6 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
                                                { 11, 16, 15, 13 };
      private final ToolMaterial toolMaterial;
      private int                armorType;
-     private final int          damageReduceAmount;
-     
      public ModDelta            mod;
      public String              name;
      
@@ -45,7 +43,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses, ISpecialA
           this.setCreativeTab(CreativeTabs.tabCombat);
           
           this.toolMaterial = mat;
-          this.damageReduceAmount = mat.getDamageReductionAmount(type);
+          mat.getDamageReductionAmount(type);
           this.setMaxDamage(mat.getDurability(type));
           
           if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))

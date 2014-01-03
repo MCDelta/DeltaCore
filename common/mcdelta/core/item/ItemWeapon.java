@@ -297,7 +297,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      
      
      @Override
-     public Multimap getItemAttributeModifiers ()
+     public Multimap<String, AttributeModifier> getItemAttributeModifiers ()
      {
           final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
           multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
