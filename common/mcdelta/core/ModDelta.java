@@ -59,6 +59,7 @@ public class ModDelta
      
      
      
+     
      /**
       * Classes that extend ModDelta need to override this!
       * 
@@ -107,6 +108,6 @@ public class ModDelta
           
           deltaMods.add(this);
           
-          content().addContent();
+          this.content().addContent();
      }
 }

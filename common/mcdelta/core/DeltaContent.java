@@ -3,7 +3,6 @@ package mcdelta.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import mcdelta.core.item.ItemDeltaArmor;
 import mcdelta.core.item.ItemDeltaAxe;
 import mcdelta.core.item.ItemDeltaHoe;
@@ -15,6 +14,7 @@ import mcdelta.core.material.MaterialRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class DeltaContent implements IContent
 {
@@ -37,6 +37,7 @@ public class DeltaContent implements IContent
      
      
      
+     @Override
      public void addMaterialBasedContent (final ItemMaterial mat)
      {
           if (mat.needsTools())

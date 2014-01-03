@@ -88,7 +88,7 @@ public final class MaterialRegistry
      {
           final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, toolMat, armorMat);
           mats.add(tmp);
-          for (ModDelta mod : ModDelta.deltaMods)
+          for (final ModDelta mod : ModDelta.deltaMods)
           {
                if (mod.content() != null)
                {
