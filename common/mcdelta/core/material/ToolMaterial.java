@@ -11,12 +11,6 @@ public class ToolMaterial
 {
      public static List<ToolMaterial> mats    = new ArrayList<ToolMaterial>();
      
-     public static ToolMaterial       IRON    = new ToolMaterial("iron", 0xffffff, "ingotIron", EnumToolMaterial.IRON);
-     public static ToolMaterial       WOOD    = new ToolMaterial("wood", 0x866526, "plankWood", EnumToolMaterial.WOOD);
-     public static ToolMaterial       STONE   = new ToolMaterial("stone", 0x9a9a9a, "cobblestone", EnumToolMaterial.STONE);
-     public static ToolMaterial       DIAMOND = new ToolMaterial("diamond", 0x33ebcb, "gemDiamond", EnumToolMaterial.EMERALD);
-     public static ToolMaterial       GOLD    = new ToolMaterial("gold", 0xeaee57, "ingotGold", EnumToolMaterial.GOLD);
-     
      // Format: { name, color, ore, needsTools, needsWeapons, defaultShiny }
      public Object[]                  deltaInfo;
      

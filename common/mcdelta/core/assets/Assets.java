@@ -358,8 +358,6 @@ public class Assets
      {
           final byte[] data = packet.populate();
           
-          Logger.log("sending a packet", packet.getClass().getSimpleName(), data.length);
-          
           final Packet250CustomPayload packet250 = new Packet250CustomPayload();
           packet250.channel = DeltaCore.MOD_ID;
           packet250.data = data;

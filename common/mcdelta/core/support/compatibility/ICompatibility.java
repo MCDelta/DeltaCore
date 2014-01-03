@@ -1,4 +1,4 @@
-package mcdelta.core.support;
+package mcdelta.core.support.compatibility;
 
 /**
  * Runnable Interface implemented by all classes that contain code to add

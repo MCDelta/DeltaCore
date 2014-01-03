@@ -56,6 +56,7 @@ public class ItemDelta extends Item
           {
                DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
           }
+          
           if (this instanceof IExtraPasses)
           {
                ClientProxy.extraPasses.add(this);

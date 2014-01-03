@@ -1,5 +1,6 @@
 package mcdelta.core.item;
 
+import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -104,7 +105,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
           }
           if (pass == 2)
           {
-               return ToolMaterial.WOOD.getColor();
+               return DeltaCore.WOOD.getColor();
           }
           return this.toolMaterial.getColor();
      }

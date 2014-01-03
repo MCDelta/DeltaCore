@@ -161,7 +161,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           }
           if (pass == 2)
           {
-               return ToolMaterial.WOOD.getColor();
+               return DeltaCore.WOOD.getColor();
           }
           return this.toolMaterialDelta.getColor();
      }

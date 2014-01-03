@@ -23,7 +23,7 @@ public class ClientProxy extends CommonProxy
           typeBlockSided = RenderingRegistry.getNextAvailableRenderId();
           RenderingRegistry.registerBlockHandler(new RenderSidedBlock());
           
-          for (final Item item : extraPasses)
+          for (Item item : extraPasses)
           {
                MinecraftForgeClient.registerItemRenderer(item.itemID, new RenderExtraPasses());
           }
