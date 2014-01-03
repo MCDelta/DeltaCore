@@ -27,6 +27,10 @@ import cpw.mods.fml.common.network.NetworkMod;
 { DeltaCore.MOD_ID }, packetHandler = PacketHandler.class)
 public class DeltaCore extends ModDelta
 {
+    // TODO TOP PRIORITY
+    // - create an item that can have multiple Tool mats via NBT or meta
+    // - Use item to allow for dynamically adding materials
+    // 
     // TODO (possible ideas)
     // - camo creeper
     // - timed potion to prevent potion effects
