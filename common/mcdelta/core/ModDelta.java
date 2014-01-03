@@ -106,5 +106,7 @@ public class ModDelta
           }
           
           deltaMods.add(this);
+          
+          content().addContent();
      }
 }
