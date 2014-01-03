@@ -24,19 +24,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDeltaTool extends ItemDelta implements IExtraPasses
 {
-     protected ToolMaterial toolMaterial;
-     private final Block[]  blocksEffectiveAgainst;
-     protected float        efficiencyOnProperMaterial;
-     private final float    damageVsEntity;
-     protected String       toolName;
+     public ToolMaterial   toolMaterial;
+     private final Block[] blocksEffectiveAgainst;
+     protected float       efficiencyOnProperMaterial;
+     private final float   damageVsEntity;
+     protected String      toolName;
      
      @SideOnly (Side.CLIENT)
-     protected Icon         itemOverlay;
+     protected Icon        itemOverlay;
      
      @SideOnly (Side.CLIENT)
-     protected Icon         overrideIcon;
+     protected Icon        overrideIcon;
      
-     private boolean        overrideExists = false;
+     protected boolean     overrideExists = false;
      
      
      
