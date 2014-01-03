@@ -3,7 +3,6 @@ package mcdelta.core.material;
 import java.util.ArrayList;
 import java.util.List;
 
-import mcdelta.core.DeltaContent;
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import net.minecraft.item.EnumArmorMaterial;
@@ -90,7 +89,13 @@ public final class MaterialRegistry
      {
           final ItemMaterial tmp = new ItemMaterial(owner, delta, tool, armor, toolMat, armorMat);
           mats.add(tmp);
-          DeltaContent.addContent(tmp);
+          for (ModDelta mod : ModDelta.deltaMods)
+          {
+               if (mod.content() != null)
+               {
+                    mod.content().addMaterialBasedContent(tmp);
+               }
+          }
           return tmp;
      }
      

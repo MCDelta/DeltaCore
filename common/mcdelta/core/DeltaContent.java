@@ -12,7 +12,7 @@ import mcdelta.core.item.ItemWeapon;
 import mcdelta.core.material.ItemMaterial;
 import net.minecraftforge.common.MinecraftForge;
 
-public class DeltaContent
+public class DeltaContent implements IContent
 {
      public static Map<ItemMaterial, ItemWeapon>       swords   = new HashMap<ItemMaterial, ItemWeapon>();
      public static Map<ItemMaterial, ItemDeltaPickaxe> pickaxes = new HashMap<ItemMaterial, ItemDeltaPickaxe>();
@@ -25,7 +25,15 @@ public class DeltaContent
      
      
      
-     public static void addContent (final ItemMaterial mat)
+     @Override
+     public void addContent ()
+     {
+     }
+     
+     
+     
+     
+     public void addMaterialBasedContent (final ItemMaterial mat)
      {
           if (mat.needsTools())
           {
@@ -49,8 +57,10 @@ public class DeltaContent
           }
           if (mat.armorInfo != null)
           {
-               final ItemDeltaArmor helmet = new ItemDeltaArmor(mat.owner(), mat, 0);
-               helmets.put(mat, helmet);
+               //final ItemDeltaArmor helmet = new ItemDeltaArmor(mat.owner(), mat, 0);
+               //helmets.put(mat, helmet);
           }
      }
+     
+     
 }

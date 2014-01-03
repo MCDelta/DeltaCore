@@ -1,6 +1,8 @@
 package mcdelta.core;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import mcdelta.core.config.ConfigWrapper;
 import mcdelta.core.config.IConfig;
@@ -12,7 +14,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ModDelta
 {
-     protected ConfigWrapper config;
+     public static List<ModDelta> deltaMods = new ArrayList<ModDelta>();
+     protected ConfigWrapper      config;
      
      
      
@@ -56,6 +59,18 @@ public class ModDelta
      
      
      
+     /**
+      * Classes that extend ModDelta need to override this!
+      * 
+      * @return IContent
+      */
+     public IContent content ()
+     {
+          return null;
+     }
+     
+     
+     
      
      protected void initConfig (final FMLPreInitializationEvent evt)
      {
@@ -89,5 +104,7 @@ public class ModDelta
           {
                config.init(this.config);
           }
+          
+          deltaMods.add(this);
      }
 }

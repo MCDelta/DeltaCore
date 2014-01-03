@@ -89,4 +89,12 @@ public class DeltaCore extends ModDelta
           
           CompatibilityHandler.init();
      }
+     
+     
+     private IContent content = new DeltaContent();
+     
+     public IContent content ()
+     {
+          return content;
+     }
 }
