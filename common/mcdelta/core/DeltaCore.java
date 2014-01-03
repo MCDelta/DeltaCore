@@ -70,6 +70,8 @@ public class DeltaCore extends ModDelta
     @EventHandler
     public void load(final FMLInitializationEvent event)
     {
+        content().addRecipes();
+        
         MinecraftForge.setBlockHarvestLevel(Block.oreNetherQuartz, "pickaxe", 2);
     }
 
