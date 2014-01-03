@@ -6,6 +6,7 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
@@ -17,6 +18,7 @@ import net.minecraftforge.common.Property;
 public class ConfigWrapper
 {
      public static final String CATEGORY_ENCHANT = "enchantment";
+     public static final String CATEGORY_POTION  = "potion";
      
      private Configuration      config;
      
@@ -121,6 +123,27 @@ public class ConfigWrapper
                this.save();
           }
           return this.config.getCategory(CATEGORY_ENCHANT).getValues().get(name).getInt();
+     }
+     
+     
+     
+     
+     public int getPotionID (final String name)
+     {
+          this.load();
+          if (!this.config.hasKey(CATEGORY_POTION, name))
+          {
+               for (int id = this.enchantIdStart; id < Potion.potionTypes.length; ++id)
+               {
+                    if (Potion.potionTypes[id] == null)
+                    {
+                         this.config.get(CATEGORY_POTION, name, id);
+                         break;
+                    }
+               }
+               this.save();
+          }
+          return this.config.getCategory(CATEGORY_POTION).getValues().get(name).getInt();
      }
      
      
