@@ -20,15 +20,18 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ItemDelta extends Item
 {
-     public static Map<ToolMaterial, ItemWeapon>       swords           = new HashMap<ToolMaterial, ItemWeapon>();
-     public static Map<ToolMaterial, ItemDeltaPickaxe> pickaxes         = new HashMap<ToolMaterial, ItemDeltaPickaxe>();
-     public static Map<ToolMaterial, ItemDeltaShovel>  shovels          = new HashMap<ToolMaterial, ItemDeltaShovel>();
-     public static Map<ToolMaterial, ItemDeltaAxe>     axes             = new HashMap<ToolMaterial, ItemDeltaAxe>();
-     public static Map<ToolMaterial, ItemDeltaHoe>     hoes             = new HashMap<ToolMaterial, ItemDeltaHoe>();
+     public static Map<ToolMaterial, ItemWeapon>       swords   = new HashMap<ToolMaterial, ItemWeapon>();
+     public static Map<ToolMaterial, ItemDeltaPickaxe> pickaxes = new HashMap<ToolMaterial, ItemDeltaPickaxe>();
+     public static Map<ToolMaterial, ItemDeltaShovel>  shovels  = new HashMap<ToolMaterial, ItemDeltaShovel>();
+     public static Map<ToolMaterial, ItemDeltaAxe>     axes     = new HashMap<ToolMaterial, ItemDeltaAxe>();
+     public static Map<ToolMaterial, ItemDeltaHoe>     hoes     = new HashMap<ToolMaterial, ItemDeltaHoe>();
      
-     public static Map<ToolMaterial, ItemDeltaArmor>   helmets          = new HashMap<ToolMaterial, ItemDeltaArmor>();
+     public static Map<ToolMaterial, ItemDeltaArmor>   helmets  = new HashMap<ToolMaterial, ItemDeltaArmor>();
      
-     static
+     
+     
+     
+     public static void loadItems ()
      {
           for (final ToolMaterial mat : ToolMaterial.mats)
           {
@@ -60,9 +63,10 @@ public class ItemDelta extends Item
           }
      }
      
-     public ModDelta                                   mod;
-     public String                                     name;
-     private boolean                                   checkUnlocalized = true;
+     
+     public ModDelta mod;
+     public String   name;
+     private boolean checkUnlocalized = true;
      
      
      
@@ -148,4 +152,6 @@ public class ItemDelta extends Item
      {
           return this.mod.id();
      }
+     
+     
 }

@@ -3,6 +3,7 @@ package mcdelta.core;
 import java.util.Random;
 
 import mcdelta.core.config.CoreConfig;
+import mcdelta.core.item.ItemDelta;
 import mcdelta.core.logging.Logger;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
@@ -55,6 +56,8 @@ public class DeltaCore extends ModDelta
           Logger.logger = event.getModLog();
           localizationWarnings.append("The following are missing localized names: \n");
           this.init(event, new CoreConfig());
+          
+          ItemDelta.loadItems();
      }
      
      
