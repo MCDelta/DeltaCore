@@ -78,8 +78,10 @@ public enum EnumParticles
      
      public void spawnParticleFromPacket (final EntityPlayer player, final double x, final double y, final double z)
      {
-          final World world = player.worldObj;
-          final List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - 0.1D, y - 0.1D, z - 0.1D, x + 0.1D, y + 0.1D, z + 0.1D));
+          final World world = player.worldObj; 
+          
+          @SuppressWarnings ("unchecked")
+          List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(x - 0.1D, y - 0.1D, z - 0.1D, x + 0.1D, y + 0.1D, z + 0.1D));
           
           switch (this)
           {
