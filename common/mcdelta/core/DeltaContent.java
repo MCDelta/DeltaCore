@@ -62,6 +62,7 @@ public class DeltaContent implements IContent
                final ItemDeltaHoe hoe = new ItemDeltaHoe(DeltaCore.instance, mat);
                hoes.put(mat, hoe);
           }
+          
           if (mat.needsArmor())
           {
                final ItemDeltaArmor helmet = new ItemDeltaArmor(DeltaCore.instance, mat, 0);
@@ -95,25 +96,28 @@ public class DeltaContent implements IContent
      {
           final String material = mat.oreName();
           
-          // Shovel
-          ItemStack result = new ItemStack(DeltaContent.shovels.get(mat));
-          GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " o ", " o ", 'x', material, 'o', "stickWood"));
-          
-          // Pickaxe
-          result = new ItemStack(DeltaContent.pickaxes.get(mat));
-          GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", " o ", " o ", 'x', material, 'o', "stickWood"));
-          
-          // Axe
-          result = new ItemStack(DeltaContent.axes.get(mat));
-          GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " ox", " o ", 'x', material, 'o', "stickWood"));
-          
-          // Sword
-          result = new ItemStack(DeltaContent.swords.get(mat));
-          GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " x ", " o ", 'x', material, 'o', "stickWood"));
-          
-          // Hoe
-          result = new ItemStack(DeltaContent.hoes.get(mat));
-          GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " o ", " o ", 'x', material, 'o', "stickWood"));
+          if (mat.needsTools())
+          {
+               // Shovel
+               ItemStack result = new ItemStack(DeltaContent.shovels.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " o ", " o ", 'x', material, 'o', "stickWood"));
+               
+               // Pickaxe
+               result = new ItemStack(DeltaContent.pickaxes.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", " o ", " o ", 'x', material, 'o', "stickWood"));
+               
+               // Axe
+               result = new ItemStack(DeltaContent.axes.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " ox", " o ", 'x', material, 'o', "stickWood"));
+               
+               // Sword
+               result = new ItemStack(DeltaContent.swords.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " x ", " o ", 'x', material, 'o', "stickWood"));
+               
+               // Hoe
+               result = new ItemStack(DeltaContent.hoes.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " o ", " o ", 'x', material, 'o', "stickWood"));
+          }
      }
      
      
