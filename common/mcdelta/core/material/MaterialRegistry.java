@@ -88,6 +88,7 @@ public final class MaterialRegistry
                if (mod.content() != null)
                {
                     mod.content().addMaterialBasedContent(tmp);
+                    mod.content().addMaterialBasedRecipes(tmp);
                }
           }
           return tmp;
