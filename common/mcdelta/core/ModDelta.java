@@ -127,6 +127,7 @@ public abstract class ModDelta
                config.init(this.config);
           }
           
-          this.content().addContent();
+          content().addContent();
+          content().addRecipes();
      }
 }
