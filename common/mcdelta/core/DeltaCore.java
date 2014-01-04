@@ -1,5 +1,7 @@
 package mcdelta.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import mcdelta.core.config.CoreConfig;
@@ -8,9 +10,9 @@ import mcdelta.core.logging.Logger;
 import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
-import mcdelta.core.support.EssentialAlloysSupport;
 import mcdelta.core.support.LimitedModSupport;
-import mcdelta.core.support.ThaumcraftSupport;
+import mcdelta.core.support.SupportEssentialAlloys;
+import mcdelta.core.support.SupportThaumcraft;
 import mcdelta.core.support.compatibility.CompatibilityHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -38,17 +40,19 @@ public class DeltaCore extends ModDelta
      // - camo creeper
      // - timed potion to prevent potion effects
      
-     public static final String  MOD_ID               = "deltacore";
+     public static final String            MOD_ID               = "deltacore";
      
      @Instance (MOD_ID)
-     public static DeltaCore     instance;
+     public static DeltaCore               instance;
      
      @SidedProxy (clientSide = "mcdelta.core.proxy.ClientProxy", serverSide = "mcdelta.core.proxy.CommonProxy")
-     public static CommonProxy   proxy;
+     public static CommonProxy             proxy;
      
-     public static StringBuilder localizationWarnings = new StringBuilder();
+     public static StringBuilder           localizationWarnings = new StringBuilder();
      
-     public static Random        rand                 = new Random();
+     public static Random                  rand                 = new Random();
+     
+     public static List<LimitedModSupport> limitedSupport       = new ArrayList<LimitedModSupport>();
      
      
      
@@ -75,8 +79,8 @@ public class DeltaCore extends ModDelta
           OreDictionary.registerOre("gemDiamond", new ItemStack(Item.diamond));
           
           MaterialRegistry.addVanillaMaterials();
-          this.doLimitedModSupport(new EssentialAlloysSupport());
-          this.doLimitedModSupport(new ThaumcraftSupport());
+          this.doLimitedModSupport(new SupportEssentialAlloys());
+          this.doLimitedModSupport(new SupportThaumcraft());
      }
      
      
@@ -103,6 +107,11 @@ public class DeltaCore extends ModDelta
           
           proxy.registerRenderers();
           
+          for(LimitedModSupport support : limitedSupport)
+          {
+               support.postInit();
+          }
+          
           CompatibilityHandler.init();
      }
      
@@ -111,13 +120,14 @@ public class DeltaCore extends ModDelta
      
      /**
       * A simple if statement to check if a mod is loaded. Should NOT be used
-      * when a API is required. Use the CompatibilityHandler for that.
+      * when a API is required. Use the CompatibilityHandler (thanks Captain) for that.
       */
      private void doLimitedModSupport (final LimitedModSupport modSupport)
      {
           if (Loader.isModLoaded(modSupport.modid()))
           {
-               modSupport.modLoaded();
+               limitedSupport.add(modSupport);
+               modSupport.preInit();
           }
      }
      

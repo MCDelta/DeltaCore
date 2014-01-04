@@ -7,5 +7,10 @@ public interface LimitedModSupport
      
      
      
-     public void modLoaded ();
+     public void preInit ();
+     
+     
+     
+     
+     public void postInit ();
 }
