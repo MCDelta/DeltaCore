@@ -9,6 +9,7 @@ import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
 import mcdelta.core.support.EssentialAlloysSupport;
 import mcdelta.core.support.LimitedModSupport;
+import mcdelta.core.support.ThaumcraftSupport;
 import mcdelta.core.support.compatibility.CompatibilityHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -74,6 +75,7 @@ public class DeltaCore extends ModDelta
           
           MaterialRegistry.addVanillaMaterials();
           this.doLimitedModSupport(new EssentialAlloysSupport());
+          this.doLimitedModSupport(new ThaumcraftSupport());
      }
      
      

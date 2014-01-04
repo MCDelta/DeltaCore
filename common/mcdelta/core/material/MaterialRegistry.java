@@ -55,7 +55,7 @@ public final class MaterialRegistry
      public static ItemMaterial add (final DeltaInfo delta, final EnumToolMaterial tool, final int uses, final EnumArmorMaterial armor)
      {
           return add(delta, new ToolInfo(tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability()), new ArmorInfo(uses, new int[]
-          { armor.getDamageReductionAmount(0), armor.getDamageReductionAmount(1), armor.getDamageReductionAmount(2), armor.getDamageReductionAmount(3) }, armor.getEnchantability()), null, null);
+          { armor.getDamageReductionAmount(0), armor.getDamageReductionAmount(1), armor.getDamageReductionAmount(2), armor.getDamageReductionAmount(3) }, armor.getEnchantability()), null, null, null);
      }
      
      
@@ -63,23 +63,23 @@ public final class MaterialRegistry
      
      public static ItemMaterial add (final DeltaInfo delta, final EnumToolMaterial tool)
      {
-          return add(delta, new ToolInfo(tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability()), null, null, null);
+          return add(delta, new ToolInfo(tool.getHarvestLevel(), tool.getMaxUses(), tool.getEfficiencyOnProperMaterial(), tool.getDamageVsEntity(), tool.getEnchantability()), null, null, null, null);
      }
      
      
      
      
-     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra)
      {
-          return add(delta, tool, armor, null, null);
+          return add(delta, tool, armor, extra, null, null);
      }
      
      
      
      
-     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
-          final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, toolMat, armorMat);
+          final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, extra, toolMat, armorMat);
           mats.add(tmp);
           for (final ModDelta mod : ModDelta.deltaMods)
           {

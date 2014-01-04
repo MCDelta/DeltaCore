@@ -2,6 +2,7 @@ package mcdelta.core.material;
 
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.EnumHelper;
 
 public final class ItemMaterial
@@ -9,6 +10,7 @@ public final class ItemMaterial
      private final DeltaInfo         deltaInfo;
      private final ToolInfo          toolInfo;
      private final ArmorInfo         armorInfo;
+     private final ExtraInfo         extraInfo;
      
      private final EnumToolMaterial  toolMaterial;
      private final EnumArmorMaterial armorMaterial;
@@ -16,11 +18,12 @@ public final class ItemMaterial
      
      
      
-     public ItemMaterial (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public ItemMaterial (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           this.deltaInfo = delta;
           this.toolInfo = tool;
           this.armorInfo = armor;
+          this.extraInfo = extra;
           
           if (toolMat == null)
           {
@@ -164,5 +167,18 @@ public final class ItemMaterial
      public int enchantability ()
      {
           return this.toolInfo.enchantability();
+     }
+     
+     
+     
+     
+     public EnumChatFormatting getNameColor ()
+     {
+          if(this.extraInfo == null)
+          {
+               return EnumChatFormatting.WHITE;
+          }
+          
+          return this.extraInfo.nameColor();
      }
 }

@@ -10,3 +10,9 @@ material.wood=Wooden
 material.stone=Stone
 material.diamond=Diamond
 material.gold=Golden
+
+## mod support materials (resource packers do not have to support these if they do not want. It will not effect anything unless the supported mod is installed)
+
+### Thaumcraft
+
+material.thaumium=Thaumium

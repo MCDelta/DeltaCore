@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
@@ -241,5 +242,19 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
                return this.efficiencyOnProperMaterial;
           }
           return this.getStrVsBlock(stack, block);
+     }
+     
+     
+     
+     
+     @Override
+     public String getItemDisplayName (final ItemStack stack)
+     {
+          final ItemMaterial mat = this.itemMaterial;
+          
+          final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
+          final String material = StatCollector.translateToLocal("material." + mat.name());
+          
+          return mat.getNameColor() + material + " " + weapon;
      }
 }
