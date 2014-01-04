@@ -127,8 +127,6 @@ public abstract class ModDelta
                config.init(this.config);
           }
           
-          deltaMods.add(this);
-          
           this.content().addContent();
      }
 }
