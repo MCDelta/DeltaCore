@@ -15,5 +15,6 @@ public class CoreConfig extends IConfig
           
           config.getConfiguration().addCustomCategoryComment(Settings.CATEGORY_MISC, Settings.COMMENT_MISC);
           Settings.RANDOM_SEED = config.get(Settings.CATEGORY_MISC, Settings.RANDOM_SEED_KEY, 123456789);
+          Settings.OREDIC_TOOLTIP = config.get(Settings.CATEGORY_MISC, Settings.OREDIC_TOOLTIP_KEY, false);
      }
 }

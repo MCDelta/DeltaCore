@@ -10,7 +10,7 @@ public class ExtraTooltipInfo
      @ForgeSubscribe
      public void getTooltip (final ItemTooltipEvent event)
      {
-          if (Settings.LOG_DEBUG && OreDictionary.getOreName(OreDictionary.getOreID(event.itemStack)) != null)
+          if (Settings.OREDIC_TOOLTIP && OreDictionary.getOreName(OreDictionary.getOreID(event.itemStack)) != null)
           {
                event.toolTip.add(OreDictionary.getOreName(OreDictionary.getOreID(event.itemStack)));
           }
