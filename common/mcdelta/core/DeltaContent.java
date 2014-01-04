@@ -100,22 +100,32 @@ public class DeltaContent implements IContent
           {
                // Shovel
                ItemStack result = new ItemStack(DeltaContent.shovels.get(mat));
+               if(mat.toolEnchant() != null)
+                    result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " o ", " o ", 'x', material, 'o', "stickWood"));
                
                // Pickaxe
                result = new ItemStack(DeltaContent.pickaxes.get(mat));
+               if(mat.toolEnchant() != null)
+                    result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
                GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", " o ", " o ", 'x', material, 'o', "stickWood"));
                
                // Axe
                result = new ItemStack(DeltaContent.axes.get(mat));
+               if(mat.toolEnchant() != null)
+                    result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " ox", " o ", 'x', material, 'o', "stickWood"));
                
                // Sword
                result = new ItemStack(DeltaContent.swords.get(mat));
+               if(mat.weaponEnchant() != null)
+                    result.addEnchantment(mat.weaponEnchant(), mat.weaponEnchantLvl());
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " x ", " o ", 'x', material, 'o', "stickWood"));
                
                // Hoe
                result = new ItemStack(DeltaContent.hoes.get(mat));
+               if(mat.toolEnchant() != null)
+                    result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " o ", " o ", 'x', material, 'o', "stickWood"));
           }
      }

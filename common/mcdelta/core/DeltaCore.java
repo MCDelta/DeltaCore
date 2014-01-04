@@ -11,6 +11,7 @@ import mcdelta.core.proxy.CommonProxy;
 import mcdelta.core.support.LimitedModSupport;
 import mcdelta.core.support.SupportEssentialAlloys;
 import mcdelta.core.support.SupportThaumcraft;
+import mcdelta.core.support.SupportTwilightForest;
 import mcdelta.core.support.compatibility.CompatibilityHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -76,6 +77,7 @@ public class DeltaCore extends ModDelta
           MaterialRegistry.addVanillaMaterials();
           doLimitedModSupport(new SupportEssentialAlloys());
           doLimitedModSupport(new SupportThaumcraft());
+          doLimitedModSupport(new SupportTwilightForest());
      }
      
      

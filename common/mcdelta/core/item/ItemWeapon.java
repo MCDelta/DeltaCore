@@ -329,4 +329,16 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      {
           return null;
      }
+     
+     
+     
+     
+     @SideOnly (Side.CLIENT)
+     public void getSubItems (int id, CreativeTabs tab, List list)
+     {
+          ItemStack stack = new ItemStack(id, 1, 0);
+          if(toolMaterialDelta.weaponEnchant() != null)
+               stack.addEnchantment(toolMaterialDelta.weaponEnchant(), toolMaterialDelta.weaponEnchantLvl());
+          list.add(stack);
+     }
 }

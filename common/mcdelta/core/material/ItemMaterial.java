@@ -1,5 +1,6 @@
 package mcdelta.core.material;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.util.EnumChatFormatting;
@@ -174,11 +175,63 @@ public final class ItemMaterial
      
      public EnumChatFormatting getNameColor ()
      {
-          if(this.extraInfo == null)
+          if (this.extraInfo == null)
           {
                return EnumChatFormatting.WHITE;
           }
           
           return this.extraInfo.nameColor();
+     }
+     
+     
+     
+     
+     public Enchantment weaponEnchant ()
+     {
+          if (this.extraInfo == null)
+          {
+               return null;
+          }
+          
+          return extraInfo.weaponEnchant().getKey();
+     }
+     
+     
+     
+     
+     public int weaponEnchantLvl ()
+     {
+          if (this.extraInfo == null)
+          {
+               return 0;
+          }
+          
+          return extraInfo.weaponEnchant().getValue();
+     }
+     
+     
+     
+     
+     public Enchantment toolEnchant ()
+     {
+          if (this.extraInfo == null)
+          {
+               return null;
+          }
+          
+          return extraInfo.toolEnchant().getKey();
+     }
+     
+     
+     
+     
+     public int toolEnchantLvl ()
+     {
+          if (this.extraInfo == null)
+          {
+               return 0;
+          }
+          
+          return extraInfo.toolEnchant().getValue();
      }
 }

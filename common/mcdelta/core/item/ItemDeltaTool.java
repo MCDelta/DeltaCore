@@ -1,5 +1,7 @@
 package mcdelta.core.item;
 
+import java.util.List;
+
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -256,5 +258,17 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
           final String material = StatCollector.translateToLocal("material." + mat.name());
           
           return mat.getNameColor() + material + " " + weapon;
+     }
+     
+     
+     
+     
+     @SideOnly (Side.CLIENT)
+     public void getSubItems (int id, CreativeTabs tab, List list)
+     {
+          ItemStack stack = new ItemStack(id, 1, 0);
+          if (itemMaterial.toolEnchant() != null)
+               stack.addEnchantment(itemMaterial.toolEnchant(), itemMaterial.toolEnchantLvl());
+          list.add(stack);
      }
 }
