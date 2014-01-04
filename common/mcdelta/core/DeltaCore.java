@@ -31,9 +31,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 public class DeltaCore extends ModDelta
 {
      // TODO TOP PRIORITY
-     // - Fix Item ID overlap
-     // - create an item that can have multiple Tool mats via NBT or meta
-     // - Use item to allow for dynamically adding materials
      //
      // TODO (possible ideas)
      // - camo creeper
@@ -54,22 +51,28 @@ public class DeltaCore extends ModDelta
      
      
      
+     @Override
+     public void deltaInit (FMLPreInitializationEvent event)
+     {
+          this.init(event, new CoreConfig());
+     }
+     
+     
+     
+     
      @EventHandler
      public void preInit (final FMLPreInitializationEvent event)
      {
           Logger.logger = event.getModLog();
           localizationWarnings.append("The following are missing localized names: \n");
           
-          loadDeltaMods();
-          
-          this.init(event, new CoreConfig());
+          loadDeltaMods(event);
           
           OreDictionary.registerOre("ingotIron", new ItemStack(Item.ingotIron));
           OreDictionary.registerOre("ingotGold", new ItemStack(Item.ingotGold));
           OreDictionary.registerOre("gemDiamond", new ItemStack(Item.diamond));
           
           MaterialRegistry.addVanillaMaterials();
-          
           this.doLimitedModSupport(new EssentialAlloysSupport());
      }
      
@@ -125,4 +128,6 @@ public class DeltaCore extends ModDelta
      {
           return this.content;
      }
+     
+     
 }

@@ -68,6 +68,11 @@ public abstract class ModDelta
      
      
      
+     public abstract void deltaInit (FMLPreInitializationEvent event);
+     
+     
+     
+     
      protected void initConfig (final FMLPreInitializationEvent evt)
      {
           // Get all the files
@@ -96,7 +101,7 @@ public abstract class ModDelta
      /**
       * THIS SHOULD ONLY BE CALLED BY DELTA CORE
       */
-     protected static void loadDeltaMods ()
+     protected static void loadDeltaMods (FMLPreInitializationEvent event)
      {
           for (final ModContainer mod : Loader.instance().getIndexedModList().values())
           {
@@ -105,6 +110,7 @@ public abstract class ModDelta
                     if (mod.getMod() instanceof ModDelta)
                     {
                          deltaMods.add((ModDelta) mod.getMod());
+                         ((ModDelta) mod.getMod()).deltaInit(event);
                     }
                }
           }
