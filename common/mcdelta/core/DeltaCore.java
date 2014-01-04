@@ -1,7 +1,5 @@
 package mcdelta.core;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import mcdelta.core.config.CoreConfig;
@@ -19,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -52,8 +49,6 @@ public class DeltaCore extends ModDelta
      
      public static Random                  rand                 = new Random();
      
-     public static List<LimitedModSupport> limitedSupport       = new ArrayList<LimitedModSupport>();
-     
      
      
      
@@ -79,8 +74,8 @@ public class DeltaCore extends ModDelta
           OreDictionary.registerOre("gemDiamond", new ItemStack(Item.diamond));
           
           MaterialRegistry.addVanillaMaterials();
-          this.doLimitedModSupport(new SupportEssentialAlloys());
-          this.doLimitedModSupport(new SupportThaumcraft());
+          doLimitedModSupport(new SupportEssentialAlloys());
+          doLimitedModSupport(new SupportThaumcraft());
      }
      
      
@@ -118,18 +113,7 @@ public class DeltaCore extends ModDelta
      
      
      
-     /**
-      * A simple if statement to check if a mod is loaded. Should NOT be used
-      * when a API is required. Use the CompatibilityHandler (thanks Captain) for that.
-      */
-     private void doLimitedModSupport (final LimitedModSupport modSupport)
-     {
-          if (Loader.isModLoaded(modSupport.modid()))
-          {
-               limitedSupport.add(modSupport);
-               modSupport.preInit();
-          }
-     }
+
      
      private final IContent content = new DeltaContent();
      

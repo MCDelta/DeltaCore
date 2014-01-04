@@ -6,6 +6,7 @@ import java.util.List;
 
 import mcdelta.core.config.ConfigWrapper;
 import mcdelta.core.config.IConfig;
+import mcdelta.core.support.LimitedModSupport;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -14,8 +15,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public abstract class ModDelta
 {
-     public static final List<ModDelta> deltaMods = new ArrayList<ModDelta>();
-     protected ConfigWrapper            config;
+     public static final List<ModDelta>    deltaMods      = new ArrayList<ModDelta>();
+     protected ConfigWrapper               config;
+     public static List<LimitedModSupport> limitedSupport = new ArrayList<LimitedModSupport>();
      
      
      
@@ -129,5 +131,22 @@ public abstract class ModDelta
           
           content().addContent();
           content().addRecipes();
+     }
+     
+     
+     
+     
+     /**
+      * A simple if statement to check if a mod is loaded. Should NOT be used
+      * when a API is required. Use the CompatibilityHandler (thanks Captain)
+      * for that.
+      */
+     protected void doLimitedModSupport (final LimitedModSupport modSupport)
+     {
+          if (Loader.isModLoaded(modSupport.modid()))
+          {
+               limitedSupport.add(modSupport);
+               modSupport.preInit();
+          }
      }
 }
