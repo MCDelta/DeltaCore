@@ -51,7 +51,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      public String                name;
      private final float          weaponDamage;
      private final String         toolName;
-     public ItemMaterial          toolMaterialDelta;
+     public ItemMaterial          itemMaterial;
      
      
      
@@ -61,7 +61,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           super(mod.config().getItemID(mat.name() + "." + toolName), mat.getToolMaterial());
           
           this.toolName = toolName;
-          this.toolMaterialDelta = mat;
+          this.itemMaterial = mat;
           this.maxStackSize = 1;
           this.setMaxDamage(mat.maxUses());
           this.setCreativeTab(CreativeTabs.tabCombat);
@@ -112,11 +112,11 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
                this.itemIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_1", register);
                this.itemOverlay = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_2", register);
           }
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.toolMaterialDelta.name().toLowerCase() + "_" + this.toolName + ".png"));
+          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName + ".png"));
           
           if (this.overrideExists)
           {
-               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.toolMaterialDelta.name().toLowerCase() + "_" + this.toolName, register);
+               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName, register);
           }
      }
      
@@ -162,9 +162,14 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           }
           if (pass == 2)
           {
+               if(itemMaterial.nonStickCrafter() != null)
+               {
+                    return itemMaterial.nonStickCrafter().getValue();
+               }
+               
                return MaterialRegistry.WOOD.color();
           }
-          return this.toolMaterialDelta.color();
+          return this.itemMaterial.color();
      }
      
      
@@ -173,7 +178,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.toolMaterialDelta.defaultShiny())
+          if (pass == 1 && this.itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -186,7 +191,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public float func_82803_g ()
      {
-          return this.toolMaterialDelta.getDamageVsEntity();
+          return this.itemMaterial.getDamageVsEntity();
      }
      
      
@@ -278,7 +283,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public int getItemEnchantability ()
      {
-          return this.toolMaterialDelta.enchantability();
+          return this.itemMaterial.enchantability();
      }
      
      
@@ -287,9 +292,9 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.toolMaterialDelta.oreName()) != null && !OreDictionary.getOres(this.toolMaterialDelta.oreName()).isEmpty())
+          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.toolMaterialDelta.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -302,7 +307,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      {
           final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
           multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.weaponDamage + this.toolMaterialDelta.getDamageVsEntity(), 0));
+          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.weaponDamage + this.itemMaterial.getDamageVsEntity(), 0));
           
           return multimap;
      }
@@ -313,7 +318,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public String getItemDisplayName (final ItemStack stack)
      {
-          final ItemMaterial mat = this.toolMaterialDelta;
+          final ItemMaterial mat = this.itemMaterial;
           
           final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
           final String material = StatCollector.translateToLocal("material." + mat.name());
@@ -337,8 +342,8 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      public void getSubItems (int id, CreativeTabs tab, List list)
      {
           ItemStack stack = new ItemStack(id, 1, 0);
-          if(toolMaterialDelta.weaponEnchant() != null)
-               stack.addEnchantment(toolMaterialDelta.weaponEnchant(), toolMaterialDelta.weaponEnchantLvl());
+          if(itemMaterial.weaponEnchant() != null)
+               stack.addEnchantment(itemMaterial.weaponEnchant(), itemMaterial.weaponEnchantLvl());
           list.add(stack);
      }
 }

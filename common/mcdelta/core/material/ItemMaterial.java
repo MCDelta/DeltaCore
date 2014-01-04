@@ -1,5 +1,7 @@
 package mcdelta.core.material;
 
+import java.util.Map.Entry;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
@@ -233,5 +235,18 @@ public final class ItemMaterial
           }
           
           return extraInfo.toolEnchant().getValue();
+     }
+     
+     
+     
+     
+     public Entry<String, Integer> nonStickCrafter ()
+     {
+          if (this.extraInfo == null)
+          {
+               return null;
+          }
+          
+          return extraInfo.nonStickCrafter();
      }
 }

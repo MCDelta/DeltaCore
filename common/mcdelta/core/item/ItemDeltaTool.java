@@ -125,6 +125,11 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
           }
           if (pass == 2)
           {
+               if(itemMaterial.nonStickCrafter() != null)
+               {
+                    return itemMaterial.nonStickCrafter().getValue();
+               }
+               
                return MaterialRegistry.WOOD.color();
           }
           return this.itemMaterial.color();
