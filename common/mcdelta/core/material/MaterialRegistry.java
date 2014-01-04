@@ -80,7 +80,9 @@ public final class MaterialRegistry
      public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, extra, toolMat, armorMat);
+          
           mats.add(tmp);
+          
           for (final ModDelta mod : ModDelta.deltaMods)
           {
                if (mod.content() != null)
