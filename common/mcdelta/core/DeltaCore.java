@@ -3,6 +3,7 @@ package mcdelta.core;
 import java.util.Random;
 
 import mcdelta.core.config.CoreConfig;
+import mcdelta.core.event.ExtraTooltipInfo;
 import mcdelta.core.logging.Logger;
 import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.network.PacketHandler;
@@ -85,6 +86,8 @@ public class DeltaCore extends ModDelta
      public void load (final FMLInitializationEvent event)
      {
           MinecraftForge.setBlockHarvestLevel(Block.oreNetherQuartz, "pickaxe", 2);
+          
+          MinecraftForge.EVENT_BUS.register(new ExtraTooltipInfo());
      }
      
      
