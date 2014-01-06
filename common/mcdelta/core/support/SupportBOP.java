@@ -33,7 +33,7 @@ public class SupportBOP implements LimitedModSupport
      public void preInit ()
      {
           MUD = MaterialRegistry.add(new DeltaInfo("mud", 6638381, "ballMud", false, true, false, false), new ToolInfo(0, 32, 0.5F, 0.0F, 1), null, null);
-          AMETHYST = MaterialRegistry.add(new DeltaInfo("amethyst", 16733439, "gemAmethyst", false, true, false, false), new ToolInfo(4, 2013, 15.0F, 5.0F, 16), null, new ExtraInfo(new SimpleEntry<String, Integer>("ingotIron", MaterialRegistry.IRON.color())));
+          AMETHYST = MaterialRegistry.add(new DeltaInfo("amethyst", 16733439, "gemAmethyst", false, true, false, false), new ToolInfo(4, 2013, 15.0F, 5.0F, 16), null, new ExtraInfo(new SimpleEntry<String, Integer>("ingotIron", 0xbfbfbf)));
      }
      
      
@@ -46,8 +46,8 @@ public class SupportBOP implements LimitedModSupport
           if (mudball != null)
                OreDictionary.registerOre("ballMud", new ItemStack(mudball));
           
-          final Item miscItems = Assets.findItemWithName("bop.miscItems");
-          if (miscItems != null)
-               OreDictionary.registerOre("gemAmethyst", new ItemStack(miscItems, 1, 2));
+          final Item gems = Assets.findItemWithName("item.bop.gems");
+          if (gems != null)
+               OreDictionary.registerOre("gemAmethyst", new ItemStack(gems, 1, 0));
      }
 }
