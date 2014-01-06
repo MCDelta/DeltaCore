@@ -1,5 +1,6 @@
 package mcdelta.core.material;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,6 +12,17 @@ public class ExtraInfo
      private final Entry<Enchantment, Integer> weaponEnchant;
      private final Entry<Enchantment, Integer> toolEnchant;
      private final Entry<String, Integer>      nonStickCrafter;
+     
+     
+     
+     
+     public ExtraInfo (final EnumChatFormatting e, final Entry<Enchantment, Integer> entr1, final Entry<Enchantment, Integer> entr2, final Entry<String, Integer> entr3)
+     {
+          nameColor = e;
+          weaponEnchant = entr1;
+          toolEnchant = entr2;
+          nonStickCrafter = entr3;
+     }
      
      
      
@@ -31,12 +43,9 @@ public class ExtraInfo
      
      
      
-     public ExtraInfo (final EnumChatFormatting e, final Entry<Enchantment, Integer> entr1, final Entry<Enchantment, Integer> entr2, final Entry<String, Integer> entr3)
+     public ExtraInfo (SimpleEntry<String, Integer> entr)
      {
-          nameColor = e;
-          weaponEnchant = entr1;
-          toolEnchant = entr2;
-          nonStickCrafter = entr3;
+          this(EnumChatFormatting.WHITE, null, null, entr);
      }
      
      

@@ -9,6 +9,7 @@ import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
 import mcdelta.core.support.LimitedModSupport;
+import mcdelta.core.support.SupportBOP;
 import mcdelta.core.support.SupportEssentialAlloys;
 import mcdelta.core.support.SupportThaumcraft;
 import mcdelta.core.support.SupportTwilightForest;
@@ -78,6 +79,7 @@ public class DeltaCore extends ModDelta
           doLimitedModSupport(new SupportEssentialAlloys());
           doLimitedModSupport(new SupportThaumcraft());
           doLimitedModSupport(new SupportTwilightForest());
+          doLimitedModSupport(new SupportBOP());
      }
      
      
