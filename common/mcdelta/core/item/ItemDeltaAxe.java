@@ -20,6 +20,6 @@ public class ItemDeltaAxe extends ItemDeltaTool
      @Override
      public float getStrVsBlock (final ItemStack stack, final Block block)
      {
-          return block != null && (block.blockMaterial == Material.wood || block.blockMaterial == Material.plants || block.blockMaterial == Material.vine) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(stack, block);
+          return block != null && (block.blockMaterial == Material.wood || block.blockMaterial == Material.plants || block.blockMaterial == Material.vine) ? efficiencyOnProperMaterial : super.getStrVsBlock(stack, block);
      }
 }

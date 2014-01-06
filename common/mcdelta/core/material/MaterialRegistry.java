@@ -69,7 +69,7 @@ public final class MaterialRegistry
      
      
      
-     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final ExtraInfo extra)
      {
           return add(delta, tool, armor, extra, null, null);
      }
@@ -77,7 +77,7 @@ public final class MaterialRegistry
      
      
      
-     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, ExtraInfo extra, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
+     public static ItemMaterial add (final DeltaInfo delta, final ToolInfo tool, final ArmorInfo armor, final ExtraInfo extra, final EnumToolMaterial toolMat, final EnumArmorMaterial armorMat)
      {
           final ItemMaterial tmp = new ItemMaterial(delta, tool, armor, extra, toolMat, armorMat);
           

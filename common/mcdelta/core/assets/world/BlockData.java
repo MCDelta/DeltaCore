@@ -41,7 +41,7 @@ public class BlockData
      @Override
      public String toString ()
      {
-          return "BlockData [ block:" + this.block.getUnlocalizedName() + ", metadata:" + this.meta + ", tile:" + this.tile + " ]";
+          return "BlockData [ block:" + block.getUnlocalizedName() + ", metadata:" + meta + ", tile:" + tile + " ]";
      }
      
      
@@ -52,9 +52,9 @@ public class BlockData
      {
           final int prime = 31;
           int result = 1;
-          result = prime * result + (this.block == null ? 0 : this.block.hashCode());
-          result = prime * result + this.meta;
-          result = prime * result + (this.tile == null ? 0 : this.tile.hashCode());
+          result = prime * result + (block == null ? 0 : block.hashCode());
+          result = prime * result + meta;
+          result = prime * result + (tile == null ? 0 : tile.hashCode());
           return result;
      }
      
@@ -78,29 +78,29 @@ public class BlockData
           }
           final BlockData other = (BlockData) obj;
           
-          if (this.block == null)
+          if (block == null)
           {
                if (other.block != null)
                {
                     return false;
                }
           }
-          else if (!this.block.equals(other.block))
+          else if (!block.equals(other.block))
           {
                return false;
           }
-          if (this.meta != other.meta)
+          if (meta != other.meta)
           {
                return false;
           }
-          if (this.tile == null)
+          if (tile == null)
           {
                if (other.tile != null)
                {
                     return false;
                }
           }
-          else if (!this.tile.equals(other.tile))
+          else if (!tile.equals(other.tile))
           {
                return false;
           }

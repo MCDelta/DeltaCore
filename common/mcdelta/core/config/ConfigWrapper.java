@@ -38,10 +38,10 @@ public class ConfigWrapper
      
      public ConfigWrapper ()
      {
-          this.blockIdStart = 1000;
-          this.itemIdStart = 5000;
-          this.enchantIdStart = 52;
-          this.potionIdStart = 0;
+          blockIdStart = 1000;
+          itemIdStart = 5000;
+          enchantIdStart = 52;
+          potionIdStart = 0;
      }
      
      
@@ -49,9 +49,9 @@ public class ConfigWrapper
      
      public ConfigWrapper (final int blockStart, final int itemStart, final int enchantStart)
      {
-          this.blockIdStart = blockStart;
-          this.itemIdStart = itemStart;
-          this.enchantIdStart = enchantStart;
+          blockIdStart = blockStart;
+          itemIdStart = itemStart;
+          enchantIdStart = enchantStart;
      }
      
      
@@ -67,7 +67,7 @@ public class ConfigWrapper
      
      public Configuration getConfiguration ()
      {
-          return this.config;
+          return config;
      }
      
      
@@ -77,23 +77,23 @@ public class ConfigWrapper
      {
           if (!blockIds.containsKey(name))
           {
-               this.load();
-               if (!this.config.hasKey(Configuration.CATEGORY_BLOCK, name))
+               load();
+               if (!config.hasKey(Configuration.CATEGORY_BLOCK, name))
                {
-                    for (int id = this.blockIdStart; id < Block.blocksList.length; ++id)
+                    for (int id = blockIdStart; id < Block.blocksList.length; ++id)
                     {
                          if (Block.blocksList[id] == null && !blockIds.containsValue(Integer.valueOf(id)))
                          {
-                              this.blockIdStart = this.blockIdStart == id ? this.blockIdStart + 1 : id;
-                              blockIds.put(name, this.config.getBlock(name, id).getInt());
+                              blockIdStart = blockIdStart == id ? blockIdStart + 1 : id;
+                              blockIds.put(name, config.getBlock(name, id).getInt());
                               break;
                          }
                     }
-                    this.save();
+                    save();
                }
                else
                {
-                    blockIds.put(name, this.config.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(name).getInt());
+                    blockIds.put(name, config.getCategory(Configuration.CATEGORY_BLOCK).getValues().get(name).getInt());
                }
           }
           return blockIds.get(name);
@@ -106,23 +106,23 @@ public class ConfigWrapper
      {
           if (!itemIds.containsKey(name))
           {
-               this.load();
-               if (!this.config.hasKey(Configuration.CATEGORY_ITEM, name))
+               load();
+               if (!config.hasKey(Configuration.CATEGORY_ITEM, name))
                {
-                    for (int id = this.itemIdStart; id < Item.itemsList.length; ++id)
+                    for (int id = itemIdStart; id < Item.itemsList.length; ++id)
                     {
                          if (Item.itemsList[id] == null && !itemIds.containsValue(Integer.valueOf(id)))
                          {
-                              this.itemIdStart = this.itemIdStart == id ? this.itemIdStart + 1 : id;
-                              itemIds.put(name, this.config.getItem(name, id).getInt());
+                              itemIdStart = itemIdStart == id ? itemIdStart + 1 : id;
+                              itemIds.put(name, config.getItem(name, id).getInt());
                               break;
                          }
                     }
-                    this.save();
+                    save();
                }
                else
                {
-                    itemIds.put(name, this.config.getCategory(Configuration.CATEGORY_ITEM).getValues().get(name).getInt());
+                    itemIds.put(name, config.getCategory(Configuration.CATEGORY_ITEM).getValues().get(name).getInt());
                }
           }
           return itemIds.get(name);
@@ -135,23 +135,23 @@ public class ConfigWrapper
      {
           if (!enchantIds.containsKey(name))
           {
-               this.load();
-               if (!this.config.hasKey(CATEGORY_ENCHANT, name))
+               load();
+               if (!config.hasKey(CATEGORY_ENCHANT, name))
                {
-                    for (int id = this.enchantIdStart; id < Enchantment.enchantmentsList.length; ++id)
+                    for (int id = enchantIdStart; id < Enchantment.enchantmentsList.length; ++id)
                     {
                          if (Enchantment.enchantmentsList[id] == null && !enchantIds.containsValue(Integer.valueOf(id)))
                          {
-                              this.enchantIdStart = this.enchantIdStart == id ? this.enchantIdStart + 1 : id;
-                              enchantIds.put(name, this.config.get(CATEGORY_ENCHANT, name, id).getInt());
+                              enchantIdStart = enchantIdStart == id ? enchantIdStart + 1 : id;
+                              enchantIds.put(name, config.get(CATEGORY_ENCHANT, name, id).getInt());
                               break;
                          }
                     }
-                    this.save();
+                    save();
                }
                else
                {
-                    enchantIds.put(name, this.config.getCategory(CATEGORY_ENCHANT).getValues().get(name).getInt());
+                    enchantIds.put(name, config.getCategory(CATEGORY_ENCHANT).getValues().get(name).getInt());
                }
           }
           return enchantIds.get(name);
@@ -164,23 +164,23 @@ public class ConfigWrapper
      {
           if (!potionIds.containsKey(name))
           {
-               this.load();
-               if (!this.config.hasKey(CATEGORY_POTION, name))
+               load();
+               if (!config.hasKey(CATEGORY_POTION, name))
                {
-                    for (int id = this.potionIdStart; id < Potion.potionTypes.length; ++id)
+                    for (int id = potionIdStart; id < Potion.potionTypes.length; ++id)
                     {
                          if (Potion.potionTypes[id] == null && !potionIds.containsValue(Integer.valueOf(id)))
                          {
-                              this.potionIdStart = this.potionIdStart == id ? this.potionIdStart + 1 : id;
-                              potionIds.put(name, this.config.get(CATEGORY_POTION, name, id).getInt());
+                              potionIdStart = potionIdStart == id ? potionIdStart + 1 : id;
+                              potionIds.put(name, config.get(CATEGORY_POTION, name, id).getInt());
                               break;
                          }
                     }
-                    this.save();
+                    save();
                }
                else
                {
-                    potionIds.put(name, this.config.getCategory(CATEGORY_POTION).getValues().get(name).getInt());
+                    potionIds.put(name, config.getCategory(CATEGORY_POTION).getValues().get(name).getInt());
                }
           }
           return potionIds.get(name);
@@ -191,7 +191,7 @@ public class ConfigWrapper
      
      public int get (final String category, final String key, final int defaultValue)
      {
-          return this.config.get(category, key, defaultValue).getInt();
+          return config.get(category, key, defaultValue).getInt();
      }
      
      
@@ -199,7 +199,7 @@ public class ConfigWrapper
      
      public boolean get (final String category, final String key, final boolean defaultValue)
      {
-          return this.config.get(category, key, defaultValue).getBoolean(defaultValue);
+          return config.get(category, key, defaultValue).getBoolean(defaultValue);
      }
      
      
@@ -207,7 +207,7 @@ public class ConfigWrapper
      
      public String get (final String category, final String key, final String defaultValue)
      {
-          return this.config.get(category, key, defaultValue).getString();
+          return config.get(category, key, defaultValue).getString();
      }
      
      
@@ -215,7 +215,7 @@ public class ConfigWrapper
      
      public Property getProperty (final String category, final String key, final int defaultValue)
      {
-          return this.config.get(category, key, defaultValue);
+          return config.get(category, key, defaultValue);
      }
      
      
@@ -223,7 +223,7 @@ public class ConfigWrapper
      
      public Property getProperty (final String category, final String key, final boolean defaultValue)
      {
-          return this.config.get(category, key, defaultValue);
+          return config.get(category, key, defaultValue);
      }
      
      
@@ -231,7 +231,7 @@ public class ConfigWrapper
      
      public Property getProperty (final String category, final String key, final String defaultValue)
      {
-          return this.config.get(category, key, defaultValue);
+          return config.get(category, key, defaultValue);
      }
      
      
@@ -239,7 +239,7 @@ public class ConfigWrapper
      
      public ConfigCategory getCategory (final String category)
      {
-          return this.config.getCategory(category);
+          return config.getCategory(category);
      }
      
      
@@ -247,7 +247,7 @@ public class ConfigWrapper
      
      public Map<?, ?> getCategoryMap (final String category)
      {
-          return this.config.getCategory(category).getValues();
+          return config.getCategory(category).getValues();
      }
      
      
@@ -255,7 +255,7 @@ public class ConfigWrapper
      
      public Set<String> getCategoryKeys (final String category)
      {
-          return this.config.getCategory(category).getValues().keySet();
+          return config.getCategory(category).getValues().keySet();
      }
      
      
@@ -263,7 +263,7 @@ public class ConfigWrapper
      
      public boolean hasCategory (final String category)
      {
-          return this.config.hasCategory(category);
+          return config.hasCategory(category);
      }
      
      
@@ -271,7 +271,7 @@ public class ConfigWrapper
      
      public boolean hasKey (final String category, final String key)
      {
-          return this.config.hasKey(category, key);
+          return config.hasKey(category, key);
      }
      
      
@@ -279,7 +279,7 @@ public class ConfigWrapper
      
      public void save ()
      {
-          this.config.save();
+          config.save();
      }
      
      
@@ -287,7 +287,7 @@ public class ConfigWrapper
      
      public void load ()
      {
-          this.config.load();
+          config.load();
      }
      
      
@@ -295,53 +295,53 @@ public class ConfigWrapper
      
      public boolean renameProperty (final String category, final String key, final String newCategory, final String newKey, final boolean forceValue)
      {
-          if (this.config.hasKey(category, key))
+          if (config.hasKey(category, key))
           {
-               final Property prop = this.config.getCategory(category).get(key);
+               final Property prop = config.getCategory(category).get(key);
                
                if (prop.isIntValue())
                {
-                    final int value = this.config.getCategory(category).getValues().get(key).getInt();
-                    this.removeProperty(category, key);
+                    final int value = config.getCategory(category).getValues().get(key).getInt();
+                    removeProperty(category, key);
                     
                     if (forceValue)
                     {
-                         this.removeProperty(newCategory, newKey);
+                         removeProperty(newCategory, newKey);
                     }
-                    this.config.get(newCategory, newKey, value);
+                    config.get(newCategory, newKey, value);
                }
                else if (prop.isBooleanValue())
                {
-                    final boolean value = this.config.getCategory(category).getValues().get(key).getBoolean(false);
-                    this.removeProperty(category, key);
+                    final boolean value = config.getCategory(category).getValues().get(key).getBoolean(false);
+                    removeProperty(category, key);
                     
                     if (forceValue)
                     {
-                         this.removeProperty(newCategory, newKey);
+                         removeProperty(newCategory, newKey);
                     }
-                    this.config.get(newCategory, newKey, value);
+                    config.get(newCategory, newKey, value);
                }
                else if (prop.isDoubleValue())
                {
-                    final double value = this.config.getCategory(category).getValues().get(key).getDouble(0.0);
-                    this.removeProperty(category, key);
+                    final double value = config.getCategory(category).getValues().get(key).getDouble(0.0);
+                    removeProperty(category, key);
                     
                     if (forceValue)
                     {
-                         this.removeProperty(newCategory, newKey);
+                         removeProperty(newCategory, newKey);
                     }
-                    this.config.get(newCategory, newKey, value);
+                    config.get(newCategory, newKey, value);
                }
                else
                {
-                    final String value = this.config.getCategory(category).getValues().get(key).getString();
-                    this.removeProperty(category, key);
+                    final String value = config.getCategory(category).getValues().get(key).getString();
+                    removeProperty(category, key);
                     
                     if (forceValue)
                     {
-                         this.removeProperty(newCategory, newKey);
+                         removeProperty(newCategory, newKey);
                     }
-                    this.config.get(newCategory, newKey, value);
+                    config.get(newCategory, newKey, value);
                }
                return true;
           }
@@ -353,11 +353,11 @@ public class ConfigWrapper
      
      public boolean removeProperty (final String category, final String key)
      {
-          if (!this.config.hasKey(category, key))
+          if (!config.hasKey(category, key))
           {
                return false;
           }
-          this.config.getCategory(category).remove(key);
+          config.getCategory(category).remove(key);
           return true;
      }
      
@@ -366,15 +366,15 @@ public class ConfigWrapper
      
      public boolean renameCategory (final String category, final String newCategory)
      {
-          if (!this.config.hasCategory(category))
+          if (!config.hasCategory(category))
           {
                return false;
           }
-          for (final Property prop : this.config.getCategory(category).values())
+          for (final Property prop : config.getCategory(category).values())
           {
-               this.renameProperty(category, prop.getName(), newCategory, prop.getName(), true);
+               renameProperty(category, prop.getName(), newCategory, prop.getName(), true);
           }
-          this.removeCategory(category);
+          removeCategory(category);
           return true;
      }
      
@@ -383,11 +383,11 @@ public class ConfigWrapper
      
      public boolean removeCategory (final String category)
      {
-          if (!this.config.hasCategory(category))
+          if (!config.hasCategory(category))
           {
                return false;
           }
-          this.config.removeCategory(this.config.getCategory(category));
+          config.removeCategory(config.getCategory(category));
           return true;
      }
 }

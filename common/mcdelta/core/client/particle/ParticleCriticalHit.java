@@ -37,22 +37,22 @@ public class ParticleCriticalHit extends EntityFX
      {
           super(world, x, y, z);
           
-          this.worldObj = world;
+          worldObj = world;
           
-          this.posX = x;
-          this.posY = y;
-          this.posZ = z;
+          posX = x;
+          posY = y;
+          posZ = z;
           
-          this.particleRed = r;
-          this.particleGreen = g;
-          this.particleBlue = b;
+          particleRed = r;
+          particleGreen = g;
+          particleBlue = b;
           
-          this.maximumLife = maxLife;
-          this.particlePerTick = ppt;
+          maximumLife = maxLife;
+          particlePerTick = ppt;
           
-          this.theEntity = target;
+          theEntity = target;
           
-          this.isMagic = magic;
+          isMagic = magic;
      }
      
      
@@ -61,33 +61,33 @@ public class ParticleCriticalHit extends EntityFX
      @Override
      public void onUpdate ()
      {
-          for (int i = 0; i < this.particlePerTick; ++i)
+          for (int i = 0; i < particlePerTick; ++i)
           {
-               final double d0 = this.rand.nextFloat() * 2.0F - 1.0F;
-               final double d1 = this.rand.nextFloat() * 2.0F - 1.0F;
-               final double d2 = this.rand.nextFloat() * 2.0F - 1.0F;
+               final double d0 = rand.nextFloat() * 2.0F - 1.0F;
+               final double d1 = rand.nextFloat() * 2.0F - 1.0F;
+               final double d2 = rand.nextFloat() * 2.0F - 1.0F;
                
                if (d0 * d0 + d1 * d1 + d2 * d2 <= 1.0D)
                {
-                    final double d3 = this.theEntity.posX + d0 * this.theEntity.width / 4.0D;
-                    final double d4 = this.theEntity.boundingBox.minY + this.theEntity.height / 2.0F + d1 * this.theEntity.height / 4.0D;
-                    final double d5 = this.theEntity.posZ + d2 * this.theEntity.width / 4.0D;
+                    final double d3 = theEntity.posX + d0 * theEntity.width / 4.0D;
+                    final double d4 = theEntity.boundingBox.minY + theEntity.height / 2.0F + d1 * theEntity.height / 4.0D;
+                    final double d5 = theEntity.posZ + d2 * theEntity.width / 4.0D;
                     
-                    final EntityFX fx = new EntityCritFX(this.worldObj, d3, d4, d5, d0, d1 + 0.2D, d2);
-                    fx.setRBGColorF(this.particleRed, this.particleGreen, this.particleBlue);
+                    final EntityFX fx = new EntityCritFX(worldObj, d3, d4, d5, d0, d1 + 0.2D, d2);
+                    fx.setRBGColorF(particleRed, particleGreen, particleBlue);
                     
-                    if (this.isMagic)
+                    if (isMagic)
                     {
                          fx.nextTextureIndexX();
                     }
                     Minecraft.getMinecraft().effectRenderer.addEffect(fx);
                }
           }
-          ++this.currentLife;
+          ++currentLife;
           
-          if (this.currentLife >= this.maximumLife)
+          if (currentLife >= maximumLife)
           {
-               this.setDead();
+               setDead();
           }
      }
      

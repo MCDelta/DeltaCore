@@ -38,23 +38,23 @@ public class DeltaCore extends ModDelta
      // - camo creeper
      // - timed potion to prevent potion effects
      
-     public static final String            MOD_ID               = "deltacore";
+     public static final String  MOD_ID               = "deltacore";
      
      @Instance (MOD_ID)
-     public static DeltaCore               instance;
+     public static DeltaCore     instance;
      
      @SidedProxy (clientSide = "mcdelta.core.proxy.ClientProxy", serverSide = "mcdelta.core.proxy.CommonProxy")
-     public static CommonProxy             proxy;
+     public static CommonProxy   proxy;
      
-     public static StringBuilder           localizationWarnings = new StringBuilder();
+     public static StringBuilder localizationWarnings = new StringBuilder();
      
-     public static Random                  rand                 = new Random();
+     public static Random        rand                 = new Random();
      
      
      
      
      @Override
-     public void deltaInit (FMLPreInitializationEvent event)
+     public void deltaInit (final FMLPreInitializationEvent event)
      {
           this.init(event, new CoreConfig());
      }
@@ -104,7 +104,7 @@ public class DeltaCore extends ModDelta
           
           proxy.registerRenderers();
           
-          for(LimitedModSupport support : limitedSupport)
+          for (final LimitedModSupport support : limitedSupport)
           {
                support.postInit();
           }
@@ -112,10 +112,6 @@ public class DeltaCore extends ModDelta
           CompatibilityHandler.init();
      }
      
-     
-     
-     
-
      
      private final IContent content = new DeltaContent();
      
@@ -125,7 +121,7 @@ public class DeltaCore extends ModDelta
      @Override
      public IContent content ()
      {
-          return this.content;
+          return content;
      }
      
      

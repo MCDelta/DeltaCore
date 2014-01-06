@@ -29,7 +29,7 @@ public final class DeltaInfo
      
      public String name ()
      {
-          return this.name;
+          return name;
      }
      
      
@@ -37,7 +37,7 @@ public final class DeltaInfo
      
      public int color ()
      {
-          return this.color;
+          return color;
      }
      
      
@@ -45,7 +45,7 @@ public final class DeltaInfo
      
      public String oreName ()
      {
-          return this.ore;
+          return ore;
      }
      
      
@@ -53,7 +53,7 @@ public final class DeltaInfo
      
      public boolean needsTools ()
      {
-          return this.needsTools;
+          return needsTools;
      }
      
      
@@ -61,7 +61,7 @@ public final class DeltaInfo
      
      public boolean needsWeapons ()
      {
-          return this.needsWeapons;
+          return needsWeapons;
      }
      
      
@@ -69,7 +69,7 @@ public final class DeltaInfo
      
      public boolean needsArmor ()
      {
-          return this.needsArmor;
+          return needsArmor;
      }
      
      
@@ -77,6 +77,6 @@ public final class DeltaInfo
      
      public boolean defaultShiny ()
      {
-          return this.defaultShiny;
+          return defaultShiny;
      }
 }

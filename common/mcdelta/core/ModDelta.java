@@ -24,7 +24,7 @@ public abstract class ModDelta
      
      public ModContainer mod ()
      {
-          return Loader.instance().getIndexedModList().get(this.id());
+          return Loader.instance().getIndexedModList().get(id());
      }
      
      
@@ -40,7 +40,7 @@ public abstract class ModDelta
      
      public String name ()
      {
-          return this.mod().getName();
+          return mod().getName();
      }
      
      
@@ -48,7 +48,7 @@ public abstract class ModDelta
      
      public String version ()
      {
-          return this.mod().getVersion();
+          return mod().getVersion();
      }
      
      
@@ -56,7 +56,7 @@ public abstract class ModDelta
      
      public ConfigWrapper config ()
      {
-          return this.config;
+          return config;
      }
      
      
@@ -80,13 +80,13 @@ public abstract class ModDelta
           // Get all the files
           final File configFolder = new File(evt.getModConfigurationDirectory().getAbsolutePath() + "/MCDelta/");
           configFolder.mkdirs();
-          final File configFile = new File(configFolder.getAbsolutePath() + "/" + this.name() + ".cfg");
+          final File configFile = new File(configFolder.getAbsolutePath() + "/" + name() + ".cfg");
           
           // Create the config handler
-          this.config = new ConfigWrapper();
+          config = new ConfigWrapper();
           
           // Set the Configuration inside the Handler
-          this.config.setConfiguration(new Configuration(configFile, true));
+          config.setConfiguration(new Configuration(configFile, true));
      }
      
      
@@ -103,7 +103,7 @@ public abstract class ModDelta
      /**
       * THIS SHOULD ONLY BE CALLED BY DELTA CORE
       */
-     protected static void loadDeltaMods (FMLPreInitializationEvent event)
+     protected static void loadDeltaMods (final FMLPreInitializationEvent event)
      {
           for (final ModContainer mod : Loader.instance().getIndexedModList().values())
           {
@@ -123,7 +123,7 @@ public abstract class ModDelta
      
      protected void init (final FMLPreInitializationEvent evt, final IConfig config)
      {
-          this.initConfig(evt);
+          initConfig(evt);
           if (config != null)
           {
                config.init(this.config);

@@ -35,8 +35,8 @@ public class PacketDelta
           
           try
           {
-               dos.writeByte(this.type);
-               this.writeData(dos);
+               dos.writeByte(type);
+               writeData(dos);
           }
           catch (final IOException e)
           {
@@ -52,7 +52,7 @@ public class PacketDelta
      {
           try
           {
-               this.readData(data);
+               readData(data);
           }
           catch (final IOException e)
           {

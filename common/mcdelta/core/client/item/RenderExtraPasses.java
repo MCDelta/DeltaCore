@@ -61,7 +61,7 @@ public class RenderExtraPasses implements IItemRenderer
           
           if (type == ItemRenderType.INVENTORY)
           {
-               RenderAssets.renderItemInventory(stack, engine, passes, icons, colors, shiny, this.zLevel);
+               RenderAssets.renderItemInventory(stack, engine, passes, icons, colors, shiny, zLevel);
           }
           if (type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON)
           {

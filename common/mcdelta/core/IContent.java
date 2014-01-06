@@ -15,9 +15,9 @@ public interface IContent
      
      
      void addRecipes ();
-
-
-
-
+     
+     
+     
+     
      void addMaterialBasedRecipes (ItemMaterial tmp);
 }

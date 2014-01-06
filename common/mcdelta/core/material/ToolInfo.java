@@ -25,7 +25,7 @@ public final class ToolInfo
      
      public int harvestLvL ()
      {
-          return this.harvest;
+          return harvest;
      }
      
      
@@ -33,7 +33,7 @@ public final class ToolInfo
      
      public int maxUses ()
      {
-          return this.uses;
+          return uses;
      }
      
      
@@ -41,7 +41,7 @@ public final class ToolInfo
      
      public float efficiency ()
      {
-          return this.efficiency;
+          return efficiency;
      }
      
      
@@ -49,7 +49,7 @@ public final class ToolInfo
      
      public float damageVsEntity ()
      {
-          return this.damage;
+          return damage;
      }
      
      
@@ -57,6 +57,6 @@ public final class ToolInfo
      
      public int enchantability ()
      {
-          return this.enchant;
+          return enchant;
      }
 }

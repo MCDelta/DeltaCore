@@ -35,7 +35,7 @@ public class Position
           this.x = x;
           this.y = y;
           this.z = z;
-          this.dimensionID = dimID;
+          dimensionID = dimID;
      }
      
      
@@ -43,7 +43,7 @@ public class Position
      
      public int getMeta ()
      {
-          return this.world.getBlockMetadata(this.x, this.y, this.z);
+          return world.getBlockMetadata(x, y, z);
      }
      
      
@@ -51,7 +51,7 @@ public class Position
      
      public Position move (final EnumFacing facing)
      {
-          return new Position(this.world, this.x + facing.getFrontOffsetX(), this.y + facing.getFrontOffsetY(), this.z + facing.getFrontOffsetZ(), this.dimensionID);
+          return new Position(world, x + facing.getFrontOffsetX(), y + facing.getFrontOffsetY(), z + facing.getFrontOffsetZ(), dimensionID);
      }
      
      
@@ -59,7 +59,7 @@ public class Position
      
      public Position move (final int i, final int j, final int k)
      {
-          return new Position(this.world, this.x + i, this.y + j, this.z + k, this.dimensionID);
+          return new Position(world, x + i, y + j, z + k, dimensionID);
      }
      
      
@@ -71,7 +71,7 @@ public class Position
           {
                return null;
           }
-          return new BlockData(this.getBlock(), this.getMeta(), this.getTile());
+          return new BlockData(getBlock(), getMeta(), getTile());
      }
      
      
@@ -79,7 +79,7 @@ public class Position
      
      public Block getBlock ()
      {
-          return Block.blocksList[this.world.getBlockId(this.x, this.y, this.z)];
+          return Block.blocksList[world.getBlockId(x, y, z)];
      }
      
      
@@ -87,7 +87,7 @@ public class Position
      
      public TileEntity getTile ()
      {
-          return this.world.getBlockTileEntity(this.x, this.y, this.z);
+          return world.getBlockTileEntity(x, y, z);
      }
      
      
@@ -96,7 +96,7 @@ public class Position
      @Override
      public String toString ()
      {
-          return "Position [ x:" + this.x + ", y:" + this.y + ", z:" + this.z + ", dimension:" + this.dimensionID + " ]";
+          return "Position [ x:" + x + ", y:" + y + ", z:" + z + ", dimension:" + dimensionID + " ]";
      }
      
      
@@ -104,7 +104,7 @@ public class Position
      
      public Position copy ()
      {
-          return new Position(this.world, this.x, this.y, this.z, this.dimensionID);
+          return new Position(world, x, y, z, dimensionID);
      }
      
      
@@ -112,11 +112,11 @@ public class Position
      
      public boolean isNormalCube ()
      {
-          if (this.world instanceof World)
+          if (world instanceof World)
           {
                final World world = (World) this.world;
                
-               return this.getBlock().isBlockNormalCube(world, this.x, this.y, this.z);
+               return getBlock().isBlockNormalCube(world, x, y, z);
           }
           Logger.log(Level.SEVERE, "[ isNormalCube() ]" + Assets.worldAccessError, this);
           

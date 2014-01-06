@@ -31,11 +31,11 @@ public class FXItemBreak extends EntityFX
      public FXItemBreak (final World world, final double x, final double y, final double z, final ItemStack item, final int damage)
      {
           super(world, x, y, z, 0.0D, 0.0D, 0.0D);
-          this.stack = item;
-          this.setParticleIcon(this.stack.getItem().getIconFromDamage(damage));
-          this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
-          this.particleGravity = Block.blockSnow.blockParticleGravity;
-          this.particleScale /= 2.0F;
+          stack = item;
+          setParticleIcon(stack.getItem().getIconFromDamage(damage));
+          particleRed = particleGreen = particleBlue = 1.0F;
+          particleGravity = Block.blockSnow.blockParticleGravity;
+          particleScale /= 2.0F;
      }
      
      
@@ -67,43 +67,43 @@ public class FXItemBreak extends EntityFX
      @Override
      public void renderParticle (final Tessellator tessellator, final float pt, final float x, final float y, final float z, final float rotationA, final float rotationB)
      {
-          float f6 = (this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;
+          float f6 = (particleTextureIndexX + particleTextureJitterX / 4.0F) / 16.0F;
           float f7 = f6 + 0.015609375F;
-          float f8 = (this.particleTextureIndexY + this.particleTextureJitterY / 4.0F) / 16.0F;
+          float f8 = (particleTextureIndexY + particleTextureJitterY / 4.0F) / 16.0F;
           float f9 = f8 + 0.015609375F;
-          final float f10 = 0.1F * this.particleScale;
+          final float f10 = 0.1F * particleScale;
           
           final int passes = 1;
           
           final Icon[] icons = new Icon[passes];
-          icons[0] = this.stack.getItem().getIconFromDamage(this.stack.getItemDamage());
+          icons[0] = stack.getItem().getIconFromDamage(stack.getItemDamage());
           
           final int[] colors = new int[passes];
           colors[0] = 0xffffff;
           
-          if (this.stack.getItem() instanceof IExtraPasses && this.stack.getItem() instanceof ItemWeapon)
+          if (stack.getItem() instanceof IExtraPasses && stack.getItem() instanceof ItemWeapon)
           {
                for (int i = 0; i < passes; i++)
                {
-                    icons[i] = ((IExtraPasses) this.stack.getItem()).getIconFromPass(this.stack, i + 1);
+                    icons[i] = ((IExtraPasses) stack.getItem()).getIconFromPass(stack, i + 1);
                }
                for (int i = 0; i < passes; i++)
                {
-                    colors[i] = ((IExtraPasses) this.stack.getItem()).getColorFromPass(this.stack, i + 1);
+                    colors[i] = ((IExtraPasses) stack.getItem()).getColorFromPass(stack, i + 1);
                }
           }
           for (int i = 0; i < passes; i++)
           {
                if (icons[i] != null)
                {
-                    f6 = icons[i].getInterpolatedU(this.particleTextureJitterX / 4.0F * 16.0F);
-                    f7 = icons[i].getInterpolatedU((this.particleTextureJitterX + 1.0F) / 4.0F * 16.0F);
-                    f8 = icons[i].getInterpolatedV(this.particleTextureJitterY / 4.0F * 16.0F);
-                    f9 = icons[i].getInterpolatedV((this.particleTextureJitterY + 1.0F) / 4.0F * 16.0F);
+                    f6 = icons[i].getInterpolatedU(particleTextureJitterX / 4.0F * 16.0F);
+                    f7 = icons[i].getInterpolatedU((particleTextureJitterX + 1.0F) / 4.0F * 16.0F);
+                    f8 = icons[i].getInterpolatedV(particleTextureJitterY / 4.0F * 16.0F);
+                    f9 = icons[i].getInterpolatedV((particleTextureJitterY + 1.0F) / 4.0F * 16.0F);
                }
-               final float f11 = (float) (this.prevPosX + (this.posX - this.prevPosX) * pt - interpPosX);
-               final float f12 = (float) (this.prevPosY + (this.posY - this.prevPosY) * pt - interpPosY);
-               final float f13 = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * pt - interpPosZ);
+               final float f11 = (float) (prevPosX + (posX - prevPosX) * pt - interpPosX);
+               final float f12 = (float) (prevPosY + (posY - prevPosY) * pt - interpPosY);
+               final float f13 = (float) (prevPosZ + (posZ - prevPosZ) * pt - interpPosZ);
                final float f14 = 1.0F;
                
                final float[] rgb = Assets.hexToRGB(colors[i]);

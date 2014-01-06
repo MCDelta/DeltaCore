@@ -30,12 +30,12 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
           super(mod.config().getItemID(getArmorType(type) + "." + mat.name().toLowerCase()), mat.getArmorMaterial(), 1, type);
           
           this.mod = mod;
-          this.name = getArmorType(type) + "." + mat.name().toLowerCase();
-          final String unlocalized = mod.id().toLowerCase() + ":" + this.name;
-          this.setUnlocalizedName(unlocalized);
-          this.setCreativeTab(CreativeTabs.tabCombat);
+          name = getArmorType(type) + "." + mat.name().toLowerCase();
+          final String unlocalized = mod.id().toLowerCase() + ":" + name;
+          setUnlocalizedName(unlocalized);
+          setCreativeTab(CreativeTabs.tabCombat);
           
-          this.itemMaterial = mat;
+          itemMaterial = mat;
           
           if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))
           {
@@ -77,7 +77,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public Icon getIconFromPass (final ItemStack stack, final int pass)
      {
-          return this.itemIcon;
+          return itemIcon;
      }
      
      
@@ -86,7 +86,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
-          return this.itemMaterial.color();
+          return itemMaterial.color();
      }
      
      
@@ -95,7 +95,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          return this.itemMaterial.defaultShiny();
+          return itemMaterial.defaultShiny();
      }
      
      
@@ -104,9 +104,9 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
+          if (OreDictionary.getOres(itemMaterial.oreName()) != null && !OreDictionary.getOres(itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -119,7 +119,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      public void registerIcons (final IconRegister register)
      {
           super.registerIcons(register);
-          this.itemIcon = ItemDelta.doRegister("deltacore", "armor_" + this.armorType, register);
+          itemIcon = ItemDelta.doRegister("deltacore", "armor_" + armorType, register);
      }
      
      

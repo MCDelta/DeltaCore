@@ -11,7 +11,7 @@ public class TileEntityDelta extends TileEntity
 {
      public Position getPosition ()
      {
-          return new Position(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+          return new Position(worldObj, xCoord, yCoord, zCoord);
      }
      
      
@@ -21,8 +21,8 @@ public class TileEntityDelta extends TileEntity
      public Packet getDescriptionPacket ()
      {
           final NBTTagCompound nbt = new NBTTagCompound();
-          this.writeToNBT(nbt);
-          return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
+          writeToNBT(nbt);
+          return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, nbt);
      }
      
      
@@ -31,6 +31,6 @@ public class TileEntityDelta extends TileEntity
      @Override
      public void onDataPacket (final INetworkManager net, final Packet132TileEntityData packet)
      {
-          this.readFromNBT(packet.data);
+          readFromNBT(packet.data);
      }
 }

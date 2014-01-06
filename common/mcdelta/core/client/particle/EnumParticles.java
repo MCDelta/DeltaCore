@@ -86,19 +86,19 @@ public enum EnumParticles
                case CRITICAL_HIT:
                     if (!entities.isEmpty())
                     {
-                         this.spawnParticle(world, x, y, z, entities.get(0), 0xAB3D3D, 1, 20, false);
+                         spawnParticle(world, x, y, z, entities.get(0), 0xAB3D3D, 1, 20, false);
                     }
                     break;
                case CRITICAL_HIT_NORMAL:
                     if (!entities.isEmpty())
                     {
-                         this.spawnParticle(world, x, y, z, entities.get(0), 0xffffff, 1, 20, false);
+                         spawnParticle(world, x, y, z, entities.get(0), 0xffffff, 1, 20, false);
                     }
                     break;
                case ITEM_BREAK:
                     if (!entities.isEmpty())
                     {
-                         this.spawnParticle(world, x, y, z, entities.get(0), player.getHeldItem(), 2, 6);
+                         spawnParticle(world, x, y, z, entities.get(0), player.getHeldItem(), 2, 6);
                     }
                     break;
                default:

@@ -16,13 +16,13 @@ public class ParticleHammerSmash extends EntityFX
      {
           super(world, x, y, z);
           
-          this.worldObj = world;
+          worldObj = world;
           
-          this.posX = x;
-          this.posY = y;
-          this.posZ = z;
+          posX = x;
+          posY = y;
+          posZ = z;
           
-          this.radius = radi;
+          radius = radi;
      }
      
      
@@ -33,15 +33,15 @@ public class ParticleHammerSmash extends EntityFX
      {
           for (int i = 0; i < 150; ++i)
           {
-               final double xOffset = this.rand.nextInt(this.radius * 2) - this.radius + this.rand.nextDouble();
-               final double yOffset = this.rand.nextDouble();
-               final double zOffset = this.rand.nextInt(this.radius * 2) - this.radius + this.rand.nextDouble();
+               final double xOffset = rand.nextInt(radius * 2) - radius + rand.nextDouble();
+               final double yOffset = rand.nextDouble();
+               final double zOffset = rand.nextInt(radius * 2) - radius + rand.nextDouble();
                
                final double motionX = xOffset;
                final double motionY = yOffset;
                final double motionZ = zOffset;
                
-               final int id = this.worldObj.getBlockId((int) (this.posX + xOffset), (int) this.posY - 1, (int) (this.posZ + zOffset));
+               final int id = worldObj.getBlockId((int) (posX + xOffset), (int) posY - 1, (int) (posZ + zOffset));
                boolean flag = true;
                
                if (id == 0)
@@ -50,27 +50,27 @@ public class ParticleHammerSmash extends EntityFX
                }
                if (flag)
                {
-                    this.worldObj.spawnParticle("tilecrack_" + id + "_0", this.posX + xOffset, this.posY + yOffset, this.posZ + zOffset, motionX, motionY, motionZ);
+                    worldObj.spawnParticle("tilecrack_" + id + "_0", posX + xOffset, posY + yOffset, posZ + zOffset, motionX, motionY, motionZ);
                }
           }
           
-          if (this.currentLife == this.maximumLife)
+          if (currentLife == maximumLife)
           {
                for (int i = 0; i < 10; ++i)
                {
                     final int radiusClose = 2;
                     
-                    final double xOffset = this.rand.nextInt(radiusClose * 2) - radiusClose;
-                    final double zOffset = this.rand.nextInt(radiusClose * 2) - radiusClose;
+                    final double xOffset = rand.nextInt(radiusClose * 2) - radiusClose;
+                    final double zOffset = rand.nextInt(radiusClose * 2) - radiusClose;
                     
-                    this.worldObj.spawnParticle("cloud", this.posX + xOffset, this.posY, this.posZ + zOffset, 0, 0, 0);
+                    worldObj.spawnParticle("cloud", posX + xOffset, posY, posZ + zOffset, 0, 0, 0);
                }
           }
-          ++this.currentLife;
+          ++currentLife;
           
-          if (this.currentLife >= this.maximumLife)
+          if (currentLife >= maximumLife)
           {
-               this.setDead();
+               setDead();
           }
      }
      

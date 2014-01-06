@@ -26,8 +26,8 @@ public class RenderThrownItem extends Render
      
      public RenderThrownItem (final Item par1Item, final int x)
      {
-          this.item = par1Item;
-          this.damage = x;
+          item = par1Item;
+          damage = x;
      }
      
      
@@ -44,7 +44,7 @@ public class RenderThrownItem extends Render
      @Override
      public void doRender (final Entity entity, final double x, final double y, final double z, final float par8, final float par9)
      {
-          final Icon icon = this.item.getIconFromDamage(this.damage);
+          final Icon icon = item.getIconFromDamage(damage);
           
           if (icon != null)
           {
@@ -53,10 +53,10 @@ public class RenderThrownItem extends Render
                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                GL11.glScalef(0.5F, 0.5F, 0.5F);
                
-               GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-               GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+               GL11.glRotatef(180.0F - renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+               GL11.glRotatef(-renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
                
-               RenderAssets.renderItemInWorld(new ItemStack(this.item), icon);
+               RenderAssets.renderItemInWorld(new ItemStack(item), icon);
                
                GL11.glPopMatrix();
           }

@@ -38,10 +38,10 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      public ItemDeltaHoe (final ModDelta mod, final ItemMaterial mat)
      {
           super(mod, mat.name() + ".hoe");
-          this.itemMaterial = mat;
-          this.maxStackSize = 1;
-          this.setMaxDamage(mat.maxUses());
-          this.setCreativeTab(CreativeTabs.tabTools);
+          itemMaterial = mat;
+          maxStackSize = 1;
+          setMaxDamage(mat.maxUses());
+          setCreativeTab(CreativeTabs.tabTools);
           
           ClientProxy.extraPasses.add(this);
      }
@@ -52,14 +52,14 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public void registerIcons (final IconRegister register)
      {
-          this.itemIcon = doRegister("deltacore", "hoe" + "_1", register);
-          this.itemOverlay = doRegister("deltacore", "hoe" + "_2", register);
+          itemIcon = doRegister("deltacore", "hoe" + "_1", register);
+          itemOverlay = doRegister("deltacore", "hoe" + "_2", register);
           
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_hoe.png"));
+          overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_hoe.png"));
           
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.name().toLowerCase() + "_hoe", register);
+               overrideIcon = this.doRegister("/override/" + itemMaterial.name().toLowerCase() + "_hoe", register);
           }
      }
      
@@ -69,7 +69,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public int getPasses (final ItemStack stack)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 1;
           }
@@ -82,15 +82,15 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public Icon getIconFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               return this.overrideIcon;
+               return overrideIcon;
           }
           if (pass == 2)
           {
-               return this.itemOverlay;
+               return itemOverlay;
           }
-          return this.itemIcon;
+          return itemIcon;
      }
      
      
@@ -99,7 +99,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 0xffffff;
           }
@@ -107,7 +107,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
           {
                return MaterialRegistry.WOOD.color();
           }
-          return this.itemMaterial.color();
+          return itemMaterial.color();
      }
      
      
@@ -116,7 +116,7 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.itemMaterial.defaultShiny())
+          if (pass == 1 && itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -177,6 +177,6 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      
      public String getMaterialName ()
      {
-          return this.itemMaterial.name();
+          return itemMaterial.name();
      }
 }

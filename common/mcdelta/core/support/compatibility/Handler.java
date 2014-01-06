@@ -29,7 +29,7 @@ final class Handler
      public void init ()
      {
           // Check if the API is loaded
-          if (Loader.isModLoaded(this.name))
+          if (Loader.isModLoaded(name))
           {
                // Create the temporal variables for internal usage
                Class<? extends ICompatibility> tmpHandler = null;
@@ -38,11 +38,11 @@ final class Handler
                try
                {
                     // Try to find the Handler Class
-                    tmpHandler = (Class<? extends ICompatibility>) Class.forName(this.handler, false, Loader.instance().getModClassLoader());
+                    tmpHandler = (Class<? extends ICompatibility>) Class.forName(handler, false, Loader.instance().getModClassLoader());
                }
                catch (final ClassNotFoundException e)
                {
-                    Logger.severe(e, String.format("MCDelta has failed to find a compatibility class with %s, please inform the MCDelta team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to find a compatibility class with %s, please inform the MCDelta team", name));
                     return;
                }
                try
@@ -52,7 +52,7 @@ final class Handler
                }
                catch (final Exception e)
                {
-                    Logger.severe(e, String.format("MCDelta has failed to create a new instance of a compatibility with %s, please inform the MCDelta Team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to create a new instance of a compatibility with %s, please inform the MCDelta Team", name));
                     return;
                }
                try
@@ -62,7 +62,7 @@ final class Handler
                }
                catch (final Exception e)
                {
-                    Logger.severe(e, String.format("MCDelta has failed to load a compatibility with %s, please inform the MCDelta team", this.name));
+                    Logger.severe(e, String.format("MCDelta has failed to load a compatibility with %s, please inform the MCDelta team", name));
                     return;
                }
           }

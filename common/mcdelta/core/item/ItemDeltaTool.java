@@ -56,14 +56,14 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      public ItemDeltaTool (final ModDelta mod, final String name, final ItemMaterial mat, final Block[] effective, final float damage, final boolean b)
      {
           super(mod, mat.name() + "." + name, b);
-          this.itemMaterial = mat;
-          this.toolName = name;
-          this.blocksEffectiveAgainst = effective;
-          this.maxStackSize = 1;
-          this.setMaxDamage(mat.maxUses());
-          this.efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
-          this.damageVsEntity = damage + mat.getDamageVsEntity();
-          this.setCreativeTab(CreativeTabs.tabTools);
+          itemMaterial = mat;
+          toolName = name;
+          blocksEffectiveAgainst = effective;
+          maxStackSize = 1;
+          setMaxDamage(mat.maxUses());
+          efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
+          damageVsEntity = damage + mat.getDamageVsEntity();
+          setCreativeTab(CreativeTabs.tabTools);
      }
      
      
@@ -72,14 +72,14 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public void registerIcons (final IconRegister register)
      {
-          this.itemIcon = doRegister("deltacore", this.toolName + "_1", register);
-          this.itemOverlay = doRegister("deltacore", this.toolName + "_2", register);
+          itemIcon = doRegister("deltacore", toolName + "_1", register);
+          itemOverlay = doRegister("deltacore", toolName + "_2", register);
           
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName + ".png"));
+          overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_" + toolName + ".png"));
           
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               this.overrideIcon = this.doRegister("/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName, register);
+               overrideIcon = this.doRegister("/override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
           }
      }
      
@@ -89,7 +89,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public int getPasses (final ItemStack stack)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 1;
           }
@@ -102,15 +102,15 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public Icon getIconFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               return this.overrideIcon;
+               return overrideIcon;
           }
           if (pass == 2)
           {
-               return this.itemOverlay;
+               return itemOverlay;
           }
-          return this.itemIcon;
+          return itemIcon;
      }
      
      
@@ -119,20 +119,20 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 0xffffff;
           }
           if (pass == 2)
           {
-               if(itemMaterial.nonStickCrafter() != null)
+               if (itemMaterial.nonStickCrafter() != null)
                {
                     return itemMaterial.nonStickCrafter().getValue();
                }
                
                return MaterialRegistry.WOOD.color();
           }
-          return this.itemMaterial.color();
+          return itemMaterial.color();
      }
      
      
@@ -141,7 +141,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.itemMaterial.defaultShiny())
+          if (pass == 1 && itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -154,11 +154,11 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public float getStrVsBlock (final ItemStack stack, final Block block)
      {
-          for (final Block element : this.blocksEffectiveAgainst)
+          for (final Block element : blocksEffectiveAgainst)
           {
                if (element == block)
                {
-                    return this.efficiencyOnProperMaterial;
+                    return efficiencyOnProperMaterial;
                }
           }
           return 1.0F;
@@ -203,7 +203,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public int getItemEnchantability ()
      {
-          return this.itemMaterial.enchantability();
+          return itemMaterial.enchantability();
      }
      
      
@@ -211,7 +211,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      public String getToolMaterialName ()
      {
-          return this.itemMaterial.toString();
+          return itemMaterial.toString();
      }
      
      
@@ -220,9 +220,9 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
+          if (OreDictionary.getOres(itemMaterial.oreName()) != null && !OreDictionary.getOres(itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -234,7 +234,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      public Multimap<String, AttributeModifier> getItemAttributeModifiers ()
      {
           final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
-          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
+          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", damageVsEntity, 0));
           return multimap;
      }
      
@@ -246,7 +246,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      {
           if (ForgeHooks.isToolEffective(stack, block, meta))
           {
-               return this.efficiencyOnProperMaterial;
+               return efficiencyOnProperMaterial;
           }
           return this.getStrVsBlock(stack, block);
      }
@@ -257,9 +257,9 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public String getItemDisplayName (final ItemStack stack)
      {
-          final ItemMaterial mat = this.itemMaterial;
+          final ItemMaterial mat = itemMaterial;
           
-          final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
+          final String weapon = StatCollector.translateToLocal("tool." + toolName);
           final String material = StatCollector.translateToLocal("material." + mat.name());
           
           return mat.getNameColor() + material + " " + weapon;
@@ -268,12 +268,15 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      
      
+     @Override
      @SideOnly (Side.CLIENT)
-     public void getSubItems (int id, CreativeTabs tab, List list)
+     public void getSubItems (final int id, final CreativeTabs tab, final List list)
      {
-          ItemStack stack = new ItemStack(id, 1, 0);
+          final ItemStack stack = new ItemStack(id, 1, 0);
           if (itemMaterial.toolEnchant() != null)
+          {
                stack.addEnchantment(itemMaterial.toolEnchant(), itemMaterial.toolEnchantLvl());
+          }
           list.add(stack);
      }
 }

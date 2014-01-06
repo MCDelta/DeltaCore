@@ -21,7 +21,7 @@ public final class ArmorInfo
      
      public int maxUses ()
      {
-          return this.uses;
+          return uses;
      }
      
      
@@ -29,7 +29,7 @@ public final class ArmorInfo
      
      public int[] shieldBarArray ()
      {
-          return this.shieldBarArray;
+          return shieldBarArray;
      }
      
      
@@ -37,6 +37,6 @@ public final class ArmorInfo
      
      public int enchantability ()
      {
-          return this.enchantability;
+          return enchantability;
      }
 }

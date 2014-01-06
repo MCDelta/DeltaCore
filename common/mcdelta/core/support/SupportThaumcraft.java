@@ -39,7 +39,7 @@ public class SupportThaumcraft implements LimitedModSupport
      @Override
      public void postInit ()
      {
-          Item thaumiumIngot = Assets.findItemWithName("ItemResource");
+          final Item thaumiumIngot = Assets.findItemWithName("ItemResource");
           
           if (thaumiumIngot != null)
           {

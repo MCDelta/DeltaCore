@@ -41,18 +41,18 @@ public class ItemDelta extends Item
      public ItemDelta (final ModDelta mod, final String name, final boolean checkLoc)
      {
           super(mod.config().getItemID(name));
-          this.maxStackSize = 64;
-          this.setCreativeTab(CreativeTabs.tabAllSearch);
+          maxStackSize = 64;
+          setCreativeTab(CreativeTabs.tabAllSearch);
           
-          this.checkUnlocalized = checkLoc;
+          checkUnlocalized = checkLoc;
           
           // ItemDelta code
           this.mod = mod;
           this.name = name;
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
-          this.setUnlocalizedName(unlocalized);
+          setUnlocalizedName(unlocalized);
           
-          if (this.checkUnlocalized && !StatCollector.func_94522_b("item." + unlocalized + ".name"))
+          if (checkUnlocalized && !StatCollector.func_94522_b("item." + unlocalized + ".name"))
           {
                DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
           }
@@ -69,9 +69,9 @@ public class ItemDelta extends Item
      @Override
      public void registerIcons (final IconRegister register)
      {
-          final String s = this.name.replace(".", "_");
+          final String s = name.replace(".", "_");
           
-          this.itemIcon = this.doRegister(s, register);
+          itemIcon = this.doRegister(s, register);
      }
      
      
@@ -79,7 +79,7 @@ public class ItemDelta extends Item
      
      protected Icon doRegister (final String s, final IconRegister register)
      {
-          return doRegister(this.mod.id(), s, register);
+          return doRegister(mod.id(), s, register);
      }
      
      
@@ -102,7 +102,7 @@ public class ItemDelta extends Item
      
      public String getid ()
      {
-          return this.mod.id();
+          return mod.id();
      }
      
 }

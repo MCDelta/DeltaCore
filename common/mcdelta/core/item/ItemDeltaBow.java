@@ -33,7 +33,7 @@ public class ItemDeltaBow extends ItemBow
           this.mod = mod;
           this.name = name;
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
-          this.setUnlocalizedName(unlocalized);
+          setUnlocalizedName(unlocalized);
           
           if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))
           {
@@ -53,7 +53,7 @@ public class ItemDeltaBow extends ItemBow
      {
           boolean hasAmmo = player.capabilities.isCreativeMode;
           
-          for (final Item item : this.ammo)
+          for (final Item item : ammo)
           {
                if (player.inventory.hasItem(item.itemID))
                {
@@ -68,7 +68,7 @@ public class ItemDeltaBow extends ItemBow
                {
                     return event.result;
                }
-               player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+               player.setItemInUse(stack, getMaxItemUseDuration(stack));
           }
           return stack;
      }

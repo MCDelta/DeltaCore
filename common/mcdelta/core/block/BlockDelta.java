@@ -35,8 +35,8 @@ public class BlockDelta extends Block
           this.mod = mod;
           this.name = name;
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
-          this.setUnlocalizedName(unlocalized);
-          this.setCreativeTab(CreativeTabs.tabAllSearch);
+          setUnlocalizedName(unlocalized);
+          setCreativeTab(CreativeTabs.tabAllSearch);
           
           GameRegistry.registerBlock(this, name);
           
@@ -52,9 +52,9 @@ public class BlockDelta extends Block
      @Override
      public void registerIcons (final IconRegister register)
      {
-          final String s = this.name.replace(".", "_");
+          final String s = name.replace(".", "_");
           
-          this.blockIcon = this.doRegister(s, register);
+          blockIcon = doRegister(s, register);
      }
      
      
@@ -62,11 +62,11 @@ public class BlockDelta extends Block
      
      protected Icon doRegister (final String s, final IconRegister register)
      {
-          final ResourceLocation loc = new ResourceLocation(this.mod.id().toLowerCase(), "textures/blocks/" + s + ".png");
+          final ResourceLocation loc = new ResourceLocation(mod.id().toLowerCase(), "textures/blocks/" + s + ".png");
           
           if (Assets.resourceExists(loc))
           {
-               return register.registerIcon(this.mod.id() + ":" + s);
+               return register.registerIcon(mod.id() + ":" + s);
           }
           return register.registerIcon(DeltaCore.MOD_ID + ":null");
      }
@@ -84,6 +84,6 @@ public class BlockDelta extends Block
      
      public String getid ()
      {
-          return this.mod.id();
+          return mod.id();
      }
 }

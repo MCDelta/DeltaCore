@@ -7,15 +7,15 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class ExtraInfo
 {
-     private EnumChatFormatting          nameColor;
-     private Entry<Enchantment, Integer> weaponEnchant;
-     private Entry<Enchantment, Integer> toolEnchant;
-     private Entry<String, Integer>      nonStickCrafter;
+     private final EnumChatFormatting          nameColor;
+     private final Entry<Enchantment, Integer> weaponEnchant;
+     private final Entry<Enchantment, Integer> toolEnchant;
+     private final Entry<String, Integer>      nonStickCrafter;
      
      
      
      
-     public ExtraInfo (EnumChatFormatting e)
+     public ExtraInfo (final EnumChatFormatting e)
      {
           this(e, null, null);
      }
@@ -23,7 +23,7 @@ public class ExtraInfo
      
      
      
-     public ExtraInfo (EnumChatFormatting e, Entry<Enchantment, Integer> entr1, Entry<Enchantment, Integer> entr2)
+     public ExtraInfo (final EnumChatFormatting e, final Entry<Enchantment, Integer> entr1, final Entry<Enchantment, Integer> entr2)
      {
           this(e, entr1, entr2, null);
      }
@@ -31,12 +31,12 @@ public class ExtraInfo
      
      
      
-     public ExtraInfo (EnumChatFormatting e, Entry<Enchantment, Integer> entr1, Entry<Enchantment, Integer> entr2, Entry<String, Integer> entr3)
+     public ExtraInfo (final EnumChatFormatting e, final Entry<Enchantment, Integer> entr1, final Entry<Enchantment, Integer> entr2, final Entry<String, Integer> entr3)
      {
-          this.nameColor = e;
-          this.weaponEnchant = entr1;
-          this.toolEnchant = entr2;
-          this.nonStickCrafter = entr3;
+          nameColor = e;
+          weaponEnchant = entr1;
+          toolEnchant = entr2;
+          nonStickCrafter = entr3;
      }
      
      
@@ -44,7 +44,7 @@ public class ExtraInfo
      
      public EnumChatFormatting nameColor ()
      {
-          return this.nameColor;
+          return nameColor;
      }
      
      

@@ -49,9 +49,9 @@ public class BlockSided extends BlockDelta
      @SideOnly (Side.CLIENT)
      public void registerIcons (final IconRegister register)
      {
-          this.blockIcon = this.doRegister(this.name + "_back", register);
-          this.frontIcon = this.doRegister(this.name + "_front", register);
-          this.sideIcon = this.doRegister(this.name + "_side", register);
+          blockIcon = doRegister(name + "_back", register);
+          frontIcon = doRegister(name + "_front", register);
+          sideIcon = doRegister(name + "_side", register);
      }
      
      
@@ -61,7 +61,7 @@ public class BlockSided extends BlockDelta
      @SideOnly (Side.CLIENT)
      public Icon getIcon (final int side, final int meta)
      {
-          return meta == 0 ? side == 0 ? this.frontIcon : side == 1 ? this.blockIcon : this.sideIcon : meta == 1 ? side == 1 ? this.frontIcon : side == 0 ? this.blockIcon : this.sideIcon : meta > 1 && meta % 2 == 0 ? side == meta ? this.frontIcon : side == meta + 1 ? this.blockIcon : this.sideIcon : meta > 1 && !(meta % 2 == 0) ? side == meta ? this.frontIcon : side == meta - 1 ? this.blockIcon : this.sideIcon : this.sideIcon;
+          return meta == 0 ? side == 0 ? frontIcon : side == 1 ? blockIcon : sideIcon : meta == 1 ? side == 1 ? frontIcon : side == 0 ? blockIcon : sideIcon : meta > 1 && meta % 2 == 0 ? side == meta ? frontIcon : side == meta + 1 ? blockIcon : sideIcon : meta > 1 && !(meta % 2 == 0) ? side == meta ? frontIcon : side == meta - 1 ? blockIcon : sideIcon : sideIcon;
      }
      
      
@@ -94,7 +94,7 @@ public class BlockSided extends BlockDelta
           
           if (flag && !flag1)
           {
-               world.scheduleBlockUpdate(x, y, z, this.blockID, this.tickRate(world));
+               world.scheduleBlockUpdate(x, y, z, blockID, tickRate(world));
                world.setBlockMetadataWithNotify(x, y, z, i1 | 8, 4);
           }
           else if (!flag && flag1)

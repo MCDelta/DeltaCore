@@ -18,15 +18,15 @@ public abstract class IConfig
      {
           config.load();
           
-          this.initCommon(config);
+          initCommon(config);
           
           if (FMLCommonHandler.instance().getSide().isServer())
           {
-               this.initServer(config);
+               initServer(config);
           }
           else
           {
-               this.initClient(config);
+               initClient(config);
           }
           config.save();
      }

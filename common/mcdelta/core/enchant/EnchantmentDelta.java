@@ -27,9 +27,9 @@ public class EnchantmentDelta extends Enchantment
           this.mod = mod;
           this.name = name;
           
-          if (!StatCollector.func_94522_b(this.getName()))
+          if (!StatCollector.func_94522_b(getName()))
           {
-               DeltaCore.localizationWarnings.append("- " + this.getName() + " \n");
+               DeltaCore.localizationWarnings.append("- " + getName() + " \n");
           }
      }
      
@@ -39,7 +39,7 @@ public class EnchantmentDelta extends Enchantment
      @Override
      public String getName ()
      {
-          return "enchantment." + this.getModid().toLowerCase() + ":" + this.name;
+          return "enchantment." + getModid().toLowerCase() + ":" + name;
      }
      
      
@@ -47,6 +47,6 @@ public class EnchantmentDelta extends Enchantment
      
      public String getModid ()
      {
-          return this.mod.id();
+          return mod.id();
      }
 }

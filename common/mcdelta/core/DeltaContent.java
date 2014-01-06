@@ -92,46 +92,56 @@ public class DeltaContent implements IContent
      
      
      @Override
-     public void addMaterialBasedRecipes (ItemMaterial mat)
+     public void addMaterialBasedRecipes (final ItemMaterial mat)
      {
-          String material = mat.oreName();
+          final String material = mat.oreName();
           String stickMaterial = "stickWood";
+          
+          if (mat.nonStickCrafter() != null)
+          {
+               stickMaterial = mat.nonStickCrafter().getKey();
+          }
           
           if (mat.needsTools())
           {
-               if (mat.nonStickCrafter() != null)
-               {
-                    stickMaterial = mat.nonStickCrafter().getKey();
-               }
-               
                // Shovel
                ItemStack result = new ItemStack(DeltaContent.shovels.get(mat));
                if (mat.toolEnchant() != null)
+               {
                     result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
+               }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " o ", " o ", 'x', material, 'o', stickMaterial));
                
                // Pickaxe
                result = new ItemStack(DeltaContent.pickaxes.get(mat));
                if (mat.toolEnchant() != null)
+               {
                     result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
+               }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", " o ", " o ", 'x', material, 'o', stickMaterial));
                
                // Axe
                result = new ItemStack(DeltaContent.axes.get(mat));
                if (mat.toolEnchant() != null)
+               {
                     result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
+               }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " ox", " o ", 'x', material, 'o', stickMaterial));
                
                // Sword
                result = new ItemStack(DeltaContent.swords.get(mat));
                if (mat.weaponEnchant() != null)
+               {
                     result.addEnchantment(mat.weaponEnchant(), mat.weaponEnchantLvl());
+               }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " x ", " x ", " o ", 'x', material, 'o', stickMaterial));
                
                // Hoe
                result = new ItemStack(DeltaContent.hoes.get(mat));
                if (mat.toolEnchant() != null)
+               {
                     result.addEnchantment(mat.toolEnchant(), mat.toolEnchantLvl());
+               }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " o ", " o ", 'x', material, 'o', stickMaterial));
           }
      }

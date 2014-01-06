@@ -61,26 +61,26 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           super(mod.config().getItemID(mat.name() + "." + toolName), mat.getToolMaterial());
           
           this.toolName = toolName;
-          this.itemMaterial = mat;
-          this.maxStackSize = 1;
-          this.setMaxDamage(mat.maxUses());
-          this.setCreativeTab(CreativeTabs.tabCombat);
+          itemMaterial = mat;
+          maxStackSize = 1;
+          setMaxDamage(mat.maxUses());
+          setCreativeTab(CreativeTabs.tabCombat);
           
-          this.harvest.add(Block.web);
+          harvest.add(Block.web);
           
-          this.effective.add(Material.plants);
-          this.effective.add(Material.vine);
-          this.effective.add(Material.coral);
-          this.effective.add(Material.leaves);
-          this.effective.add(Material.pumpkin);
+          effective.add(Material.plants);
+          effective.add(Material.vine);
+          effective.add(Material.coral);
+          effective.add(Material.leaves);
+          effective.add(Material.pumpkin);
           
-          this.weaponDamage = f;
+          weaponDamage = f;
           
           // ItemDelta code
           this.mod = mod;
-          this.name = mat.name() + "." + toolName;
-          final String unlocalized = mod.id().toLowerCase() + ":" + this.name;
-          this.setUnlocalizedName(unlocalized);
+          name = mat.name() + "." + toolName;
+          final String unlocalized = mod.id().toLowerCase() + ":" + name;
+          setUnlocalizedName(unlocalized);
           
           final String weapon = "tool." + toolName;
           final String material = "material." + mat.name();
@@ -102,21 +102,21 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public void registerIcons (final IconRegister register)
      {
-          if (this.toolName == "sword")
+          if (toolName == "sword")
           {
-               this.itemIcon = ItemDelta.doRegister("deltacore", this.toolName + "_1", register);
-               this.itemOverlay = ItemDelta.doRegister("deltacore", this.toolName + "_2", register);
+               itemIcon = ItemDelta.doRegister("deltacore", toolName + "_1", register);
+               itemOverlay = ItemDelta.doRegister("deltacore", toolName + "_2", register);
           }
           else
           {
-               this.itemIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_1", register);
-               this.itemOverlay = ItemDelta.doRegister(this.mod.id().toLowerCase(), this.toolName + "_2", register);
+               itemIcon = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_1", register);
+               itemOverlay = ItemDelta.doRegister(mod.id().toLowerCase(), toolName + "_2", register);
           }
-          this.overrideExists = Assets.resourceExists(new ResourceLocation(this.mod.id().toLowerCase(), "textures/items/override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName + ".png"));
+          overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_" + toolName + ".png"));
           
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               this.overrideIcon = ItemDelta.doRegister(this.mod.id().toLowerCase(), "override/" + this.itemMaterial.name().toLowerCase() + "_" + this.toolName, register);
+               overrideIcon = ItemDelta.doRegister(mod.id().toLowerCase(), "override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
           }
      }
      
@@ -126,7 +126,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public int getPasses (final ItemStack stack)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 1;
           }
@@ -139,15 +139,15 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public Icon getIconFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
-               return this.overrideIcon;
+               return overrideIcon;
           }
           if (pass == 2)
           {
-               return this.itemOverlay;
+               return itemOverlay;
           }
-          return this.itemIcon;
+          return itemIcon;
      }
      
      
@@ -156,20 +156,20 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
-          if (this.overrideExists)
+          if (overrideExists)
           {
                return 0xffffff;
           }
           if (pass == 2)
           {
-               if(itemMaterial.nonStickCrafter() != null)
+               if (itemMaterial.nonStickCrafter() != null)
                {
                     return itemMaterial.nonStickCrafter().getValue();
                }
                
                return MaterialRegistry.WOOD.color();
           }
-          return this.itemMaterial.color();
+          return itemMaterial.color();
      }
      
      
@@ -178,7 +178,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getShinyFromPass (final ItemStack stack, final int pass)
      {
-          if (pass == 1 && this.itemMaterial.defaultShiny())
+          if (pass == 1 && itemMaterial.defaultShiny())
           {
                return true;
           }
@@ -191,7 +191,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public float func_82803_g ()
      {
-          return this.itemMaterial.getDamageVsEntity();
+          return itemMaterial.getDamageVsEntity();
      }
      
      
@@ -200,11 +200,11 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public float getStrVsBlock (final ItemStack stack, final Block block)
      {
-          if (this.harvest.contains(block))
+          if (harvest.contains(block))
           {
                return 15.0F;
           }
-          return this.effective.contains(block.blockMaterial) ? 1.5F : 1.0F;
+          return effective.contains(block.blockMaterial) ? 1.5F : 1.0F;
      }
      
      
@@ -255,7 +255,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public ItemStack onItemRightClick (final ItemStack stack, final World world, final EntityPlayer player)
      {
-          if (this.getItemUseAction(stack) != null)
+          if (getItemUseAction(stack) != null)
           {
                final ArrowNockEvent event = new ArrowNockEvent(player, stack);
                MinecraftForge.EVENT_BUS.post(event);
@@ -263,7 +263,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
                {
                     return event.result;
                }
-               player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+               player.setItemInUse(stack, getMaxItemUseDuration(stack));
           }
           return stack;
      }
@@ -274,7 +274,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean canHarvestBlock (final Block block)
      {
-          return this.harvest.contains(block);
+          return harvest.contains(block);
      }
      
      
@@ -283,7 +283,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public int getItemEnchantability ()
      {
-          return this.itemMaterial.enchantability();
+          return itemMaterial.enchantability();
      }
      
      
@@ -292,9 +292,9 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public boolean getIsRepairable (final ItemStack repair, final ItemStack gem)
      {
-          if (OreDictionary.getOres(this.itemMaterial.oreName()) != null && !OreDictionary.getOres(this.itemMaterial.oreName()).isEmpty())
+          if (OreDictionary.getOres(itemMaterial.oreName()) != null && !OreDictionary.getOres(itemMaterial.oreName()).isEmpty())
           {
-               return OreDictionary.itemMatches(OreDictionary.getOres(this.itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
+               return OreDictionary.itemMatches(OreDictionary.getOres(itemMaterial.oreName()).get(0), gem, false) ? true : super.getIsRepairable(repair, gem);
           }
           return super.getIsRepairable(repair, gem);
      }
@@ -307,7 +307,7 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      {
           final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
           multimap.removeAll(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) this.weaponDamage + this.itemMaterial.getDamageVsEntity(), 0));
+          multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double) weaponDamage + itemMaterial.getDamageVsEntity(), 0));
           
           return multimap;
      }
@@ -318,9 +318,9 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      @Override
      public String getItemDisplayName (final ItemStack stack)
      {
-          final ItemMaterial mat = this.itemMaterial;
+          final ItemMaterial mat = itemMaterial;
           
-          final String weapon = StatCollector.translateToLocal("tool." + this.toolName);
+          final String weapon = StatCollector.translateToLocal("tool." + toolName);
           final String material = StatCollector.translateToLocal("material." + mat.name());
           
           return mat.getNameColor() + material + " " + weapon;
@@ -338,12 +338,15 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
      
      
      
+     @Override
      @SideOnly (Side.CLIENT)
-     public void getSubItems (int id, CreativeTabs tab, List list)
+     public void getSubItems (final int id, final CreativeTabs tab, final List list)
      {
-          ItemStack stack = new ItemStack(id, 1, 0);
-          if(itemMaterial.weaponEnchant() != null)
+          final ItemStack stack = new ItemStack(id, 1, 0);
+          if (itemMaterial.weaponEnchant() != null)
+          {
                stack.addEnchantment(itemMaterial.weaponEnchant(), itemMaterial.weaponEnchantLvl());
+          }
           list.add(stack);
      }
 }
