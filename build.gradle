@@ -15,8 +15,8 @@ buildscript {
 apply plugin: "forge"
 
 group = 'mcdelta.core'
-version = '0.1a'
-archivesBaseName = 'MCDeltaCore'
+version = '1.1a|pre'
+archivesBaseName = 'DeltaCore'
 
 sourceSets {
     main {
