@@ -14,5 +14,10 @@ material.gold=Golden
 ## mod support materials (resource packers do not have to support these if they do not want. It will not effect anything unless the supported mod is installed)
 
 ### Thaumcraft
-
 material.thaumium=Thaumium
+### Twilight Forest
+material.ironwood=Ironwood
+material.fiery=Fiery
+material.stealeaf=Steelleaf
+material.niteMetal=Knightly
+
