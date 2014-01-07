@@ -6,7 +6,7 @@ import mcdelta.core.material.ItemMaterial;
 import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.material.ToolInfo;
 
-public class SupportEssentialAlloys implements LimitedModSupport
+public class SupportEssentialAlloys implements ILimitedModSupport
 {
      public static ItemMaterial BRONZE;
      public static ItemMaterial MAGIC;

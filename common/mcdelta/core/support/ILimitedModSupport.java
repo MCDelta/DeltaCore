@@ -1,6 +1,6 @@
 package mcdelta.core.support;
 
-public interface LimitedModSupport
+public interface ILimitedModSupport
 {
      public String modid ();
      

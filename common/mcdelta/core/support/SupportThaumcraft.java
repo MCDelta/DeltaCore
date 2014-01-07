@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class SupportThaumcraft implements LimitedModSupport
+public class SupportThaumcraft implements ILimitedModSupport
 {
      public static ItemMaterial THAUMIUM;
      

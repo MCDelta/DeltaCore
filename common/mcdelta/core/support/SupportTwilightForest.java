@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class SupportTwilightForest implements LimitedModSupport
+public class SupportTwilightForest implements ILimitedModSupport
 {
      public static ItemMaterial IRONWOOD;
      public static ItemMaterial FIERY;

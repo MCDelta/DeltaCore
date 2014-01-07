@@ -8,9 +8,10 @@ import mcdelta.core.logging.Logger;
 import mcdelta.core.material.MaterialRegistry;
 import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
-import mcdelta.core.support.LimitedModSupport;
+import mcdelta.core.support.ILimitedModSupport;
 import mcdelta.core.support.SupportBOP;
 import mcdelta.core.support.SupportEssentialAlloys;
+import mcdelta.core.support.SupportTE;
 import mcdelta.core.support.SupportThaumcraft;
 import mcdelta.core.support.SupportTwilightForest;
 import mcdelta.core.support.compatibility.CompatibilityHandler;
@@ -80,6 +81,7 @@ public class DeltaCore extends ModDelta
           doLimitedModSupport(new SupportThaumcraft());
           doLimitedModSupport(new SupportTwilightForest());
           doLimitedModSupport(new SupportBOP());
+          doLimitedModSupport(new SupportTE());
      }
      
      
@@ -106,7 +108,7 @@ public class DeltaCore extends ModDelta
           
           proxy.registerRenderers();
           
-          for (final LimitedModSupport support : limitedSupport)
+          for (final ILimitedModSupport support : limitedSupport)
           {
                support.postInit();
           }

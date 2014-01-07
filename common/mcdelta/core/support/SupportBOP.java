@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class SupportBOP implements LimitedModSupport
+public class SupportBOP implements ILimitedModSupport
 {
      public static ItemMaterial MUD;
      public static ItemMaterial AMETHYST;

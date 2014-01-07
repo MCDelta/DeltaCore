@@ -6,7 +6,7 @@ import java.util.List;
 
 import mcdelta.core.config.ConfigWrapper;
 import mcdelta.core.config.IConfig;
-import mcdelta.core.support.LimitedModSupport;
+import mcdelta.core.support.ILimitedModSupport;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -17,7 +17,7 @@ public abstract class ModDelta
 {
      public static final List<ModDelta>    deltaMods      = new ArrayList<ModDelta>();
      protected ConfigWrapper               config;
-     public static List<LimitedModSupport> limitedSupport = new ArrayList<LimitedModSupport>();
+     public static List<ILimitedModSupport> limitedSupport = new ArrayList<ILimitedModSupport>();
      
      
      
@@ -141,7 +141,7 @@ public abstract class ModDelta
       * when a API is required. Use the CompatibilityHandler (thanks Captain)
       * for that.
       */
-     protected void doLimitedModSupport (final LimitedModSupport modSupport)
+     protected void doLimitedModSupport (final ILimitedModSupport modSupport)
      {
           if (Loader.isModLoaded(modSupport.modid()))
           {
