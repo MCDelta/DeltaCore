@@ -90,7 +90,7 @@ public class Logger
           
           final StringBuilder sb = new StringBuilder();
           
-          if (level != Level.INFO)
+          if (level != Level.INFO && level != Debug.DEBUG)
           {
                sb.append("\n");
                sb.append("\n");
@@ -134,7 +134,7 @@ public class Logger
                sb.append("!!!!!");
           }
           
-          if (level != Level.INFO)
+          if (level != Level.INFO && level != Debug.DEBUG)
           {
                sb.append("\n");
           }
