@@ -53,6 +53,12 @@ task sourceJar(type: Jar) {
     appendix = 'src'
 }
 
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    appendix = 'compile'
+}
+
 artifacts {
     archives sourceJar
+    archives deobfJar
 }
