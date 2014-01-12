@@ -2,11 +2,13 @@ package mcdelta.core.item;
 
 import java.util.List;
 
+import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ItemMaterial;
 import mcdelta.core.material.MaterialRegistry;
+import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,6 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -26,8 +29,10 @@ import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDeltaTool extends ItemDelta implements IExtraPasses
+public class ItemDeltaTool extends ItemTool implements IExtraPasses
 {
+     public ModDelta       mod;
+     public String         name;
      public ItemMaterial   itemMaterial;
      private final Block[] blocksEffectiveAgainst;
      protected float       efficiencyOnProperMaterial;
@@ -55,7 +60,7 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      
      public ItemDeltaTool (final ModDelta mod, final String name, final ItemMaterial mat, final Block[] effective, final float damage, final boolean b)
      {
-          super(mod, mat.name() + "." + name, b);
+          super(mod.config().getItemID(mat.name() + "." + name), damage, mat.getToolMaterial(), effective);
           itemMaterial = mat;
           toolName = name;
           blocksEffectiveAgainst = effective;
@@ -64,6 +69,25 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
           efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
           damageVsEntity = damage + mat.getDamageVsEntity();
           setCreativeTab(CreativeTabs.tabTools);
+          
+          // ItemDelta code
+          this.mod = mod;
+          this.name = mat.name() + "." + toolName;
+          final String unlocalized = mod.id().toLowerCase() + ":" + name;
+          setUnlocalizedName(unlocalized);
+          
+          final String weapon = "tool." + toolName;
+          final String material = "material." + mat.name();
+          
+          if (!StatCollector.func_94522_b(weapon))
+          {
+               DeltaCore.localizationWarnings.append("- " + weapon + " \n");
+          }
+          if (!StatCollector.func_94522_b(material))
+          {
+               DeltaCore.localizationWarnings.append("- " + material + " \n");
+          }
+          ClientProxy.extraPasses.add(this);
      }
      
      
@@ -72,14 +96,14 @@ public class ItemDeltaTool extends ItemDelta implements IExtraPasses
      @Override
      public void registerIcons (final IconRegister register)
      {
-          itemIcon = doRegister("deltacore", toolName + "_1", register);
-          itemOverlay = doRegister("deltacore", toolName + "_2", register);
+          itemIcon = ItemDelta.doRegister("deltacore", toolName + "_1", register);
+          itemOverlay = ItemDelta.doRegister("deltacore", toolName + "_2", register);
           
           overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_" + toolName + ".png"));
           
           if (overrideExists)
           {
-               overrideIcon = this.doRegister("/override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
+               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
           }
      }
      

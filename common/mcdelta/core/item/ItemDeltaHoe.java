@@ -1,5 +1,6 @@
 package mcdelta.core.item;
 
+import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -10,9 +11,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
@@ -20,8 +23,10 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
+public class ItemDeltaHoe extends ItemHoe implements IExtraPasses
 {
+     public ModDelta            mod;
+     public String              name;
      private final ItemMaterial itemMaterial;
      
      @SideOnly (Side.CLIENT)
@@ -37,12 +42,29 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      
      public ItemDeltaHoe (final ModDelta mod, final ItemMaterial mat)
      {
-          super(mod, mat.name() + ".hoe");
+          super(mod.config().getItemID(mat.name() + ".hoe"), mat.getToolMaterial());
           itemMaterial = mat;
           maxStackSize = 1;
           setMaxDamage(mat.maxUses());
           setCreativeTab(CreativeTabs.tabTools);
           
+          // ItemDelta code
+          this.mod = mod;
+          this.name = mat.name() + ".hoe";
+          final String unlocalized = mod.id().toLowerCase() + ":" + name;
+          setUnlocalizedName(unlocalized);
+          
+          final String weapon = "tool.hoe";
+          final String material = "material." + mat.name();
+          
+          if (!StatCollector.func_94522_b(weapon))
+          {
+               DeltaCore.localizationWarnings.append("- " + weapon + " \n");
+          }
+          if (!StatCollector.func_94522_b(material))
+          {
+               DeltaCore.localizationWarnings.append("- " + material + " \n");
+          }
           ClientProxy.extraPasses.add(this);
      }
      
@@ -52,14 +74,14 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      @Override
      public void registerIcons (final IconRegister register)
      {
-          itemIcon = doRegister("deltacore", "hoe" + "_1", register);
-          itemOverlay = doRegister("deltacore", "hoe" + "_2", register);
+          itemIcon = ItemDelta.doRegister("deltacore", "hoe" + "_1", register);
+          itemOverlay = ItemDelta.doRegister("deltacore", "hoe" + "_2", register);
           
           overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_hoe.png"));
           
           if (overrideExists)
           {
-               overrideIcon = this.doRegister("/override/" + itemMaterial.name().toLowerCase() + "_hoe", register);
+               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_hoe", register);
           }
      }
      
@@ -178,5 +200,19 @@ public class ItemDeltaHoe extends ItemDelta implements IExtraPasses
      public String getMaterialName ()
      {
           return itemMaterial.name();
+     }
+     
+     
+     
+     
+     @Override
+     public String getItemDisplayName (final ItemStack stack)
+     {
+          final ItemMaterial mat = itemMaterial;
+          
+          final String weapon = StatCollector.translateToLocal("tool.hoe");
+          final String material = StatCollector.translateToLocal("material." + mat.name());
+          
+          return mat.getNameColor() + material + " " + weapon;
      }
 }

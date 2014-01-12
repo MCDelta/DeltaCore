@@ -1,6 +1,10 @@
 # tools
 
 tool.sword=Sword
+tool.pickaxe=Pickaxe
+tool.axe=Axe
+tool.shovel=Shovel
+tool.hoe=Hoe
 
 
 # materials
