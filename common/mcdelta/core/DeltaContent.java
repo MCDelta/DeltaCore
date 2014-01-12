@@ -144,6 +144,25 @@ public class DeltaContent implements IContent
                }
                GameRegistry.addRecipe(new ShapedOreRecipe(result, " xx", " o ", " o ", 'x', material, 'o', stickMaterial));
           }
+          
+          if (mat.needsArmor())
+          {
+               // Helmet
+               ItemStack result = new ItemStack(DeltaContent.helmets.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", "x x", "  ", 'x', material));
+               
+               // Plate
+               result = new ItemStack(DeltaContent.chests.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "x x", "xxx", "xxx", 'x', material));
+               
+               // Legs
+               result = new ItemStack(DeltaContent.pants.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", "x x", "x x", 'x', material));
+               
+               // Boots
+               result = new ItemStack(DeltaContent.boots.get(mat));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "   ", "x x", "x x", 'x', material));
+          }
      }
      
      
