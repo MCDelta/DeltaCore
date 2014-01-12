@@ -1,0 +1,25 @@
+# tools
+
+tool.sword=Меч
+
+
+# materials
+
+material.iron=Железный(ая/ое)
+material.wood=Деревянный(ая/ое)
+material.stone=Каменный(ая/ое)
+material.diamond=Алмазный(ая/ое)
+material.gold=Золотой(ая/ое)
+
+## mod support materials (resource packers do not have to support these if they do not want. It will not effect anything unless the supported mod is installed)
+
+### Thaumcraft
+material.thaumium=Таум
+### Twilight Forest
+material.ironwood=Древний(яя/ее)
+material.fiery=Огненный(ая/ое)
+material.stealeaf=Магический(ая/ое)
+material.niteMetal=Королевский(ая/ое)
+### Biomes O Plenty
+material.amethyst=Аметистовый(ая/ое)
+material.mud=Грязевой(ая/ое)
