@@ -151,7 +151,7 @@ public class Logger
           
           for (final Object obj : list)
           {
-               sb.append("/n");
+               sb.append("\n");
                sb.append("- " + obj);
           }
           return sb;
