@@ -2,17 +2,23 @@ package mcdelta.core.item;
 
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
+import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ItemMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.google.common.collect.Multimap;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,6 +27,11 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      private final ItemMaterial itemMaterial;
      public ModDelta            mod;
      public String              name;
+     
+     @SideOnly (Side.CLIENT)
+     protected Icon             overrideIcon;
+     
+     protected boolean          overrideExists = false;
      
      
      
@@ -77,6 +88,10 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public Icon getIconFromPass (final ItemStack stack, final int pass)
      {
+          if (overrideExists)
+          {
+               return overrideIcon;
+          }
           return itemIcon;
      }
      
@@ -86,6 +101,10 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public int getColorFromPass (final ItemStack stack, final int pass)
      {
+          if (overrideExists)
+          {
+               return 0xffffff;
+          }
           return itemMaterial.color();
      }
      
@@ -118,8 +137,14 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @SideOnly (Side.CLIENT)
      public void registerIcons (final IconRegister register)
      {
-          super.registerIcons(register);
-          itemIcon = ItemDelta.doRegister("deltacore", "armor_" + armorType, register);
+          itemIcon = ItemDelta.doRegister("deltacore", "armor_" + getArmorType(armorType), register);
+          
+          overrideExists = Assets.resourceExists(new ResourceLocation(mod.id().toLowerCase(), "textures/items/override/" + itemMaterial.name().toLowerCase() + "_" + getArmorType(armorType) + ".png"));
+          
+          if (overrideExists)
+          {
+               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_" + getArmorType(armorType), register);
+          }
      }
      
      
@@ -128,19 +153,38 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public String getArmorTexture (final ItemStack stack, final Entity entity, final int slot, final String type)
      {
-          /*
-           * StringBuilder builder = new StringBuilder();
-           * 
-           * builder.append(Archive.MOD_ID + ":textures/models/armor/");
-           * builder.append(ArmorTypes.getType(stack).getTextureName());
-           * builder.append("_layer_"); switch (getPiece(stack).getType()) {
-           * case 2: builder.append(2); break; default: builder.append(1);
-           * break; } if (ArmorTypes.getType(stack).hasOverlay() && (type !=
-           * null) && type.equalsIgnoreCase("overlay")) {
-           * builder.append("_overlay"); } builder.append(".png");
-           * 
-           * return builder.toString();
-           */
-          return "";
+          return mod.id() + ":textures/models/armor/" + itemMaterial.name() + ((slot == 2 ? "_2" : "")) + ".png";
+     }
+     
+     
+     
+     
+     @Override
+     public String getItemDisplayName (final ItemStack stack)
+     {
+          final ItemMaterial mat = itemMaterial;
+          
+          final String weapon = StatCollector.translateToLocal("armor." + getArmorType(armorType));
+          final String material = StatCollector.translateToLocal("material." + mat.name());
+          
+          return mat.getNameColor() + material + " " + weapon;
+     }
+     
+     
+     
+     
+     @Override
+     public Multimap<String, AttributeModifier> getItemAttributeModifiers ()
+     {
+          final Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();
+          
+          if (itemMaterial.armorSharedAttrKey() == null)
+          {
+               return multimap;
+          }
+          
+          multimap.put(itemMaterial.armorSharedAttrKey(), new AttributeModifier(field_111210_e, "Armor modifier", itemMaterial.armorSharedAttrValue(), 0));
+          
+          return multimap;
      }
 }

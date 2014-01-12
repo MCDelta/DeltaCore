@@ -249,4 +249,30 @@ public final class ItemMaterial
           
           return extraInfo.nonStickCrafter();
      }
+     
+     
+     
+     
+     public String armorSharedAttrKey ()
+     {
+          if (extraInfo == null)
+          {
+               return null;
+          }
+          
+          return extraInfo.armorSharedAttr() == null ? null : extraInfo.armorSharedAttr().getKey();
+     }
+     
+     
+     
+     
+     public double armorSharedAttrValue ()
+     {
+          if (extraInfo == null)
+          {
+               return 0;
+          }
+          
+          return extraInfo.armorSharedAttr() == null ? 0 : extraInfo.armorSharedAttr().getValue();
+     }
 }
