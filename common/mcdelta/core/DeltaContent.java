@@ -149,7 +149,7 @@ public class DeltaContent implements IContent
           {
                // Helmet
                ItemStack result = new ItemStack(DeltaContent.helmets.get(mat));
-               GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", "x x", "  ", 'x', material));
+               GameRegistry.addRecipe(new ShapedOreRecipe(result, "xxx", "x x", "   ", 'x', material));
                
                // Plate
                result = new ItemStack(DeltaContent.chests.get(mat));
