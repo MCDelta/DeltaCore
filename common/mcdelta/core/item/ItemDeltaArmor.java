@@ -1,6 +1,5 @@
 package mcdelta.core.item;
 
-import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
 import mcdelta.core.client.item.IExtraPasses;
@@ -47,11 +46,6 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
           setCreativeTab(CreativeTabs.tabCombat);
           
           itemMaterial = mat;
-          
-          if (!StatCollector.func_94522_b("item." + unlocalized + ".name"))
-          {
-               DeltaCore.localizationWarnings.append("- item." + unlocalized + ".name \n");
-          }
           ClientProxy.extraPasses.add(this);
      }
      
@@ -167,7 +161,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
           final String weapon = StatCollector.translateToLocal("armor." + getArmorType(armorType));
           final String material = StatCollector.translateToLocal("material." + mat.name());
           
-          return mat.getNameColor() + material + " " + weapon;
+          return mat.getNameColor() + String.format(weapon, material);
      }
      
      

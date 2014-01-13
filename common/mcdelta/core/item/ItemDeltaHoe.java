@@ -213,6 +213,6 @@ public class ItemDeltaHoe extends ItemHoe implements IExtraPasses
           final String weapon = StatCollector.translateToLocal("tool.hoe");
           final String material = StatCollector.translateToLocal("material." + mat.name());
           
-          return mat.getNameColor() + material + " " + weapon;
+          return mat.getNameColor() + String.format(weapon, material);
      }
 }

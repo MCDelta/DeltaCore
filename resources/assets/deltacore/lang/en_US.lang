@@ -1,13 +1,13 @@
-tool.sword=Sword
-tool.pickaxe=Pickaxe
-tool.axe=Axe
-tool.shovel=Shovel
-tool.hoe=Hoe
+tool.sword=%1$s Sword
+tool.pickaxe=%1$s Pickaxe
+tool.axe=%1$s Axe
+tool.shovel=%1$s Shovel
+tool.hoe=%1$s Hoe
 
-armor.helmet=Helmet
-armor.plate=Chestplate
-armor.legs=Leggings
-armor.boots=Boots
+armor.helmet=%1$s Helmet
+armor.plate=%1$s Chestplate
+armor.legs=%1$s Leggings
+armor.boots=%1$s Boots
 
 material.iron=Iron
 material.wood=Wooden
@@ -15,7 +15,7 @@ material.stone=Stone
 material.diamond=Diamond
 material.gold=Golden
 
-## mod support materials (resource packers do not have to support these if they do not want. It will not effect anything unless the supported mod is installed)
+# mod support materials (resource packers do not have to support these if they do not want. It will not effect anything unless the supported mod is installed)
 material.thaumium=Thaumium
 material.ironwood=Ironwood
 material.fiery=Fiery
