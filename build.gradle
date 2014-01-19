@@ -42,21 +42,24 @@ processResources {
 }
 
 jar {
-    archiveName = baseName + "[" + version + "].jar"
     manifest {
         attributes 'MCVersion' : project.minecraft.version
         attributes 'Version' : project.version
     }
+    archiveName = baseName + "[" + version + "].jar"
 }
 
 task sourceJar(type: Jar) {
+    archiveName = baseName + "[" + version + "|s].jar"
     from sourceSets.main.allSource
     appendix = 'src'
+    archiveName = baseName + "[" + version + "|" + appendix + "].jar"
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     appendix = 'compile'
+    archiveName = baseName + "[" + version + "|" + appendix + "].jar"
 }
 
 artifacts {
