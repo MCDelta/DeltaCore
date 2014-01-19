@@ -7,7 +7,6 @@ import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.logging.Logger;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -42,7 +41,6 @@ public class ItemDelta extends Item
      {
           super(mod.config().getItemID(name));
           maxStackSize = 64;
-          setCreativeTab(CreativeTabs.tabAllSearch);
           
           checkUnlocalized = checkLoc;
           

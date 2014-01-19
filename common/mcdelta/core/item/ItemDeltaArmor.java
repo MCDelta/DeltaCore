@@ -6,7 +6,6 @@ import mcdelta.core.client.item.IExtraPasses;
 import mcdelta.core.material.ItemMaterial;
 import mcdelta.core.proxy.ClientProxy;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemArmor;
@@ -43,7 +42,6 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
           name = getArmorType(type) + "." + mat.name().toLowerCase();
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
           setUnlocalizedName(unlocalized);
-          setCreativeTab(CreativeTabs.tabCombat);
           
           itemMaterial = mat;
           ClientProxy.extraPasses.add(this);

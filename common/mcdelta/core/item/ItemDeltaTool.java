@@ -68,7 +68,6 @@ public class ItemDeltaTool extends ItemTool implements IExtraPasses
           setMaxDamage(mat.maxUses());
           efficiencyOnProperMaterial = mat.getEfficiencyOnProperMaterial();
           damageVsEntity = damage + mat.getDamageVsEntity();
-          setCreativeTab(CreativeTabs.tabTools);
           
           // ItemDelta code
           this.mod = mod;

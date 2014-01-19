@@ -64,7 +64,6 @@ public class ItemWeapon extends ItemSword implements IExtraPasses
           itemMaterial = mat;
           maxStackSize = 1;
           setMaxDamage(mat.maxUses());
-          setCreativeTab(CreativeTabs.tabCombat);
           
           harvest.add(Block.web);
           
