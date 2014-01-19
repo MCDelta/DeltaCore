@@ -103,7 +103,7 @@ public class ItemDeltaTool extends ItemTool implements IExtraPasses
           
           if (overrideExists)
           {
-               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
+               overrideIcon = ItemDelta.doRegister(mod.id(), "override/" + itemMaterial.name().toLowerCase() + "_" + toolName, register);
           }
      }
      

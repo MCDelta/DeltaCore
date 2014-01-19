@@ -137,7 +137,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
           
           if (overrideExists)
           {
-               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_" + getArmorType(armorType), register);
+               overrideIcon = ItemDelta.doRegister(mod.id(), "override/" + itemMaterial.name().toLowerCase() + "_" + getArmorType(armorType), register);
           }
      }
      
