@@ -6,7 +6,6 @@ import mcdelta.core.assets.Assets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -36,7 +35,6 @@ public class BlockDelta extends Block
           this.name = name;
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
           setUnlocalizedName(unlocalized);
-          setCreativeTab(CreativeTabs.tabAllSearch);
           
           GameRegistry.registerBlock(this, name);
           
