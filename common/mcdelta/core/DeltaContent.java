@@ -11,7 +11,6 @@ import mcdelta.core.item.ItemDeltaPickaxe;
 import mcdelta.core.item.ItemDeltaShovel;
 import mcdelta.core.item.ItemWeapon;
 import mcdelta.core.material.ItemMaterial;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -48,37 +47,37 @@ public class DeltaContent implements IContent
      {
           if (mat.needsTools())
           {
-               final ItemDeltaShovel shovel = (ItemDeltaShovel) new ItemDeltaShovel(DeltaCore.instance, mat).setCreativeTab(CreativeTabs.tabTools);
+               final ItemDeltaShovel shovel = (ItemDeltaShovel) new ItemDeltaShovel(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(shovel, "shovel", mat.getHarvestLevel());
                shovels.put(mat, shovel);
                
-               final ItemDeltaPickaxe pick = (ItemDeltaPickaxe) new ItemDeltaPickaxe(DeltaCore.instance, mat).setCreativeTab(CreativeTabs.tabTools);
+               final ItemDeltaPickaxe pick = (ItemDeltaPickaxe) new ItemDeltaPickaxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(pick, "pickaxe", mat.getHarvestLevel());
                pickaxes.put(mat, pick);
                
-               final ItemDeltaAxe axe = (ItemDeltaAxe) new ItemDeltaAxe(DeltaCore.instance, mat).setCreativeTab(CreativeTabs.tabTools);
+               final ItemDeltaAxe axe = (ItemDeltaAxe) new ItemDeltaAxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(axe, "axe", mat.getHarvestLevel());
                axes.put(mat, axe);
                
-               final ItemWeapon sword = (ItemWeapon) new ItemWeapon("sword", DeltaCore.instance, mat, 4.0F).setCreativeTab(CreativeTabs.tabCombat);
+               final ItemWeapon sword = (ItemWeapon) new ItemWeapon("sword", DeltaCore.instance, mat, 4.0F);
                swords.put(mat, sword);
                
-               final ItemDeltaHoe hoe = (ItemDeltaHoe) new ItemDeltaHoe(DeltaCore.instance, mat).setCreativeTab(CreativeTabs.tabTools);
+               final ItemDeltaHoe hoe = (ItemDeltaHoe) new ItemDeltaHoe(DeltaCore.instance, mat);
                hoes.put(mat, hoe);
           }
           
           if (mat.needsArmor())
           {
-               final ItemDeltaArmor helmet = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 0).setCreativeTab(CreativeTabs.tabCombat);
+               final ItemDeltaArmor helmet = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 0);
                helmets.put(mat, helmet);
                
-               final ItemDeltaArmor chest = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 1).setCreativeTab(CreativeTabs.tabCombat);
+               final ItemDeltaArmor chest = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 1);
                chests.put(mat, chest);
                
-               final ItemDeltaArmor pant = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 2).setCreativeTab(CreativeTabs.tabCombat);
+               final ItemDeltaArmor pant = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 2);
                pants.put(mat, pant);
                
-               final ItemDeltaArmor boot = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 3).setCreativeTab(CreativeTabs.tabCombat);
+               final ItemDeltaArmor boot = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 3);
                boots.put(mat, boot);
           }
      }
