@@ -81,7 +81,7 @@ public class ItemDeltaHoe extends ItemHoe implements IExtraPasses
           
           if (overrideExists)
           {
-               overrideIcon = ItemDelta.doRegister(mod.id(), "/override/" + itemMaterial.name().toLowerCase() + "_hoe", register);
+               overrideIcon = ItemDelta.doRegister(mod.id(), "override/" + itemMaterial.name().toLowerCase() + "_hoe", register);
           }
      }
      
