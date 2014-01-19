@@ -3,6 +3,7 @@ package mcdelta.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import mcdelta.core.client.CreativeTabDeltaSearch;
 import mcdelta.core.item.ItemDeltaArmor;
 import mcdelta.core.item.ItemDeltaAxe;
 import mcdelta.core.item.ItemDeltaHoe;
@@ -18,16 +19,18 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class DeltaContent implements IContent
 {
-     public static Map<ItemMaterial, ItemWeapon>       swords   = new HashMap<ItemMaterial, ItemWeapon>();
-     public static Map<ItemMaterial, ItemDeltaPickaxe> pickaxes = new HashMap<ItemMaterial, ItemDeltaPickaxe>();
-     public static Map<ItemMaterial, ItemDeltaShovel>  shovels  = new HashMap<ItemMaterial, ItemDeltaShovel>();
-     public static Map<ItemMaterial, ItemDeltaAxe>     axes     = new HashMap<ItemMaterial, ItemDeltaAxe>();
-     public static Map<ItemMaterial, ItemDeltaHoe>     hoes     = new HashMap<ItemMaterial, ItemDeltaHoe>();
+     public static Map<ItemMaterial, ItemWeapon>       swords    = new HashMap<ItemMaterial, ItemWeapon>();
+     public static Map<ItemMaterial, ItemDeltaPickaxe> pickaxes  = new HashMap<ItemMaterial, ItemDeltaPickaxe>();
+     public static Map<ItemMaterial, ItemDeltaShovel>  shovels   = new HashMap<ItemMaterial, ItemDeltaShovel>();
+     public static Map<ItemMaterial, ItemDeltaAxe>     axes      = new HashMap<ItemMaterial, ItemDeltaAxe>();
+     public static Map<ItemMaterial, ItemDeltaHoe>     hoes      = new HashMap<ItemMaterial, ItemDeltaHoe>();
      
-     public static Map<ItemMaterial, ItemDeltaArmor>   helmets  = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   chests   = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   pants    = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   boots    = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   helmets   = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   chests    = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   pants     = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   boots     = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     
+     public static CreativeTabDeltaSearch              tabDeltaSearch;
      
      
      

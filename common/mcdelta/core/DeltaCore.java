@@ -2,6 +2,7 @@ package mcdelta.core;
 
 import java.util.Random;
 
+import mcdelta.core.client.CreativeTabDeltaSearch;
 import mcdelta.core.config.CoreConfig;
 import mcdelta.core.event.ExtraTooltipInfo;
 import mcdelta.core.logging.Logger;
@@ -113,6 +114,7 @@ public class DeltaCore extends ModDelta
           }
           
           CompatibilityHandler.init();
+          DeltaContent.tabDeltaSearch = new CreativeTabDeltaSearch();
      }
      
      
