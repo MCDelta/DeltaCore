@@ -15,8 +15,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public abstract class ModDelta
 {
-     public static final List<ModDelta>    deltaMods      = new ArrayList<ModDelta>();
-     protected ConfigWrapper               config;
+     public static final List<ModDelta>     deltaMods      = new ArrayList<ModDelta>();
+     protected ConfigWrapper                config;
      public static List<ILimitedModSupport> limitedSupport = new ArrayList<ILimitedModSupport>();
      
      

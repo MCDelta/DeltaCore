@@ -44,10 +44,14 @@ public class SupportBOP implements ILimitedModSupport
      {
           final Item mudball = Assets.findItemWithName("bop.mudball");
           if (mudball != null)
+          {
                OreDictionary.registerOre("ballMud", new ItemStack(mudball));
+          }
           
           final Item gems = Assets.findItemWithName("item.bop.gems");
           if (gems != null)
+          {
                OreDictionary.registerOre("gemAmethyst", new ItemStack(gems, 1, 0));
+          }
      }
 }

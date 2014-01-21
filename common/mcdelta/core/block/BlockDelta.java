@@ -3,23 +3,29 @@ package mcdelta.core.block;
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
+import mcdelta.core.logging.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockDelta extends Block
 {
-     private final ModDelta mod;
-     public String          name;
+     public ModDelta mod;
+     public String   name;
      
      
      
      
-     public BlockDelta (final String s, final Material mat)
+     public BlockDelta (String s, Material mat)
      {
           this(DeltaCore.instance, s, mat);
      }
@@ -27,13 +33,13 @@ public class BlockDelta extends Block
      
      
      
-     public BlockDelta (final ModDelta mod, final String name, final Material mat)
+     public BlockDelta (ModDelta mod, String name, Material mat)
      {
           super(mod.config().getBlockID(name), mat);
           
           this.mod = mod;
           this.name = name;
-          final String unlocalized = mod.id().toLowerCase() + ":" + name;
+          String unlocalized = mod.id().toLowerCase() + ":" + name;
           setUnlocalizedName(unlocalized);
           
           GameRegistry.registerBlock(this, name);
@@ -48,9 +54,9 @@ public class BlockDelta extends Block
      
      
      @Override
-     public void registerIcons (final IconRegister register)
+     public void registerIcons (IconRegister register)
      {
-          final String s = name.replace(".", "_");
+          String s = name.replace(".", "_");
           
           blockIcon = doRegister(s, register);
      }
@@ -58,21 +64,23 @@ public class BlockDelta extends Block
      
      
      
-     protected Icon doRegister (final String s, final IconRegister register)
+     protected Icon doRegister (String s, IconRegister register)
      {
-          final ResourceLocation loc = new ResourceLocation(mod.id().toLowerCase(), "textures/blocks/" + s + ".png");
+          ResourceLocation loc = new ResourceLocation(mod.id().toLowerCase(), "textures/blocks/" + s + ".png");
           
           if (Assets.resourceExists(loc))
           {
                return register.registerIcon(mod.id() + ":" + s);
           }
+          
+          Logger.severe("missing icon! " + loc);
           return register.registerIcon(DeltaCore.MOD_ID + ":null");
      }
      
      
      
      
-     protected void setBlockBounds (final float[] shape)
+     protected void setBlockBounds (float[] shape)
      {
           this.setBlockBounds(shape[0], shape[1], shape[2], shape[3], shape[4], shape[5]);
      }
@@ -83,5 +91,51 @@ public class BlockDelta extends Block
      public String getid ()
      {
           return mod.id();
+     }
+     
+     
+     
+     
+     public BlockDelta setHarvestLevel (String s, int i)
+     {
+          MinecraftForge.setBlockHarvestLevel(this, s, i);
+          return this;
+     }
+     
+     
+     
+     
+     public BlockDelta setOre (String s)
+     {
+          OreDictionary.registerOre(s, this);
+          return this;
+     }
+     
+     
+     
+     
+     public BlockDelta setBlockItem (ItemBlock item)
+     {
+          Item.itemsList[blockID] = item;
+          return this;
+     }
+     
+     
+     
+     
+     @Override
+     public BlockDelta setCreativeTab (CreativeTabs tab)
+     {
+          super.setCreativeTab(tab);
+          return this;
+     }
+     
+     
+     
+     
+     public Block setProperties (Properties prop)
+     {
+          prop.setProperties(this);
+          return this;
      }
 }

@@ -75,8 +75,9 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
                     renderer.uvRotateWest = 3;
                     renderer.uvRotateSouth = 3;
                     renderer.uvRotateNorth = 3;
+                    break;
                case 1:
-                    
+                    break;
                case 2:
                     renderer.uvRotateSouth = 1;
                     renderer.uvRotateNorth = 2;
@@ -98,6 +99,7 @@ public class RenderSidedBlock implements ISimpleBlockRenderingHandler
                     renderer.uvRotateWest = 1;
                     renderer.uvRotateTop = 1;
                     renderer.uvRotateBottom = 2;
+                    break;
                default:
                     break;
           }

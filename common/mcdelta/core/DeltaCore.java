@@ -11,7 +11,7 @@ import mcdelta.core.network.PacketHandler;
 import mcdelta.core.proxy.CommonProxy;
 import mcdelta.core.support.ILimitedModSupport;
 import mcdelta.core.support.SupportBOP;
-import mcdelta.core.support.SupportEssentialAlloys;
+import mcdelta.core.support.SupportKinetiks;
 import mcdelta.core.support.SupportTE;
 import mcdelta.core.support.SupportThaumcraft;
 import mcdelta.core.support.SupportTwilightForest;
@@ -41,17 +41,18 @@ public class DeltaCore extends ModDelta
      // - camo creeper
      // - timed potion to prevent potion effects
      
-     public static final String    MOD_ID               = "deltacore";
+     public static final String  MOD_ID               = "deltacore";
      
      @Instance (MOD_ID)
-     public static DeltaCore       instance;
+     public static DeltaCore     instance;
      
      @SidedProxy (clientSide = "mcdelta.core.proxy.ClientProxy", serverSide = "mcdelta.core.proxy.CommonProxy")
-     public static CommonProxy     proxy;
+     public static CommonProxy   proxy;
      
-     public static StringBuilder   localizationWarnings = new StringBuilder();
+     public static StringBuilder localizationWarnings = new StringBuilder();
      
-     public static Random          rand                 = new Random();
+     public static Random        rand                 = new Random();
+     
      
      
      
@@ -77,7 +78,7 @@ public class DeltaCore extends ModDelta
           OreDictionary.registerOre("gemDiamond", new ItemStack(Item.diamond));
           
           MaterialRegistry.addVanillaMaterials();
-          doLimitedModSupport(new SupportEssentialAlloys());
+          doLimitedModSupport(new SupportKinetiks());
           doLimitedModSupport(new SupportThaumcraft());
           doLimitedModSupport(new SupportTwilightForest());
           doLimitedModSupport(new SupportBOP());

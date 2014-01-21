@@ -50,7 +50,7 @@ public class ItemDeltaHoe extends ItemHoe implements IExtraPasses
           
           // ItemDelta code
           this.mod = mod;
-          this.name = mat.name() + ".hoe";
+          name = mat.name() + ".hoe";
           final String unlocalized = mod.id().toLowerCase() + ":" + name;
           setUnlocalizedName(unlocalized);
           
@@ -197,6 +197,7 @@ public class ItemDeltaHoe extends ItemHoe implements IExtraPasses
      
      
      
+     @Override
      public String getMaterialName ()
      {
           return itemMaterial.name();

@@ -18,16 +18,16 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class DeltaContent implements IContent
 {
-     public static Map<ItemMaterial, ItemWeapon>       swords    = new HashMap<ItemMaterial, ItemWeapon>();
-     public static Map<ItemMaterial, ItemDeltaPickaxe> pickaxes  = new HashMap<ItemMaterial, ItemDeltaPickaxe>();
-     public static Map<ItemMaterial, ItemDeltaShovel>  shovels   = new HashMap<ItemMaterial, ItemDeltaShovel>();
-     public static Map<ItemMaterial, ItemDeltaAxe>     axes      = new HashMap<ItemMaterial, ItemDeltaAxe>();
-     public static Map<ItemMaterial, ItemDeltaHoe>     hoes      = new HashMap<ItemMaterial, ItemDeltaHoe>();
+     public static Map<ItemMaterial, ItemWeapon>       swords   = new HashMap<ItemMaterial, ItemWeapon>();
+     public static Map<ItemMaterial, ItemDeltaPickaxe> pickaxes = new HashMap<ItemMaterial, ItemDeltaPickaxe>();
+     public static Map<ItemMaterial, ItemDeltaShovel>  shovels  = new HashMap<ItemMaterial, ItemDeltaShovel>();
+     public static Map<ItemMaterial, ItemDeltaAxe>     axes     = new HashMap<ItemMaterial, ItemDeltaAxe>();
+     public static Map<ItemMaterial, ItemDeltaHoe>     hoes     = new HashMap<ItemMaterial, ItemDeltaHoe>();
      
-     public static Map<ItemMaterial, ItemDeltaArmor>   helmets   = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   chests    = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   pants     = new HashMap<ItemMaterial, ItemDeltaArmor>();
-     public static Map<ItemMaterial, ItemDeltaArmor>   boots     = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   helmets  = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   chests   = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   pants    = new HashMap<ItemMaterial, ItemDeltaArmor>();
+     public static Map<ItemMaterial, ItemDeltaArmor>   boots    = new HashMap<ItemMaterial, ItemDeltaArmor>();
      
      public static CreativeTabDeltaSearch              tabDeltaSearch;
      
@@ -47,37 +47,37 @@ public class DeltaContent implements IContent
      {
           if (mat.needsTools())
           {
-               final ItemDeltaShovel shovel = (ItemDeltaShovel) new ItemDeltaShovel(DeltaCore.instance, mat);
+               final ItemDeltaShovel shovel = new ItemDeltaShovel(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(shovel, "shovel", mat.getHarvestLevel());
                shovels.put(mat, shovel);
                
-               final ItemDeltaPickaxe pick = (ItemDeltaPickaxe) new ItemDeltaPickaxe(DeltaCore.instance, mat);
+               final ItemDeltaPickaxe pick = new ItemDeltaPickaxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(pick, "pickaxe", mat.getHarvestLevel());
                pickaxes.put(mat, pick);
                
-               final ItemDeltaAxe axe = (ItemDeltaAxe) new ItemDeltaAxe(DeltaCore.instance, mat);
+               final ItemDeltaAxe axe = new ItemDeltaAxe(DeltaCore.instance, mat);
                MinecraftForge.setToolClass(axe, "axe", mat.getHarvestLevel());
                axes.put(mat, axe);
                
-               final ItemWeapon sword = (ItemWeapon) new ItemWeapon("sword", DeltaCore.instance, mat, 4.0F);
+               final ItemWeapon sword = new ItemWeapon("sword", DeltaCore.instance, mat, 4.0F);
                swords.put(mat, sword);
                
-               final ItemDeltaHoe hoe = (ItemDeltaHoe) new ItemDeltaHoe(DeltaCore.instance, mat);
+               final ItemDeltaHoe hoe = new ItemDeltaHoe(DeltaCore.instance, mat);
                hoes.put(mat, hoe);
           }
           
           if (mat.needsArmor())
           {
-               final ItemDeltaArmor helmet = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 0);
+               final ItemDeltaArmor helmet = new ItemDeltaArmor(DeltaCore.instance, mat, 0);
                helmets.put(mat, helmet);
                
-               final ItemDeltaArmor chest = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 1);
+               final ItemDeltaArmor chest = new ItemDeltaArmor(DeltaCore.instance, mat, 1);
                chests.put(mat, chest);
                
-               final ItemDeltaArmor pant = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 2);
+               final ItemDeltaArmor pant = new ItemDeltaArmor(DeltaCore.instance, mat, 2);
                pants.put(mat, pant);
                
-               final ItemDeltaArmor boot = (ItemDeltaArmor) new ItemDeltaArmor(DeltaCore.instance, mat, 3);
+               final ItemDeltaArmor boot = new ItemDeltaArmor(DeltaCore.instance, mat, 3);
                boots.put(mat, boot);
           }
      }

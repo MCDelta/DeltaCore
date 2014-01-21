@@ -44,6 +44,7 @@ public class CreativeTabDeltaSearch extends CreativeTabDelta
      
      
      
+     @Override
      @SideOnly (Side.CLIENT)
      public void displayAllReleventItems (List list)
      {
@@ -76,6 +77,7 @@ public class CreativeTabDeltaSearch extends CreativeTabDelta
      
      
      
+     @Override
      public boolean hasSearchBar ()
      {
           return true;

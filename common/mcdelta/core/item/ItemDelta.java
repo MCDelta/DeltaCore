@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemDelta extends Item
 {
@@ -91,6 +92,7 @@ public class ItemDelta extends Item
           {
                return register.registerIcon(modid.toLowerCase() + ":" + s);
           }
+          
           Logger.severe("missing icon! " + loc);
           return register.registerIcon(DeltaCore.MOD_ID + ":null");
      }
@@ -103,4 +105,12 @@ public class ItemDelta extends Item
           return mod.id();
      }
      
+     
+     
+     
+     public ItemDelta setOre (String s)
+     {
+          OreDictionary.registerOre(s, this);
+          return this;
+     }
 }

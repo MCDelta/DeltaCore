@@ -145,7 +145,7 @@ public class ItemDeltaArmor extends ItemArmor implements IExtraPasses
      @Override
      public String getArmorTexture (final ItemStack stack, final Entity entity, final int slot, final String type)
      {
-          return mod.id() + ":textures/models/armor/" + itemMaterial.name() + ((slot == 2 ? "_2" : "")) + ".png";
+          return mod.id() + ":textures/models/armor/" + itemMaterial.name() + (slot == 2 ? "_2" : "") + ".png";
      }
      
      
