@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 public enum Properties
 {
      STONE,
+     IRON,
      LIGHT_SOURCE;
      
      public void setProperties (Block block)
@@ -15,6 +16,11 @@ public enum Properties
                     block.setHardness(2.0F);
                     block.setResistance(10.0F);
                     block.setStepSound(Block.soundStoneFootstep);
+                    break;
+               case IRON:
+                    block.setHardness(3.0F);
+                    block.setResistance(8.0F);
+                    block.setStepSound(Block.soundGlassFootstep);
                     break;
                case LIGHT_SOURCE:
                     block.setHardness(0.3F);

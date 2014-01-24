@@ -1,8 +1,12 @@
 package mcdelta.core.block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mcdelta.core.DeltaCore;
 import mcdelta.core.ModDelta;
 import mcdelta.core.assets.Assets;
+import mcdelta.core.block.item.ItemBlockMeta;
 import mcdelta.core.logging.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,8 +23,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockDelta extends Block
 {
-     public ModDelta mod;
-     public String   name;
+     public static Map<String, Class<? extends ItemBlock>> items = new HashMap<String, Class<? extends ItemBlock>>();
+     public ModDelta                                       mod;
+     public String                                         name;
      
      
      
@@ -42,7 +47,20 @@ public class BlockDelta extends Block
           String unlocalized = mod.id().toLowerCase() + ":" + name;
           setUnlocalizedName(unlocalized);
           
-          GameRegistry.registerBlock(this, name);
+          if (this instanceof IMetadata)
+          {
+               GameRegistry.registerBlock(this, ItemBlockMeta.class, name);
+          }
+          
+          else if (items.containsKey(name))
+          {
+               GameRegistry.registerBlock(this, items.get(name), name);
+          }
+          
+          else
+          {
+               GameRegistry.registerBlock(this, name);
+          }
           
           if (!StatCollector.func_94522_b("tile." + unlocalized + ".name"))
           {
@@ -114,10 +132,9 @@ public class BlockDelta extends Block
      
      
      
-     public BlockDelta setBlockItem (ItemBlock item)
+     public void setBlockItem (ItemBlock item)
      {
           Item.itemsList[blockID] = item;
-          return this;
      }
      
      

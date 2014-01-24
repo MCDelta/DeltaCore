@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import mcdelta.core.DeltaCore;
-import mcdelta.core.assets.client.RenderAssets;
 import mcdelta.core.assets.world.BlockData;
-import mcdelta.core.assets.world.BlockShapes;
 import mcdelta.core.assets.world.Position;
 import mcdelta.core.logging.Logger;
 import mcdelta.core.network.PacketDelta;
@@ -28,8 +26,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Assets
 {
-     public static RenderAssets render           = new RenderAssets();
-     public static BlockShapes  shapes           = new BlockShapes();
      public static String       worldAccessError = " Cannot set to air! Position's blockAccess needs to be an instanceof World.";
      
      

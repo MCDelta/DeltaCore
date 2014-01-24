@@ -1,8 +1,5 @@
 package mcdelta.core.assets.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mcdelta.core.DeltaCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,7 +11,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -30,16 +26,48 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderAssets
 {
-     public static final ResourceLocation RES_ITEM_GLINT         = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-     public static final ResourceLocation RES_MAP_BACKGROUND     = new ResourceLocation("textures/map/map_background.png");
-     public static final ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
-     
-     public static List<Item>             flipInInventory        = new ArrayList<Item>();
+     public static ResourceLocation RES_ITEM_GLINT         = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+     public static ResourceLocation RES_MAP_BACKGROUND     = new ResourceLocation("textures/map/map_background.png");
+     public static ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
      
      
      
      
-     public static void rotateSidedRenderer (final RenderBlocks renderer, final EnumFacing face)
+     public static void renderBlockItem (final RenderBlocks renderer, final Block block, final int metadata)
+     {
+          final Tessellator tessellator = Tessellator.instance;
+          GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(0.0F, -1.0F, 0.0F);
+          renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 0, metadata));
+          tessellator.draw();
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(0.0F, 1.0F, 0.0F);
+          renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 1, metadata));
+          tessellator.draw();
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(0.0F, 0.0F, -1.0F);
+          renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 2, metadata));
+          tessellator.draw();
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(0.0F, 0.0F, 1.0F);
+          renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 3, metadata));
+          tessellator.draw();
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(-1.0F, 0.0F, 0.0F);
+          renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 4, metadata));
+          tessellator.draw();
+          tessellator.startDrawingQuads();
+          tessellator.setNormal(1.0F, 0.0F, 0.0F);
+          renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 5, metadata));
+          tessellator.draw();
+          GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+     }
+     
+     
+     
+     
+     public static void rotateSidedRenderer (RenderBlocks renderer, EnumFacing face)
      {
           switch (face)
           {
@@ -79,20 +107,20 @@ public class RenderAssets
      
      
      
-     public static void renderEntityItem (final EntityItem entityItem, final ItemStack stack, final int passes, final Icon[] icons, final int[] colors, final boolean[] shiny)
+     public static void renderEntityItem (EntityItem entityItem, ItemStack stack, int passes, Icon[] icons, int[] colors, boolean[] shiny)
      {
-          final byte b0 = getMiniBlockCount(stack);
+          byte b0 = getMiniBlockCount(stack);
           
           for (int i = 0; i < passes; i++)
           {
-               final Icon icon = icons[i];
+               Icon icon = icons[i];
                
                DeltaCore.rand.setSeed(187L);
                
-               final int color = colors[i];
-               final float r = (color >> 16 & 255) / 255.0F;
-               final float g = (color >> 8 & 255) / 255.0F;
-               final float b = (color & 255) / 255.0F;
+               int color = colors[i];
+               float r = (color >> 16 & 255) / 255.0F;
+               float g = (color >> 8 & 255) / 255.0F;
+               float b = (color & 255) / 255.0F;
                
                renderDroppedItem(entityItem, stack, icon, b0, 0, r, g, b, 0, shiny[i]);
           }
@@ -101,7 +129,7 @@ public class RenderAssets
      
      
      
-     public static void renderItemInWorld (final ItemStack stack, final Icon icon)
+     public static void renderItemInWorld (ItemStack stack, Icon icon)
      {
           renderItemInWorld(stack, 1, new Icon[]
           { icon }, new int[]
@@ -112,18 +140,18 @@ public class RenderAssets
      
      
      
-     public static void renderItemInWorld (final ItemStack stack, final int passes, final Icon[] icons, final int[] colors, final boolean[] shiny)
+     public static void renderItemInWorld (ItemStack stack, int passes, Icon[] icons, int[] colors, boolean[] shiny)
      {
           for (int i = 0; i < passes; i++)
           {
-               final Icon icon = icons[i];
+               Icon icon = icons[i];
                
                DeltaCore.rand.setSeed(187L);
                
-               final int color = colors[i];
-               final float r = (color >> 16 & 255) / 255.0F;
-               final float g = (color >> 8 & 255) / 255.0F;
-               final float b = (color & 255) / 255.0F;
+               int color = colors[i];
+               float r = (color >> 16 & 255) / 255.0F;
+               float g = (color >> 8 & 255) / 255.0F;
+               float b = (color & 255) / 255.0F;
                
                renderDroppedItem(null, stack, icon, 0, 0, r, g, b, 0, shiny[i]);
           }
@@ -132,7 +160,7 @@ public class RenderAssets
      
      
      
-     public static void renderEquippedItem (final ItemStack stack, final TextureManager texturemanager, final Icon icon)
+     public static void renderEquippedItem (ItemStack stack, TextureManager texturemanager, Icon icon)
      {
           renderEquippedItem(stack, texturemanager, 1, new Icon[]
           { icon }, new int[]
@@ -143,11 +171,11 @@ public class RenderAssets
      
      
      
-     public static void renderEquippedItem (final ItemStack stack, final TextureManager texturemanager, final int passes, final Icon[] icons, final int[] colors, final boolean[] shiny)
+     public static void renderEquippedItem (ItemStack stack, TextureManager texturemanager, int passes, Icon[] icons, int[] colors, boolean[] shiny)
      {
           for (int i = 0; i < passes; i++)
           {
-               final Icon icon = icons[i];
+               Icon icon = icons[i];
                
                if (icon == null)
                {
@@ -155,16 +183,16 @@ public class RenderAssets
                     return;
                }
                texturemanager.bindTexture(texturemanager.getResourceLocation(stack.getItemSpriteNumber()));
-               final Tessellator tessellator = Tessellator.instance;
-               final float f = icon.getMinU();
-               final float f1 = icon.getMaxU();
-               final float f2 = icon.getMinV();
-               final float f3 = icon.getMaxV();
+               Tessellator tessellator = Tessellator.instance;
+               float f = icon.getMinU();
+               float f1 = icon.getMaxU();
+               float f2 = icon.getMinV();
+               float f3 = icon.getMaxV();
                
-               final int color = colors[i];
-               final float r = (color >> 16 & 255) / 255.0F;
-               final float g = (color >> 8 & 255) / 255.0F;
-               final float b = (color & 255) / 255.0F;
+               int color = colors[i];
+               float r = (color >> 16 & 255) / 255.0F;
+               float g = (color >> 8 & 255) / 255.0F;
+               float b = (color & 255) / 255.0F;
                GL11.glColor4f(r, g, b, 1.0F);
                
                ItemRenderer.renderItemIn2D(tessellator, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
@@ -176,11 +204,11 @@ public class RenderAssets
                     texturemanager.bindTexture(RES_ITEM_GLINT);
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-                    final float f7 = 0.76F;
+                    float f7 = 0.76F;
                     GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
                     GL11.glMatrixMode(GL11.GL_TEXTURE);
                     GL11.glPushMatrix();
-                    final float f8 = 0.125F;
+                    float f8 = 0.125F;
                     GL11.glScalef(f8, f8, f8);
                     float f9 = Minecraft.getSystemTime() % 3000L / 3000.0F * 8.0F;
                     GL11.glTranslatef(f9, 0.0F, 0.0F);
@@ -206,7 +234,7 @@ public class RenderAssets
      
      
      
-     public static void renderItemInventory (final ItemStack stack, final TextureManager engine, final int zLevel)
+     public static void renderItemInventory (ItemStack stack, TextureManager engine, int zLevel)
      {
           renderItemInventory(stack, engine, 1, new Icon[]
           { stack.getIconIndex() }, new int[]
@@ -216,7 +244,7 @@ public class RenderAssets
      
      
      
-     public static void renderItemInventory (final ItemStack stack, final TextureManager engine, final int passes, final Icon[] icons, final int[] colors, final boolean[] shiny, final int zLevel)
+     public static void renderItemInventory (ItemStack stack, TextureManager engine, int passes, Icon[] icons, int[] colors, boolean[] shiny, int zLevel)
      {
           stack.getItemDamage();
           
@@ -225,7 +253,7 @@ public class RenderAssets
           float f1;
           float f2;
           
-          final ResourceLocation resourcelocation = engine.getResourceLocation(stack.getItemSpriteNumber());
+          ResourceLocation resourcelocation = engine.getResourceLocation(stack.getItemSpriteNumber());
           
           for (int i = 0; i < passes; i++)
           {
@@ -256,9 +284,9 @@ public class RenderAssets
      
      
      
-     private static void renderIcon (final int x, final int y, final Icon icon, final int par4, final int par5, final int zLevel)
+     private static void renderIcon (int x, int y, Icon icon, int par4, int par5, int zLevel)
      {
-          final Tessellator tessellator = Tessellator.instance;
+          Tessellator tessellator = Tessellator.instance;
           tessellator.startDrawingQuads();
           tessellator.addVertexWithUV(x + 0, y + par5, zLevel, icon.getMinU(), icon.getMaxV());
           tessellator.addVertexWithUV(x + par4, y + par5, zLevel, icon.getMaxU(), icon.getMaxV());
@@ -270,7 +298,7 @@ public class RenderAssets
      
      
      
-     private static void renderEffect (final TextureManager manager, final int x, final int y, int zLevel)
+     private static void renderEffect (TextureManager manager, int x, int y, int zLevel)
      {
           GL11.glDepthFunc(GL11.GL_GREATER);
           GL11.glDisable(GL11.GL_LIGHTING);
@@ -291,7 +319,7 @@ public class RenderAssets
      
      
      
-     private static void renderGlint (final int par1, final int par2, final int par3, final int par4, final int par5, final int zLevel)
+     private static void renderGlint (int par1, int par2, int par3, int par4, int par5, int zLevel)
      {
           for (int j1 = 0; j1 < 2; ++j1)
           {
@@ -303,11 +331,11 @@ public class RenderAssets
                {
                     GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                }
-               final float f = 0.00390625F;
-               final float f1 = 0.00390625F;
-               final float f2 = Minecraft.getSystemTime() % (3000 + j1 * 1873) / (3000.0F + j1 * 1873) * 256.0F;
-               final float f3 = 0.0F;
-               final Tessellator tessellator = Tessellator.instance;
+               float f = 0.00390625F;
+               float f1 = 0.00390625F;
+               float f2 = Minecraft.getSystemTime() % (3000 + j1 * 1873) / (3000.0F + j1 * 1873) * 256.0F;
+               float f3 = 0.0F;
+               Tessellator tessellator = Tessellator.instance;
                float f4 = 4.0F;
                
                if (j1 == 1)
@@ -326,32 +354,32 @@ public class RenderAssets
      
      
      
-     private static void renderDroppedItem (final EntityItem entityItem, final ItemStack stack, Icon icon, final int par3, final float par4, final float par5, final float par6, final float par7, final int pass, final boolean shiny)
+     private static void renderDroppedItem (EntityItem entityItem, ItemStack stack, Icon icon, int par3, float par4, float par5, float par6, float par7, int pass, boolean shiny)
      {
-          final TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-          final Tessellator tessellator = Tessellator.instance;
+          TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+          Tessellator tessellator = Tessellator.instance;
           
           if (entityItem != null && icon == null)
           {
-               final ResourceLocation resourcelocation = texturemanager.getResourceLocation(entityItem.getEntityItem().getItemSpriteNumber());
+               ResourceLocation resourcelocation = texturemanager.getResourceLocation(entityItem.getEntityItem().getItemSpriteNumber());
                icon = ((TextureMap) texturemanager.getTexture(resourcelocation)).getAtlasSprite("missingno");
           }
-          final float f4 = icon.getMinU();
-          final float f5 = icon.getMaxU();
-          final float f6 = icon.getMinV();
-          final float f7 = icon.getMaxV();
-          final float f8 = 1.0F;
-          final float f9 = 0.5F;
-          final float f10 = 0.25F;
+          float f4 = icon.getMinU();
+          float f5 = icon.getMaxU();
+          float f6 = icon.getMinV();
+          float f7 = icon.getMaxV();
+          float f8 = 1.0F;
+          float f9 = 0.5F;
+          float f10 = 0.25F;
           float f11;
           
           if (Minecraft.getMinecraft().gameSettings.fancyGraphics)
           {
                GL11.glPushMatrix();
                
-               final float f12 = 0.0625F;
+               float f12 = 0.0625F;
                f11 = 0.021875F;
-               final byte b0 = getMiniItemCount(stack);
+               byte b0 = getMiniItemCount(stack);
                
                GL11.glTranslatef(-f9, -f10, -((f12 + f11) * b0 / 2.0F));
                
@@ -359,8 +387,8 @@ public class RenderAssets
                {
                     if (k > 0)
                     {
-                         final float x = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F / 0.5F;
-                         final float y = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F / 0.5F;
+                         float x = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F / 0.5F;
+                         float y = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F / 0.5F;
                          GL11.glTranslatef(x, y, f12 + f11);
                     }
                     else
@@ -385,11 +413,11 @@ public class RenderAssets
                          texturemanager.bindTexture(RES_ITEM_GLINT);
                          GL11.glEnable(GL11.GL_BLEND);
                          GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-                         final float f13 = 0.76F;
+                         float f13 = 0.76F;
                          GL11.glColor4f(0.5F * f13, 0.25F * f13, 0.8F * f13, 1.0F);
                          GL11.glMatrixMode(GL11.GL_TEXTURE);
                          GL11.glPushMatrix();
-                         final float f14 = 0.125F;
+                         float f14 = 0.125F;
                          GL11.glScalef(f14, f14, f14);
                          float f15 = Minecraft.getSystemTime() % 3000L / 3000.0F * 8.0F;
                          GL11.glTranslatef(f15, 0.0F, 0.0F);
@@ -420,8 +448,8 @@ public class RenderAssets
                     if (l > 0)
                     {
                          f11 = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F;
-                         final float f16 = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F;
-                         final float f17 = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F;
+                         float f16 = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F;
+                         float f17 = (DeltaCore.rand.nextFloat() * 2.0F - 1.0F) * 0.3F;
                          GL11.glTranslatef(f11, f16, f17);
                     }
                     GL11.glRotatef(180.0F - RenderManager.instance.playerViewY, 0.0F, 1.0F, 0.0F);
@@ -442,7 +470,7 @@ public class RenderAssets
      
      
      
-     private static byte getMiniItemCount (final ItemStack stack)
+     private static byte getMiniItemCount (ItemStack stack)
      {
           byte ret = 1;
           if (stack.stackSize > 1)
@@ -463,7 +491,7 @@ public class RenderAssets
      
      
      
-     private static byte getMiniBlockCount (final ItemStack stack)
+     private static byte getMiniBlockCount (ItemStack stack)
      {
           byte ret = 1;
           if (stack.stackSize > 1)
@@ -488,17 +516,17 @@ public class RenderAssets
      
      
      
-     public static void renderItem (final EntityLivingBase living, final ItemStack stack, final int par3, final ItemRenderType type, final RenderBlocks renderBlocks)
+     public static void renderItem (EntityLivingBase living, ItemStack stack, int par3, ItemRenderType type, RenderBlocks renderBlocks)
      {
           GL11.glPushMatrix();
-          final TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
+          TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
           
           Block block = null;
           if (stack.getItem() instanceof ItemBlock && stack.itemID < Block.blocksList.length)
           {
                block = Block.blocksList[stack.itemID];
           }
-          final IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, type);
+          IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, type);
           if (customRenderer != null)
           {
                texturemanager.bindTexture(texturemanager.getResourceLocation(stack.getItemSpriteNumber()));
@@ -511,7 +539,7 @@ public class RenderAssets
           }
           else
           {
-               final Icon icon = living.getItemIcon(stack, par3);
+               Icon icon = living.getItemIcon(stack, par3);
                
                if (icon == null)
                {
@@ -519,16 +547,16 @@ public class RenderAssets
                     return;
                }
                texturemanager.bindTexture(texturemanager.getResourceLocation(stack.getItemSpriteNumber()));
-               final Tessellator tessellator = Tessellator.instance;
-               final float f = icon.getMinU();
-               final float f1 = icon.getMaxU();
-               final float f2 = icon.getMinV();
-               final float f3 = icon.getMaxV();
-               final float f4 = 0.0F;
-               final float f5 = 0.3F;
+               Tessellator tessellator = Tessellator.instance;
+               float f = icon.getMinU();
+               float f1 = icon.getMaxU();
+               float f2 = icon.getMinV();
+               float f3 = icon.getMaxV();
+               float f4 = 0.0F;
+               float f5 = 0.3F;
                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                GL11.glTranslatef(-f4, -f5, 0.0F);
-               final float f6 = 1.5F;
+               float f6 = 1.5F;
                GL11.glScalef(f6, f6, f6);
                GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
                GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
@@ -542,11 +570,11 @@ public class RenderAssets
                     texturemanager.bindTexture(RES_ITEM_GLINT);
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-                    final float f7 = 0.76F;
+                    float f7 = 0.76F;
                     GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
                     GL11.glMatrixMode(GL11.GL_TEXTURE);
                     GL11.glPushMatrix();
-                    final float f8 = 0.125F;
+                    float f8 = 0.125F;
                     GL11.glScalef(f8, f8, f8);
                     float f9 = Minecraft.getSystemTime() % 3000L / 3000.0F * 8.0F;
                     GL11.glTranslatef(f9, 0.0F, 0.0F);
